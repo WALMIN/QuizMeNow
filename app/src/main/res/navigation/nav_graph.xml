@@ -1,0 +1,55 @@
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/HomeFragment">
+
+    <fragment
+        android:id="@+id/HomeFragment"
+        android:name="com.walmin.android.quizmenow.HomeFragment"
+        android:label="@string/home_fragment_label"
+        tools:layout="@layout/fragment_home">
+
+        <action
+            android:id="@+id/homeToGetReady"
+            app:destination="@id/GetReadyFragment" />
+
+        <action
+            android:id="@+id/homeToStats"
+            app:destination="@id/StatsFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/StatsFragment"
+        android:name="com.walmin.android.quizmenow.StatsFragment"
+        android:label="@string/stats_fragment_label"
+        tools:layout="@layout/fragment_stats">
+
+        <action
+            android:id="@+id/statsToHome"
+            app:destination="@id/HomeFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/GetReadyFragment"
+        android:name="com.walmin.android.quizmenow.GetReadyFragment"
+        android:label="@string/get_ready_fragment_label"
+        tools:layout="@layout/fragment_game">
+
+        <action
+            android:id="@+id/getReadyToGame"
+            app:destination="@id/GameFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/GameFragment"
+        android:name="com.walmin.android.quizmenow.GameFragment"
+        android:label="@string/game_fragment_label"
+        tools:layout="@layout/fragment_game">
+
+        <action
+            android:id="@+id/gameToHome"
+            app:destination="@id/HomeFragment" />
+    </fragment>
+
+</navigation>
