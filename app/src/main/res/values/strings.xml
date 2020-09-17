@@ -1,5 +1,8 @@
 <resources>
     <string name="app_name">Quiz Me Now</string>
+    <string name="homeListURL">https://walmin.com/quiz/resources/quizlist.json</string>
+    <string name="thumbnailURL">https://walmin.com/quiz/resources/thumbnails/%1$s.png</string>
+    <string name="quizURL">https://opentdb.com/api.php?amount=10&amp;category=%1$s&amp;type=multiple</string>
 
     <string name="home_fragment_label">Home Fragment</string>
     <string name="stats_fragment_label">Stats Fragment</string>
@@ -7,7 +10,8 @@
     <string name="game_fragment_label">Game Fragment</string>
 
     <!-- Home -->
-    <string name="quizTitle">General knowledge</string>
+    <string name="quizTitle">Loading…</string>
+    <string name="goOnline">Go online for more</string>
 
     <!-- Get ready -->
     <string name="getReady">Get ready!</string>
