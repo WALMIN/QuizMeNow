@@ -57,10 +57,10 @@ class HomeFragment : Fragment(), OnHomeItemClickListener {
     fun fetchOfflineList(){
         homeList.clear()
 
-        homeList.add(HomeItemData("Animals", "0", "795548"))
-        homeList.add(HomeItemData("General knowledge", "1", "3F51B5"))
-        homeList.add(HomeItemData("Sports", "2", "263238"))
-        homeList.add(HomeItemData(getString(R.string.goOnline), "-1", "F44336"))
+        homeList.add(HomeItemData("Animals", "0", "607D8B"))
+        homeList.add(HomeItemData("General knowledge", "1", "F44336"))
+        homeList.add(HomeItemData("Sports", "2", "FFEB3B"))
+        homeList.add(HomeItemData(getString(R.string.goOnline), "-1", "4CAF50"))
 
         homeListAdapter.notifyDataSetChanged();
 
