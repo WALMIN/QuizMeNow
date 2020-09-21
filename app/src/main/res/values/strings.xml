@@ -17,12 +17,14 @@
     <string name="getReady">Get ready!</string>
 
     <!-- Game -->
-    <string name="currentQuestion">Question %1$s</string>
+    <string name="currentQuestion">Question %1$s/10</string>
 
     <string name="question">Question?</string>
     <string name="answer0">0</string>
     <string name="answer1">1</string>
     <string name="answer2">2</string>
     <string name="answer3">3</string>
+
+    <string name="tapToContinue">&#8594; Tap to continue &#8592;</string>
 
 </resources>

@@ -1,11 +1,12 @@
 package com.walmin.android.quizmenow
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
+import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.android.volley.Request
@@ -13,7 +14,6 @@ import com.android.volley.RequestQueue
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
 import org.json.JSONException
-import kotlin.collections.ArrayList
 
 class HomeFragment : Fragment(), OnHomeItemClickListener {
 
@@ -25,7 +25,11 @@ class HomeFragment : Fragment(), OnHomeItemClickListener {
     lateinit var homeListAdapter: HomeListAdapter
     var homeList = ArrayList<HomeItemData>()
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         return inflater.inflate(R.layout.fragment_home, container, false)
     }
 
@@ -67,37 +71,42 @@ class HomeFragment : Fragment(), OnHomeItemClickListener {
     }
 
     fun fetchList(){
-        val request = JsonObjectRequest(Request.Method.GET, resources.getString(R.string.homeListURL), null,
-        { response ->
-            try {
-                homeList.clear()
+        val request = JsonObjectRequest(Request.Method.GET,
+            resources.getString(R.string.homeListURL),
+            null,
+            { response ->
+                try {
+                    homeList.clear()
 
-                val listArray = response.getJSONArray("quiz")
+                    val listArray = response.getJSONArray("quiz")
 
-                for (i in 0 until listArray.length()) {
-                    val item = listArray.getJSONObject(i)
-                    homeList.add(HomeItemData(
-                        item.getString("title"),
-                        item.getString("value"),
-                        item.getString("color")))
+                    for (i in 0 until listArray.length()) {
+                        val item = listArray.getJSONObject(i)
+                        homeList.add(
+                            HomeItemData(
+                                item.getString("title"),
+                                item.getString("value"),
+                                item.getString("color")
+                            )
+                        )
+
+                    }
+
+                    homeList.sortBy { it.title }
+                    homeListAdapter.notifyDataSetChanged();
+
+                } catch (e: JSONException) {
+                    e.printStackTrace()
 
                 }
 
-                homeList.sortBy { it.title }
-                homeListAdapter.notifyDataSetChanged();
+            },
+            {
+                online = false
+                fetchOfflineList()
 
-            } catch (e: JSONException) {
-                e.printStackTrace()
-
-            }
-
-        },
-        {
-            online = false
-            fetchOfflineList()
-
-            it.printStackTrace()
-        })
+                it.printStackTrace()
+            })
         requestQueue?.add(request)
 
     }
@@ -117,14 +126,68 @@ class HomeFragment : Fragment(), OnHomeItemClickListener {
 
         }else{
             if(online){
-                Toast.makeText(context, getString(R.string.quizURL, item.value), Toast.LENGTH_LONG).show()
+                fetchQuestions(getString(R.string.quizURL, item.value))
 
             }else{
-                Toast.makeText(context, item.value, Toast.LENGTH_LONG).show()
+                fetchOfflineQuestions()
 
             }
 
         }
+
+    }
+
+    fun fetchOfflineQuestions(){
+
+
+    }
+
+    fun fetchQuestions(url: String){
+        val request = JsonObjectRequest(Request.Method.GET, url, null,
+            { response ->
+                try {
+                    GameFragment.questionList.clear()
+
+                    val questionArray = response.getJSONArray("results")
+
+                    for (i in 0 until questionArray.length()) {
+                        val item = questionArray.getJSONObject(i)
+
+                        val answerList = ArrayList<String>()
+                        answerList.add(item.getString("correct_answer"))
+                        answerList.add(item.getJSONArray("incorrect_answers")[0].toString())
+                        answerList.add(item.getJSONArray("incorrect_answers")[1].toString())
+                        answerList.add(item.getJSONArray("incorrect_answers")[2].toString())
+
+                        answerList.shuffle()
+
+                        GameFragment.questionList.add(
+                            QuestionItemData(
+                                item.getString("question"),
+                                item.getString("correct_answer"),
+                                answerList
+                            )
+                        )
+
+                        Log.d("HomeFragment", GameFragment.questionList[i].toString())
+
+                    }
+
+                    findNavController().navigate(R.id.homeToGame)
+
+                } catch (e: JSONException) {
+                    e.printStackTrace()
+
+                }
+
+            },
+            {
+                online = false
+                fetchOfflineList()
+
+                it.printStackTrace()
+            })
+        requestQueue?.add(request)
 
     }
 

@@ -18,6 +18,10 @@
         <action
             android:id="@+id/homeToStats"
             app:destination="@id/StatsFragment" />
+
+        <action
+            android:id="@+id/homeToGame"
+            app:destination="@id/GameFragment" />
     </fragment>
 
     <fragment
