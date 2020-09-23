@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.android.volley.Request
 import com.android.volley.RequestQueue
 import com.android.volley.toolbox.JsonObjectRequest
@@ -21,6 +22,7 @@ class HomeFragment : Fragment(), OnHomeItemClickListener {
     var requestQueue: RequestQueue? = null
 
     // List
+    lateinit var homeListViewRefreshLayout: SwipeRefreshLayout
     lateinit var homeListView: RecyclerView
     lateinit var homeListAdapter: HomeListAdapter
     var homeList = ArrayList<HomeItemData>()
@@ -37,6 +39,13 @@ class HomeFragment : Fragment(), OnHomeItemClickListener {
         super.onViewCreated(view, savedInstanceState)
 
         // List
+        homeListViewRefreshLayout = view.findViewById(R.id.quizListViewRefreshLayout)
+        homeListViewRefreshLayout.setOnRefreshListener {
+            homeListViewRefreshLayout.isRefreshing = true
+            fetchList()
+
+        }
+
         homeListView = view.findViewById(R.id.quizListView)
         homeListView.setHasFixedSize(true);
         homeListView.layoutManager = GridLayoutManager(context, 3)
@@ -44,17 +53,7 @@ class HomeFragment : Fragment(), OnHomeItemClickListener {
         homeListAdapter = HomeListAdapter(homeList, this)
         homeListView.adapter = homeListAdapter
 
-        // Fetch list
-        if(Tools.isNetworkConnected(requireContext())){
-            online = true
-            requestQueue = Volley.newRequestQueue(context)
-            fetchList()
-
-        }else{
-            online = false
-            fetchOfflineList()
-
-        }
+        fetchList()
 
     }
 
@@ -66,63 +65,71 @@ class HomeFragment : Fragment(), OnHomeItemClickListener {
         homeList.add(HomeItemData("Sports", "2", "FFEB3B"))
         homeList.add(HomeItemData(getString(R.string.goOnline), "-1", "4CAF50"))
 
-        homeListAdapter.notifyDataSetChanged();
+        homeListAdapter.notifyDataSetChanged()
 
     }
 
     fun fetchList(){
-        val request = JsonObjectRequest(Request.Method.GET,
-            resources.getString(R.string.homeListURL),
-            null,
-            { response ->
-                try {
-                    homeList.clear()
+        homeListViewRefreshLayout.isRefreshing = true
 
-                    val listArray = response.getJSONArray("quiz")
+        if(!Tools.isNetworkConnected(requireContext())){
+            homeListViewRefreshLayout.isRefreshing = false
 
-                    for (i in 0 until listArray.length()) {
-                        val item = listArray.getJSONObject(i)
-                        homeList.add(
-                            HomeItemData(
-                                item.getString("title"),
-                                item.getString("value"),
-                                item.getString("color")
+            online = false
+            fetchOfflineList()
+
+        }else {
+            online = true
+            requestQueue = Volley.newRequestQueue(context)
+
+            val request = JsonObjectRequest(Request.Method.GET,
+                resources.getString(R.string.homeListURL),
+                null,
+                { response ->
+                    try {
+                        homeList.clear()
+
+                        val listArray = response.getJSONArray("quiz")
+
+                        for (i in 0 until listArray.length()) {
+                            val item = listArray.getJSONObject(i)
+                            homeList.add(
+                                HomeItemData(
+                                    item.getString("title"),
+                                    item.getString("value"),
+                                    item.getString("color")
+                                )
                             )
-                        )
+
+                        }
+
+                        homeList.sortBy { it.title }
+                        homeListAdapter.notifyDataSetChanged();
+
+                    } catch (e: JSONException) {
+                        e.printStackTrace()
 
                     }
+                    homeListViewRefreshLayout.isRefreshing = false
 
-                    homeList.sortBy { it.title }
-                    homeListAdapter.notifyDataSetChanged();
+                },
+                {
+                    it.printStackTrace()
 
-                } catch (e: JSONException) {
-                    e.printStackTrace()
+                    homeListViewRefreshLayout.isRefreshing = false
 
-                }
+                    online = false
+                    fetchOfflineList()
+                })
+            requestQueue?.add(request)
 
-            },
-            {
-                online = false
-                fetchOfflineList()
-
-                it.printStackTrace()
-            })
-        requestQueue?.add(request)
+        }
 
     }
 
     override fun onHomeItemClick(item: HomeItemData) {
         if(item.value == "-1"){
-            if(Tools.isNetworkConnected(requireContext())){
-                online = true
-                requestQueue = Volley.newRequestQueue(context)
-                fetchList()
-
-            }else{
-                online = false
-                fetchOfflineList()
-
-            }
+            fetchList()
 
         }else{
             if(online){
@@ -182,10 +189,11 @@ class HomeFragment : Fragment(), OnHomeItemClickListener {
 
             },
             {
+                it.printStackTrace()
+
                 online = false
                 fetchOfflineList()
 
-                it.printStackTrace()
             })
         requestQueue?.add(request)
 
