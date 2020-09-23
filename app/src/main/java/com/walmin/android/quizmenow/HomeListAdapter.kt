@@ -28,10 +28,7 @@ class HomeListAdapter(homeList: ArrayList<HomeItemData>, var onClickListener: On
 
     }
 
-    override fun getItemCount(): Int {
-        return homeList.size
-
-    }
+    override fun getItemCount() = homeList.size
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
@@ -56,10 +53,10 @@ class HomeListAdapter(homeList: ArrayList<HomeItemData>, var onClickListener: On
                                 .replace(" ", "_")
                         )
                     )
-                    //.placeholder(R.drawable.loading_home_item)
-                    //.error(R.drawable.error_home_item)
-                    .diskCacheStrategy(DiskCacheStrategy.NONE)
-                    .skipMemoryCache(true)
+                    .placeholder(R.drawable.loading)
+                    .error(R.drawable.error)
+                    .diskCacheStrategy(DiskCacheStrategy.ALL)
+                    .skipMemoryCache(false)
                     .into(itemView.findViewById(R.id.quizThumbnail))
 
             }else{
@@ -69,10 +66,10 @@ class HomeListAdapter(homeList: ArrayList<HomeItemData>, var onClickListener: On
                             .replace(itemView.context.getString(R.string.goOnline), "wifi")
                             .toLowerCase(Locale.ROOT)
                             .replace(" ", "_")))
-                    //.placeholder(R.drawable.loading_home_item)
-                    //.error(R.drawable.error_home_item)
-                    .diskCacheStrategy(DiskCacheStrategy.NONE)
-                    .skipMemoryCache(true)
+                    .placeholder(R.drawable.loading)
+                    .error(R.drawable.error)
+                    .diskCacheStrategy(DiskCacheStrategy.ALL)
+                    .skipMemoryCache(false)
                     .into(itemView.findViewById(R.id.quizThumbnail))
 
             }

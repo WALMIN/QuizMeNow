@@ -39,7 +39,7 @@ class HomeFragment : Fragment(), OnHomeItemClickListener {
         // List
         homeListView = view.findViewById(R.id.quizListView)
         homeListView.setHasFixedSize(true);
-        homeListView.layoutManager = GridLayoutManager(context, 2)
+        homeListView.layoutManager = GridLayoutManager(context, 3)
 
         homeListAdapter = HomeListAdapter(homeList, this)
         homeListView.adapter = homeListAdapter

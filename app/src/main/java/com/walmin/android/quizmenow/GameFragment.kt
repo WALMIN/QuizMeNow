@@ -7,11 +7,11 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.navigation.fragment.findNavController
+import com.mackhartley.roundedprogressbar.RoundedProgressBar
 
 class GameFragment : Fragment() {
 
@@ -49,7 +49,7 @@ class GameFragment : Fragment() {
 
     lateinit var tapToContinueView: TextView
 
-    lateinit var gameTimerView: ProgressBar
+    lateinit var gameTimerView: RoundedProgressBar
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_game, container, false)
@@ -59,28 +59,30 @@ class GameFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         // Stuff
-        timer = object: CountDownTimer(10000, 500) {
+        timer = object: CountDownTimer(10000, 50) {
             override fun onTick(millisUntilFinished: Long) {
-                gameTimerView.progress = (millisUntilFinished / 1000).toInt()
+                gameTimerView.setProgressPercentage(gameTimerView.getProgressPercentage() - 0.5)
 
             }
 
             override fun onFinish() {
+                gameTimerView.setProgressPercentage(0.0)
+
                 answer0Card.isEnabled = false
                 answer1Card.isEnabled = false
                 answer2Card.isEnabled = false
                 answer3Card.isEnabled = false
 
-                if(answer0View.text.toString() == questionList[currentQuestion].correctAnswer){
+                if(questionList[currentQuestion].answers[0] == questionList[currentQuestion].correctAnswer){
                     answer0Card.setCardBackgroundColor(requireContext().getColor(R.color.correct))
 
-                }else if(answer1View.text.toString() == questionList[currentQuestion].correctAnswer){
+                }else if(questionList[currentQuestion].answers[1] == questionList[currentQuestion].correctAnswer){
                     answer1Card.setCardBackgroundColor(requireContext().getColor(R.color.correct))
 
-                }else if(answer2View.text.toString() == questionList[currentQuestion].correctAnswer){
+                }else if(questionList[currentQuestion].answers[2] == questionList[currentQuestion].correctAnswer){
                     answer2Card.setCardBackgroundColor(requireContext().getColor(R.color.correct))
 
-                }else if(answer3View.text.toString() == questionList[currentQuestion].correctAnswer){
+                }else if(questionList[currentQuestion].answers[3] == questionList[currentQuestion].correctAnswer){
                     answer3Card.setCardBackgroundColor(requireContext().getColor(R.color.correct))
 
                 }
@@ -98,7 +100,6 @@ class GameFragment : Fragment() {
             }
 
         }
-        timer.start()
 
         // Views
         layout = view.findViewById(R.id.layout)
@@ -150,14 +151,14 @@ class GameFragment : Fragment() {
             tapToContinueView.visibility = View.GONE
 
         gameTimerView = view.findViewById(R.id.gameTimerView)
-            gameTimerView.progress = 10
+            gameTimerView.setProgressPercentage(100.0)
 
         setQuestion(currentQuestion)
 
     }
 
     fun setQuestion(question: Int){
-        gameTimerView.progress = 10
+        gameTimerView.setProgressPercentage(100.0)
         timer.start()
 
         currentQuestionView.text = getString(R.string.currentQuestion, (question + 1).toString())
@@ -184,7 +185,7 @@ class GameFragment : Fragment() {
 
     fun checkAnswer(view: CardView, question: Int, input: String){
         if(question <= (questionList.size - 1)){
-            gameTimerView.progress = 10
+            gameTimerView.setProgressPercentage(0.0)
             timer.cancel()
 
             answer0Card.isEnabled = false
@@ -223,6 +224,21 @@ class GameFragment : Fragment() {
                 tapToContinueView.visibility = View.VISIBLE
 
             }
+
+        }
+
+    }
+
+    override fun onPause() {
+        stopTimer()
+
+        super.onPause()
+
+    }
+
+    fun stopTimer(){
+        if(timer != null){
+            timer.cancel()
 
         }
 
