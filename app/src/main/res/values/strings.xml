@@ -7,7 +7,7 @@
     <string name="home_fragment_label">Home Fragment</string>
     <string name="stats_fragment_label">Stats Fragment</string>
     <string name="get_ready_fragment_label">Get Ready Fragment</string>
-    <string name="game_fragment_label">Game Fragment</string>
+    <string name="quiz_fragment_label">Game Fragment</string>
 
     <!-- Home -->
     <string name="quizTitle">Loading…</string>

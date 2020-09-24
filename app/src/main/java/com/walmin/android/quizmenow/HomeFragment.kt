@@ -153,7 +153,7 @@ class HomeFragment : Fragment(), OnHomeItemClickListener {
         val request = JsonObjectRequest(Request.Method.GET, url, null,
             { response ->
                 try {
-                    GameFragment.questionList.clear()
+                    QuizFragment.questionList.clear()
 
                     val questionArray = response.getJSONArray("results")
 
@@ -168,7 +168,7 @@ class HomeFragment : Fragment(), OnHomeItemClickListener {
 
                         answerList.shuffle()
 
-                        GameFragment.questionList.add(
+                        QuizFragment.questionList.add(
                             QuestionItemData(
                                 item.getString("question"),
                                 item.getString("correct_answer"),
@@ -176,7 +176,7 @@ class HomeFragment : Fragment(), OnHomeItemClickListener {
                             )
                         )
 
-                        Log.d("HomeFragment", GameFragment.questionList[i].toString())
+                        Log.d("HomeFragment", QuizFragment.questionList[i].toString())
 
                     }
 

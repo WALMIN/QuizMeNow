@@ -13,7 +13,7 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.navigation.fragment.findNavController
 import com.mackhartley.roundedprogressbar.RoundedProgressBar
 
-class GameFragment : Fragment() {
+class QuizFragment : Fragment() {
 
     companion object GameFragment {
         var questionList = ArrayList<QuestionItemData>()
@@ -52,7 +52,7 @@ class GameFragment : Fragment() {
     lateinit var gameTimerView: RoundedProgressBar
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_game, container, false)
+        return inflater.inflate(R.layout.fragment_quiz, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -105,7 +105,7 @@ class GameFragment : Fragment() {
         layout = view.findViewById(R.id.layout)
         layout.setOnClickListener{
             if(finished){
-                findNavController().navigate(R.id.gameToHome)
+                findNavController().navigate(R.id.quizToHome)
 
             }else if(nextQuestion){
                 nextQuestion = false
