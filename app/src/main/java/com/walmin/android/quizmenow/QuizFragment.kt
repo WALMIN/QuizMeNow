@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.activity.OnBackPressedCallback
 import androidx.cardview.widget.CardView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.navigation.fragment.findNavController
@@ -17,12 +18,11 @@ class QuizFragment : Fragment() {
 
     companion object GameFragment {
         var questionList = ArrayList<QuestionItemData>()
+        var currentQuestion = -1
 
     }
 
     // Stuff
-    var currentQuestion = 0
-
     var nextQuestion = false
     var finished = false
 
@@ -51,17 +51,49 @@ class QuizFragment : Fragment() {
 
     lateinit var gameTimerView: RoundedProgressBar
 
+    fun shouldInterceptBackPress() = true
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        activity?.onBackPressedDispatcher?.addCallback(requireActivity(), object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                if(!shouldInterceptBackPress()){
+                    isEnabled = false
+                    activity?.onBackPressed()
+
+                }
+
+            }
+
+        })
+
+    }
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_quiz, container, false)
     }
 
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        activity?.onBackPressedDispatcher?.addCallback(requireActivity(), object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                if(!shouldInterceptBackPress()){
+                    isEnabled = false
+                    activity?.onBackPressed()
+
+                }
+
+            }
+
+        })
+
         // Stuff
-        timer = object: CountDownTimer(10000, 50) {
+        timer = object: CountDownTimer(10000, 100) {
             override fun onTick(millisUntilFinished: Long) {
-                gameTimerView.setProgressPercentage(gameTimerView.getProgressPercentage() - 0.5)
+                gameTimerView.setProgressPercentage(gameTimerView.getProgressPercentage() - 1)
 
             }
 
@@ -111,8 +143,7 @@ class QuizFragment : Fragment() {
                 nextQuestion = false
                 tapToContinueView.visibility = View.GONE
 
-                currentQuestion++
-                setQuestion(currentQuestion)
+                findNavController().navigate(R.id.quizToGetReady)
 
             }
 
@@ -224,21 +255,6 @@ class QuizFragment : Fragment() {
                 tapToContinueView.visibility = View.VISIBLE
 
             }
-
-        }
-
-    }
-
-    override fun onPause() {
-        stopTimer()
-
-        super.onPause()
-
-    }
-
-    fun stopTimer(){
-        if(timer != null){
-            timer.cancel()
 
         }
 

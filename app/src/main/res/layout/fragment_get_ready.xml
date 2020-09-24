@@ -4,47 +4,51 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@+id/getReadyBarView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        android:text="@string/getReady"
-        android:textStyle="bold"
-        android:textAllCaps="true"
-        android:textColor="@color/colorAccent"
-        android:textSize="40sp"/>
-
-    <ProgressBar
-        android:id="@+id/getReadyBarView"
-        style="?android:attr/progressBarStyleHorizontal"
-        android:layout_width="192dp"
-        android:minWidth="192dp"
-        android:maxWidth="192dp"
-        android:layout_height="192dp"
-        android:minHeight="192dp"
-        android:maxHeight="192dp"
-        android:max="3"
-        android:progress="2"
-        android:progressDrawable="@drawable/get_ready_progress"
-        android:background="@drawable/get_ready_background"
+        android:orientation="vertical"
+        android:gravity="center"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent">
 
-    <TextView
-        android:id="@+id/getReadyView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        android:text="2"
-        android:textColor="@color/colorAccent"
-        android:textSize="64sp"/>
+        <ImageView
+            android:id="@+id/quizIconView"
+            android:layout_width="96dp"
+            android:minWidth="96dp"
+            android:maxWidth="96dp"
+            android:layout_height="96dp"
+            android:minHeight="96dp"
+            android:maxHeight="96dp"
+            android:layout_marginBottom="12dp"
+            android:contentDescription="@null"
+            android:src="@drawable/general_knowledge" />
 
+        <TextView
+            android:id="@+id/getReadyTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/getReady"
+            android:textStyle="bold"
+            android:textAllCaps="true"
+            android:textColor="@color/colorAccent"
+            android:textSize="40sp"/>
+
+        <com.mackhartley.roundedprogressbar.RoundedProgressBar
+            android:id="@+id/getReadyTimerView"
+            android:layout_width="match_parent"
+            android:layout_height="8dp"
+            android:minHeight="8dp"
+            android:maxHeight="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:rpbAnimationLength="20"
+            app:rpbProgressBgColor="@color/background"
+            app:rpbProgressColor="@color/colorAccent"
+            app:rpbShowProgressText="false" />
+
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

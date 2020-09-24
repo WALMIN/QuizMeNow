@@ -55,6 +55,10 @@
         <action
             android:id="@+id/quizToHome"
             app:destination="@id/HomeFragment" />
+
+        <action
+            android:id="@+id/quizToGetReady"
+            app:destination="@id/GetReadyFragment" />
     </fragment>
 
 </navigation>

@@ -22,10 +22,10 @@ class HomeFragment : Fragment(), OnHomeItemClickListener {
     var requestQueue: RequestQueue? = null
 
     // List
-    lateinit var homeListViewRefreshLayout: SwipeRefreshLayout
-    lateinit var homeListView: RecyclerView
-    lateinit var homeListAdapter: HomeListAdapter
-    var homeList = ArrayList<HomeItemData>()
+    lateinit var quizListViewRefreshLayout: SwipeRefreshLayout
+    lateinit var quizListView: RecyclerView
+    lateinit var quizListAdapter: HomeListAdapter
+    var quizList = ArrayList<HomeItemData>()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -39,41 +39,41 @@ class HomeFragment : Fragment(), OnHomeItemClickListener {
         super.onViewCreated(view, savedInstanceState)
 
         // List
-        homeListViewRefreshLayout = view.findViewById(R.id.quizListViewRefreshLayout)
-        homeListViewRefreshLayout.setOnRefreshListener {
-            homeListViewRefreshLayout.isRefreshing = true
+        quizListViewRefreshLayout = view.findViewById(R.id.quizListViewRefreshLayout)
+        quizListViewRefreshLayout.setOnRefreshListener {
+            quizListViewRefreshLayout.isRefreshing = true
             fetchList()
 
         }
 
-        homeListView = view.findViewById(R.id.quizListView)
-        homeListView.setHasFixedSize(true);
-        homeListView.layoutManager = GridLayoutManager(context, 3)
+        quizListView = view.findViewById(R.id.quizListView)
+        quizListView.setHasFixedSize(true);
+        quizListView.layoutManager = GridLayoutManager(context, 3)
 
-        homeListAdapter = HomeListAdapter(homeList, this)
-        homeListView.adapter = homeListAdapter
+        quizListAdapter = HomeListAdapter(quizList, this)
+        quizListView.adapter = quizListAdapter
 
         fetchList()
 
     }
 
     fun fetchOfflineList(){
-        homeList.clear()
+        quizList.clear()
 
-        homeList.add(HomeItemData("Animals", "0", "607D8B"))
-        homeList.add(HomeItemData("General knowledge", "1", "F44336"))
-        homeList.add(HomeItemData("Sports", "2", "FFEB3B"))
-        homeList.add(HomeItemData(getString(R.string.goOnline), "-1", "4CAF50"))
+        quizList.add(HomeItemData("Animals", "0", "607D8B"))
+        quizList.add(HomeItemData("General knowledge", "1", "F44336"))
+        quizList.add(HomeItemData("Sports", "2", "FFEB3B"))
+        quizList.add(HomeItemData(getString(R.string.goOnline), "-1", "4CAF50"))
 
-        homeListAdapter.notifyDataSetChanged()
+        quizListAdapter.notifyDataSetChanged()
 
     }
 
     fun fetchList(){
-        homeListViewRefreshLayout.isRefreshing = true
+        quizListViewRefreshLayout.isRefreshing = true
 
         if(!Tools.isNetworkConnected(requireContext())){
-            homeListViewRefreshLayout.isRefreshing = false
+            quizListViewRefreshLayout.isRefreshing = false
 
             online = false
             fetchOfflineList()
@@ -87,13 +87,13 @@ class HomeFragment : Fragment(), OnHomeItemClickListener {
                 null,
                 { response ->
                     try {
-                        homeList.clear()
+                        quizList.clear()
 
                         val listArray = response.getJSONArray("quiz")
 
                         for (i in 0 until listArray.length()) {
                             val item = listArray.getJSONObject(i)
-                            homeList.add(
+                            quizList.add(
                                 HomeItemData(
                                     item.getString("title"),
                                     item.getString("value"),
@@ -103,20 +103,20 @@ class HomeFragment : Fragment(), OnHomeItemClickListener {
 
                         }
 
-                        homeList.sortBy { it.title }
-                        homeListAdapter.notifyDataSetChanged();
+                        quizList.sortBy { it.title }
+                        quizListAdapter.notifyDataSetChanged();
 
                     } catch (e: JSONException) {
                         e.printStackTrace()
 
                     }
-                    homeListViewRefreshLayout.isRefreshing = false
+                    quizListViewRefreshLayout.isRefreshing = false
 
                 },
                 {
                     it.printStackTrace()
 
-                    homeListViewRefreshLayout.isRefreshing = false
+                    quizListViewRefreshLayout.isRefreshing = false
 
                     online = false
                     fetchOfflineList()
@@ -133,7 +133,7 @@ class HomeFragment : Fragment(), OnHomeItemClickListener {
 
         }else{
             if(online){
-                fetchQuestions(getString(R.string.quizURL, item.value))
+                fetchQuestions(item.title, getString(R.string.quizURL, item.value))
 
             }else{
                 fetchOfflineQuestions()
@@ -149,52 +149,54 @@ class HomeFragment : Fragment(), OnHomeItemClickListener {
 
     }
 
-    fun fetchQuestions(url: String){
-        val request = JsonObjectRequest(Request.Method.GET, url, null,
-            { response ->
-                try {
-                    QuizFragment.questionList.clear()
+    fun fetchQuestions(title: String, url: String){
+        val request = JsonObjectRequest(Request.Method.GET, url, null, { response ->
+            try {
+                QuizFragment.currentQuestion = -1
+                QuizFragment.questionList.clear()
 
-                    val questionArray = response.getJSONArray("results")
+                val questionArray = response.getJSONArray("results")
 
-                    for (i in 0 until questionArray.length()) {
-                        val item = questionArray.getJSONObject(i)
+                for (i in 0 until questionArray.length()) {
+                    val item = questionArray.getJSONObject(i)
 
-                        val answerList = ArrayList<String>()
-                        answerList.add(item.getString("correct_answer"))
-                        answerList.add(item.getJSONArray("incorrect_answers")[0].toString())
-                        answerList.add(item.getJSONArray("incorrect_answers")[1].toString())
-                        answerList.add(item.getJSONArray("incorrect_answers")[2].toString())
+                    val answerList = ArrayList<String>()
+                    answerList.add(item.getString("correct_answer"))
+                    answerList.add(item.getJSONArray("incorrect_answers")[0].toString())
+                    answerList.add(item.getJSONArray("incorrect_answers")[1].toString())
+                    answerList.add(item.getJSONArray("incorrect_answers")[2].toString())
 
-                        answerList.shuffle()
+                    answerList.shuffle()
 
-                        QuizFragment.questionList.add(
-                            QuestionItemData(
-                                item.getString("question"),
-                                item.getString("correct_answer"),
-                                answerList
-                            )
+                    QuizFragment.questionList.add(
+                        QuestionItemData(
+                            item.getString("question"),
+                            item.getString("correct_answer"),
+                            answerList
                         )
+                    )
 
-                        Log.d("HomeFragment", QuizFragment.questionList[i].toString())
+                    GetReadyFragment.currentQuiz = title
 
-                    }
-
-                    findNavController().navigate(R.id.homeToGame)
-
-                } catch (e: JSONException) {
-                    e.printStackTrace()
+                    Log.d("HomeFragment", QuizFragment.questionList[i].toString())
 
                 }
 
-            },
-            {
-                it.printStackTrace()
+                findNavController().navigate(R.id.homeToGetReady)
 
-                online = false
-                fetchOfflineList()
+            } catch (e: JSONException) {
+                e.printStackTrace()
 
-            })
+            }
+
+        },
+        {
+            it.printStackTrace()
+
+            online = false
+            fetchOfflineList()
+
+        })
         requestQueue?.add(request)
 
     }
