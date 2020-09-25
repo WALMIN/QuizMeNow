@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.activity.OnBackPressedCallback
+import androidx.appcompat.widget.AppCompatTextView
 import androidx.cardview.widget.CardView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.navigation.fragment.findNavController
@@ -33,19 +34,19 @@ class QuizFragment : Fragment() {
 
     lateinit var currentQuestionView: TextView
 
-    lateinit var questionView: TextView
+    lateinit var questionView: AppCompatTextView
 
     lateinit var answer0Card: CardView
-    lateinit var answer0View: TextView
+    lateinit var answer0View: AppCompatTextView
 
     lateinit var answer1Card: CardView
-    lateinit var answer1View: TextView
+    lateinit var answer1View: AppCompatTextView
 
     lateinit var answer2Card: CardView
-    lateinit var answer2View: TextView
+    lateinit var answer2View: AppCompatTextView
 
     lateinit var answer3Card: CardView
-    lateinit var answer3View: TextView
+    lateinit var answer3View: AppCompatTextView
 
     lateinit var tapToContinueView: TextView
 

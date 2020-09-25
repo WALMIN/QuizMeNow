@@ -51,18 +51,20 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-                <TextView
+                <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/questionView"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:padding="12dp"
+                    android:padding="24dp"
                     android:gravity="center"
                     android:ellipsize="end"
                     android:textStyle="bold"
                     android:text="@string/question"
                     android:textAllCaps="true"
                     android:textColor="@color/text"
-                    android:textSize="32sp" />
+                    android:textSize="30sp"
+                    app:autoSizeMaxTextSize="30sp"
+                    app:autoSizeTextType="uniform" />
 
             </RelativeLayout>
         </RelativeLayout>
@@ -98,9 +100,9 @@
                 app:cardBackgroundColor="@color/colorPrimaryDark"
                 app:cardCornerRadius="4dp"
                 app:cardElevation="6dp"
-                app:contentPadding="6dp">
+                app:contentPadding="12dp">
 
-                <TextView
+                <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/answer0View"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -110,7 +112,9 @@
                     android:text="@string/answer0"
                     android:textAllCaps="true"
                     android:textColor="@color/text"
-                    android:textSize="18sp" />
+                    android:textSize="20sp"
+                    app:autoSizeMaxTextSize="20sp"
+                    app:autoSizeTextType="uniform" />
 
             </androidx.cardview.widget.CardView>
 
@@ -125,9 +129,9 @@
                 app:cardBackgroundColor="@color/colorPrimaryDark"
                 app:cardCornerRadius="4dp"
                 app:cardElevation="6dp"
-                app:contentPadding="6dp">
+                app:contentPadding="12dp">
 
-                <TextView
+                <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/answer2View"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -137,7 +141,9 @@
                     android:text="@string/answer2"
                     android:textAllCaps="true"
                     android:textColor="@color/text"
-                    android:textSize="18sp" />
+                    android:textSize="20sp"
+                    app:autoSizeMaxTextSize="20sp"
+                    app:autoSizeTextType="uniform" />
 
             </androidx.cardview.widget.CardView>
 
@@ -160,9 +166,9 @@
                 app:cardBackgroundColor="@color/colorPrimaryDark"
                 app:cardCornerRadius="4dp"
                 app:cardElevation="6dp"
-                app:contentPadding="6dp">
+                app:contentPadding="12dp">
 
-                <TextView
+                <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/answer1View"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -172,7 +178,9 @@
                     android:text="@string/answer1"
                     android:textAllCaps="true"
                     android:textColor="@color/text"
-                    android:textSize="18sp" />
+                    android:textSize="20sp"
+                    app:autoSizeMaxTextSize="20sp"
+                    app:autoSizeTextType="uniform" />
 
             </androidx.cardview.widget.CardView>
 
@@ -187,9 +195,9 @@
                 app:cardBackgroundColor="@color/colorPrimaryDark"
                 app:cardCornerRadius="4dp"
                 app:cardElevation="6dp"
-                app:contentPadding="6dp">
+                app:contentPadding="12dp">
 
-                <TextView
+                <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/answer3View"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -199,7 +207,9 @@
                     android:text="@string/answer3"
                     android:textAllCaps="true"
                     android:textColor="@color/text"
-                    android:textSize="18sp" />
+                    android:textSize="20sp"
+                    app:autoSizeMaxTextSize="20sp"
+                    app:autoSizeTextType="uniform" />
 
             </androidx.cardview.widget.CardView>
 

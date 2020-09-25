@@ -9,6 +9,7 @@
         android:id="@+id/quizListViewRefreshLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:paddingTop="6dp"
         android:paddingStart="6dp"
         android:paddingEnd="6dp"
         app:layout_constrainedHeight="true"
