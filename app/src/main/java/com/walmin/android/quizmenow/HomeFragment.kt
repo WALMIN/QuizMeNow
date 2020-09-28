@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
@@ -18,6 +19,11 @@ import org.json.JSONException
 
 class HomeFragment : Fragment(), OnHomeItemClickListener {
 
+    companion object HomeFragment {
+        var coins = 0
+
+    }
+
     var online = false
     var requestQueue: RequestQueue? = null
 
@@ -27,11 +33,10 @@ class HomeFragment : Fragment(), OnHomeItemClickListener {
     lateinit var quizListAdapter: HomeListAdapter
     var quizList = ArrayList<HomeItemData>()
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+    // Views
+    lateinit var coinsView: TextView
+
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_home, container, false)
     }
 
@@ -52,6 +57,10 @@ class HomeFragment : Fragment(), OnHomeItemClickListener {
 
         quizListAdapter = HomeListAdapter(quizList, this)
         quizListView.adapter = quizListAdapter
+
+        // Views
+        coinsView = view.findViewById(R.id.coinsView)
+        coinsView.text = coins.toString()
 
         fetchList()
 
@@ -153,6 +162,8 @@ class HomeFragment : Fragment(), OnHomeItemClickListener {
         val request = JsonObjectRequest(Request.Method.GET, url, null, { response ->
             try {
                 QuizFragment.currentQuestion = -1
+                QuizFragment.score = 0
+                QuizFragment.correctList = mutableListOf("null", "null", "null", "null", "null", "null", "null", "null", "null", "null")
                 QuizFragment.questionList.clear()
 
                 val questionArray = response.getJSONArray("results")

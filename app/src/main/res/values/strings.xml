@@ -7,17 +7,20 @@
     <string name="home_fragment_label">Home Fragment</string>
     <string name="stats_fragment_label">Stats Fragment</string>
     <string name="get_ready_fragment_label">Get Ready Fragment</string>
-    <string name="quiz_fragment_label">Game Fragment</string>
+    <string name="quiz_fragment_label">Quiz Fragment</string>
+    <string name="quiz_end_fragment_label">Quiz End Fragment</string>
 
     <!-- Home -->
     <string name="quizTitle">Loading…</string>
     <string name="goOnline">Go online for more</string>
 
+    <string name="coins">0</string>
+
     <!-- Get ready -->
     <string name="getReady">Get ready!</string>
 
-    <!-- Game -->
-    <string name="currentQuestion">Question %1$s/10</string>
+    <!-- Quiz -->
+    <string name="currentQuestion">.........</string>
 
     <string name="question">Question?</string>
     <string name="answer0">0</string>
@@ -26,5 +29,13 @@
     <string name="answer3">3</string>
 
     <string name="tapToContinue">&#8594; Tap to continue &#8592;</string>
+
+    <!-- Quiz End -->
+    <string name="accuracy">80%</string>
+
+    <string name="scoreTitle">Score</string>
+    <string name="score">+%1$s</string>
+
+    <string name="returnHome">Return home</string>
 
 </resources>

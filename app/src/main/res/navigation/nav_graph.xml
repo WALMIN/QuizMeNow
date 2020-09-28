@@ -18,10 +18,6 @@
         <action
             android:id="@+id/homeToStats"
             app:destination="@id/StatsFragment" />
-
-        <action
-            android:id="@+id/homeToQuiz"
-            app:destination="@id/QuizFragment" />
     </fragment>
 
     <fragment
@@ -53,12 +49,23 @@
         tools:layout="@layout/fragment_quiz">
 
         <action
-            android:id="@+id/quizToHome"
-            app:destination="@id/HomeFragment" />
-
-        <action
             android:id="@+id/quizToGetReady"
             app:destination="@id/GetReadyFragment" />
+
+        <action
+            android:id="@+id/quizToQuizEnd"
+            app:destination="@id/QuizEndFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/QuizEndFragment"
+        android:name="com.walmin.android.quizmenow.QuizEndFragment"
+        android:label="@string/quiz_end_fragment_label"
+        tools:layout="@layout/fragment_quiz_end">
+
+        <action
+            android:id="@+id/quizEndToHome"
+            app:destination="@id/HomeFragment" />
     </fragment>
 
 </navigation>

@@ -5,17 +5,107 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/currentQuestionView"
-        android:layout_width="match_parent"
+    <LinearLayout
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"
-        app:layout_constraintBottom_toTopOf="@+id/questionCard"
+        android:orientation="horizontal"
         android:gravity="center"
-        android:text="@string/currentQuestion"
-        android:textColor="@color/colorAccent"
-        android:textStyle="bold"
-        android:textSize="16sp" />
+        app:layout_constraintBottom_toTopOf="@+id/questionCard"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <ImageView
+            android:id="@+id/questionDot0"
+            android:layout_width="12dp"
+            android:minWidth="12dp"
+            android:maxWidth="12dp"
+            android:layout_height="wrap_content"
+            android:contentDescription="@null"
+            android:src="@drawable/question_dot" />
+
+        <ImageView
+            android:id="@+id/questionDot1"
+            android:layout_width="12dp"
+            android:minWidth="12dp"
+            android:maxWidth="12dp"
+            android:layout_height="wrap_content"
+            android:contentDescription="@null"
+            android:src="@drawable/question_dot" />
+
+        <ImageView
+            android:id="@+id/questionDot2"
+            android:layout_width="12dp"
+            android:minWidth="12dp"
+            android:maxWidth="12dp"
+            android:layout_height="wrap_content"
+            android:contentDescription="@null"
+            android:src="@drawable/question_dot" />
+
+        <ImageView
+            android:id="@+id/questionDot3"
+            android:layout_width="12dp"
+            android:minWidth="12dp"
+            android:maxWidth="12dp"
+            android:layout_height="wrap_content"
+            android:contentDescription="@null"
+            android:src="@drawable/question_dot" />
+
+        <ImageView
+            android:id="@+id/questionDot4"
+            android:layout_width="12dp"
+            android:minWidth="12dp"
+            android:maxWidth="12dp"
+            android:layout_height="wrap_content"
+            android:contentDescription="@null"
+            android:src="@drawable/question_dot" />
+
+        <ImageView
+            android:id="@+id/questionDot5"
+            android:layout_width="12dp"
+            android:minWidth="12dp"
+            android:maxWidth="12dp"
+            android:layout_height="wrap_content"
+            android:contentDescription="@null"
+            android:src="@drawable/question_dot" />
+
+        <ImageView
+            android:id="@+id/questionDot6"
+            android:layout_width="12dp"
+            android:minWidth="12dp"
+            android:maxWidth="12dp"
+            android:layout_height="wrap_content"
+            android:contentDescription="@null"
+            android:src="@drawable/question_dot" />
+
+        <ImageView
+            android:id="@+id/questionDot7"
+            android:layout_width="12dp"
+            android:minWidth="12dp"
+            android:maxWidth="12dp"
+            android:layout_height="wrap_content"
+            android:contentDescription="@null"
+            android:src="@drawable/question_dot" />
+
+        <ImageView
+            android:id="@+id/questionDot8"
+            android:layout_width="12dp"
+            android:minWidth="12dp"
+            android:maxWidth="12dp"
+            android:layout_height="wrap_content"
+            android:contentDescription="@null"
+            android:src="@drawable/question_dot" />
+
+        <ImageView
+            android:id="@+id/questionDot9"
+            android:layout_width="12dp"
+            android:minWidth="12dp"
+            android:maxWidth="12dp"
+            android:layout_height="wrap_content"
+            android:contentDescription="@null"
+            android:src="@drawable/question_dot" />
+
+    </LinearLayout>
 
     <androidx.cardview.widget.CardView
         android:id="@+id/questionCard"
