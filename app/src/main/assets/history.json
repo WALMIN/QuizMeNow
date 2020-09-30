@@ -1,0 +1,604 @@
+{
+  "results": [
+    {
+      "category": "History",
+      "type": "multiple",
+      "difficulty": "hard",
+      "question": "Pianist Fr&eacute;d&eacute;ric Chopin was a composer of which musical era?",
+      "correct_answer": "Romantic",
+      "incorrect_answers": [
+        "Classic",
+        "Baroque",
+        "Renaissance"
+      ]
+    },
+    {
+      "category": "History",
+      "type": "multiple",
+      "difficulty": "hard",
+      "question": "Spain was formed in 1469 with the marriage of Isabella I of Castile and Ferdinand II of what other Iberian kingdom?",
+      "correct_answer": "Aragon",
+      "incorrect_answers": [
+        "Galicia",
+        "Le&oacute;n",
+        "Navarre"
+      ]
+    },
+    {
+      "category": "History",
+      "type": "multiple",
+      "difficulty": "medium",
+      "question": "The Tsar Bomba, the most powerful nuclear bomb ever tested, had a yield of 50 megatons but theoretically had a maximum yield of how much?",
+      "correct_answer": "100 Megatons",
+      "incorrect_answers": [
+        "200 Megatons",
+        "75 Megatons",
+        "150 Megatons"
+      ]
+    },
+    {
+      "category": "History",
+      "type": "multiple",
+      "difficulty": "easy",
+      "question": "During WWII, in 1945, the United States dropped atomic bombs on the two Japanese cities of Hiroshima and what other city?",
+      "correct_answer": "Nagasaki",
+      "incorrect_answers": [
+        "Kawasaki",
+        "Tokyo",
+        "Kagoshima"
+      ]
+    },
+    {
+      "category": "History",
+      "type": "multiple",
+      "difficulty": "medium",
+      "question": "Who was the first explorer to sail to North America?",
+      "correct_answer": "Leif Erikson",
+      "incorrect_answers": [
+        "Christopher Columbus",
+        "Amerigo Vespucci",
+        "Ferdinand Magellan"
+      ]
+    },
+    {
+      "category": "History",
+      "type": "multiple",
+      "difficulty": "medium",
+      "question": "In what year was the famous 45 foot tall Hollywood sign first erected?",
+      "correct_answer": "1923",
+      "incorrect_answers": [
+        "1903",
+        "1913",
+        "1933"
+      ]
+    },
+    {
+      "category": "History",
+      "type": "multiple",
+      "difficulty": "medium",
+      "question": "Who was the Prime Minister of the United Kingdom for most of World War II?",
+      "correct_answer": "Winston Churchill",
+      "incorrect_answers": [
+        "Neville Chamberlain",
+        "Harold Macmillan",
+        "Edward Heath"
+      ]
+    },
+    {
+      "category": "History",
+      "type": "multiple",
+      "difficulty": "medium",
+      "question": "When did Jamaica recieve its independence from England? ",
+      "correct_answer": "1962",
+      "incorrect_answers": [
+        "1492",
+        "1963",
+        "1987"
+      ]
+    },
+    {
+      "category": "History",
+      "type": "multiple",
+      "difficulty": "medium",
+      "question": "Which of the following ancient Near Eastern peoples still exists as a modern ethnic group?",
+      "correct_answer": "Assyrians",
+      "incorrect_answers": [
+        "Babylonians",
+        "Hittites",
+        "Elamites"
+      ]
+    },
+    {
+      "category": "History",
+      "type": "multiple",
+      "difficulty": "medium",
+      "question": "According to scholarly estimates, what percentage of the world population at the time died due to Tamerlane&#039;s conquests?",
+      "correct_answer": "5%",
+      "incorrect_answers": [
+        "1%",
+        "3%",
+        "&lt;1%"
+      ]
+    },
+    {
+      "category": "History",
+      "type": "multiple",
+      "difficulty": "medium",
+      "question": "On which day did construction start on &quot;The Pentagon&quot;, the headquarters for the United States Department of Defense?",
+      "correct_answer": "September 11, 1941",
+      "incorrect_answers": [
+        "June 15, 1947",
+        "January 15, 1943",
+        "September 2, 1962"
+      ]
+    },
+    {
+      "category": "History",
+      "type": "multiple",
+      "difficulty": "medium",
+      "question": "How old was Lyndon B. Johnson when he assumed the role of President of the United States?",
+      "correct_answer": "55",
+      "incorrect_answers": [
+        "50",
+        "60",
+        "54"
+      ]
+    },
+    {
+      "category": "History",
+      "type": "multiple",
+      "difficulty": "medium",
+      "question": "In which year did the First World War begin?",
+      "correct_answer": "1914",
+      "incorrect_answers": [
+        "1930",
+        "1917",
+        "1939"
+      ]
+    },
+    {
+      "category": "History",
+      "type": "multiple",
+      "difficulty": "medium",
+      "question": "In what year did the North American Video Game Crash occur?",
+      "correct_answer": "1983",
+      "incorrect_answers": [
+        "1982",
+        "1993",
+        "1970"
+      ]
+    },
+    {
+      "category": "History",
+      "type": "multiple",
+      "difficulty": "hard",
+      "question": "Which one of these rulers did not belong to the Habsburg dynasty?",
+      "correct_answer": "Philip V",
+      "incorrect_answers": [
+        "Charles V",
+        "Philip II",
+        "Francis Joseph"
+      ]
+    },
+    {
+      "category": "History",
+      "type": "multiple",
+      "difficulty": "medium",
+      "question": "How many times was Albert Einstein married in his lifetime?",
+      "correct_answer": "Twice",
+      "incorrect_answers": [
+        "Five",
+        "Thrice",
+        "Once"
+      ]
+    },
+    {
+      "category": "History",
+      "type": "multiple",
+      "difficulty": "hard",
+      "question": "How many sonatas did Ludwig van Beethoven write?",
+      "correct_answer": "32",
+      "incorrect_answers": [
+        "50",
+        "31",
+        "21"
+      ]
+    },
+    {
+      "category": "History",
+      "type": "multiple",
+      "difficulty": "hard",
+      "question": "The Second Boer War in 1899 was fought where?",
+      "correct_answer": "South Africa",
+      "incorrect_answers": [
+        "Argentina",
+        "Nepal",
+        "Bulgaria"
+      ]
+    },
+    {
+      "category": "History",
+      "type": "multiple",
+      "difficulty": "easy",
+      "question": "When was Google founded?",
+      "correct_answer": "September 4, 1998",
+      "incorrect_answers": [
+        "October 9, 1997",
+        "December 12, 1989",
+        "Feburary 7th, 2000"
+      ]
+    },
+    {
+      "category": "History",
+      "type": "multiple",
+      "difficulty": "hard",
+      "question": "Who invented the &quot;Flying Shuttle&quot; in 1738; one of the key developments in the industrialization of weaving?",
+      "correct_answer": "John Kay",
+      "incorrect_answers": [
+        "James Hargreaves",
+        "Richard Arkwright",
+        "John Deere"
+      ]
+    },
+    {
+      "category": "History",
+      "type": "multiple",
+      "difficulty": "medium",
+      "question": "Which WWII tank ace is credited with having destroyed the most tanks?",
+      "correct_answer": "Kurt Knispel",
+      "incorrect_answers": [
+        "Michael Wittmann",
+        "Walter Kniep",
+        "Otto Carius"
+      ]
+    },
+    {
+      "category": "History",
+      "type": "multiple",
+      "difficulty": "medium",
+      "question": "What were the first states to break away from Yugoslavia?",
+      "correct_answer": "Slovenia, Croatia",
+      "incorrect_answers": [
+        "Macedonia, Montenegro",
+        "Slovenia, Macedonia",
+        "Montenegro, Slovenia"
+      ]
+    },
+    {
+      "category": "History",
+      "type": "multiple",
+      "difficulty": "medium",
+      "question": "What was the transfer of disease, crops, and people across the Atlantic shortly after the discovery of the Americas called?",
+      "correct_answer": "The Columbian Exchange",
+      "incorrect_answers": [
+        "Triangle Trade",
+        "Transatlantic Slave Trade",
+        "The Silk Road"
+      ]
+    },
+    {
+      "category": "History",
+      "type": "multiple",
+      "difficulty": "medium",
+      "question": "What year is considered to be the year that the British Empire ended?",
+      "correct_answer": "1997",
+      "incorrect_answers": [
+        "1986",
+        "1981",
+        "1971"
+      ]
+    },
+    {
+      "category": "History",
+      "type": "multiple",
+      "difficulty": "medium",
+      "question": "Which of the following snipers has the highest amount of confirmed kills?",
+      "correct_answer": "Simo H&auml;yh&auml;",
+      "incorrect_answers": [
+        "Chris Kyle",
+        "Vasily Zaytsev",
+        "Craig Harrison"
+      ]
+    },
+    {
+      "category": "History",
+      "type": "multiple",
+      "difficulty": "easy",
+      "question": "How was Socrates executed?",
+      "correct_answer": "Poison",
+      "incorrect_answers": [
+        "Decapitation",
+        "Firing squad",
+        "Crucifixion "
+      ]
+    },
+    {
+      "category": "History",
+      "type": "multiple",
+      "difficulty": "medium",
+      "question": "Who was the first president born in the independent United States?",
+      "correct_answer": "Martin Van Buren",
+      "incorrect_answers": [
+        "John Adams",
+        "George Washington",
+        "James Monroe "
+      ]
+    },
+    {
+      "category": "History",
+      "type": "multiple",
+      "difficulty": "medium",
+      "question": "In what year did the First World War end?",
+      "correct_answer": "1918",
+      "incorrect_answers": [
+        "1914",
+        "1916",
+        "1912"
+      ]
+    },
+    {
+      "category": "History",
+      "type": "multiple",
+      "difficulty": "easy",
+      "question": "How long did World War II last?",
+      "correct_answer": "6 years",
+      "incorrect_answers": [
+        "4 years",
+        "5 years",
+        "7 years"
+      ]
+    },
+    {
+      "category": "History",
+      "type": "multiple",
+      "difficulty": "medium",
+      "question": "Which U.S. president took part in the Potsdam Conference, where the Allies reached a peace settlement with Germany?",
+      "correct_answer": "Harry S. Truman",
+      "incorrect_answers": [
+        "Dwight D. Eisenhower",
+        "Franklin D. Roosevelt",
+        "Herbert Hoover"
+      ]
+    },
+    {
+      "category": "History",
+      "type": "multiple",
+      "difficulty": "medium",
+      "question": "What was the total length of the Titanic?",
+      "correct_answer": "882 ft | 268.8 m",
+      "incorrect_answers": [
+        "759 ft | 231.3 m",
+        "1042 ft | 317.6 m",
+        "825 ft | 251.5 m"
+      ]
+    },
+    {
+      "category": "History",
+      "type": "multiple",
+      "difficulty": "medium",
+      "question": "The Fallingwater House, located in Pennsylvania, was designed by which architect?",
+      "correct_answer": "Frank Lloyd Wright",
+      "incorrect_answers": [
+        "Antoni Gaudi",
+        "Frank Gehry",
+        "Le Corbusier"
+      ]
+    },
+    {
+      "category": "History",
+      "type": "multiple",
+      "difficulty": "medium",
+      "question": "What year did Australia become a federation?",
+      "correct_answer": "1901",
+      "incorrect_answers": [
+        "1910",
+        "1899",
+        "1911"
+      ]
+    },
+    {
+      "category": "History",
+      "type": "multiple",
+      "difficulty": "medium",
+      "question": "In what year did Kentucky become the 15th state to join the union?",
+      "correct_answer": "1792",
+      "incorrect_answers": [
+        "1782",
+        "1798",
+        "1788"
+      ]
+    },
+    {
+      "category": "History",
+      "type": "multiple",
+      "difficulty": "medium",
+      "question": "In World War I, what was the name of the alliance of Germany, Austria-Hungary, the Ottoman Empire, and Bulgaria?",
+      "correct_answer": "The Central Powers",
+      "incorrect_answers": [
+        "The Axis Powers",
+        "The Federation of Empires",
+        "Authoritarian Alliance"
+      ]
+    },
+    {
+      "category": "History",
+      "type": "multiple",
+      "difficulty": "easy",
+      "question": "What year did World War I begin?",
+      "correct_answer": "1914",
+      "incorrect_answers": [
+        "1905",
+        "1919",
+        "1925"
+      ]
+    },
+    {
+      "category": "History",
+      "type": "multiple",
+      "difficulty": "medium",
+      "question": "In what year did the Berlin Wall fall?",
+      "correct_answer": "1989",
+      "incorrect_answers": [
+        "1987",
+        "1991",
+        "1993"
+      ]
+    },
+    {
+      "category": "History",
+      "type": "multiple",
+      "difficulty": "hard",
+      "question": "What was the original name of New York City?",
+      "correct_answer": "New Amsterdam",
+      "incorrect_answers": [
+        "New London",
+        "New Paris",
+        "New Rome"
+      ]
+    },
+    {
+      "category": "History",
+      "type": "multiple",
+      "difficulty": "medium",
+      "question": "When was the People&#039;s Republic of China founded?",
+      "correct_answer": "October 1, 1949",
+      "incorrect_answers": [
+        "April 3, 1947",
+        "May 7, 1945",
+        "December 6, 1950"
+      ]
+    },
+    {
+      "category": "History",
+      "type": "multiple",
+      "difficulty": "medium",
+      "question": "What is the name of the ship which was only a few miles away from the RMS Titanic when it struck an iceberg on April 14, 1912?",
+      "correct_answer": "Californian",
+      "incorrect_answers": [
+        "Carpathia",
+        "Cristol",
+        "Commerce"
+      ]
+    },
+    {
+      "category": "History",
+      "type": "multiple",
+      "difficulty": "easy",
+      "question": "Which modern country is known as &quot;The Graveyard of Empires&quot;?",
+      "correct_answer": "Afghanistan",
+      "incorrect_answers": [
+        "China",
+        "Iraq",
+        "Russia"
+      ]
+    },
+    {
+      "category": "History",
+      "type": "multiple",
+      "difficulty": "medium",
+      "question": "When did construction of the Suez Canal finish?",
+      "correct_answer": "1869",
+      "incorrect_answers": [
+        "1859",
+        "1860",
+        "1850"
+      ]
+    },
+    {
+      "category": "History",
+      "type": "multiple",
+      "difficulty": "medium",
+      "question": "What year did the Vietnam War end?",
+      "correct_answer": "1975",
+      "incorrect_answers": [
+        "1978",
+        "1967",
+        "1969"
+      ]
+    },
+    {
+      "category": "History",
+      "type": "multiple",
+      "difficulty": "medium",
+      "question": "Which of the following Presidents of the United States was assassinated?",
+      "correct_answer": "William McKinley",
+      "incorrect_answers": [
+        "Lyndon Johnson",
+        "Chester Arthur",
+        "Franklin Roosevelt"
+      ]
+    },
+    {
+      "category": "History",
+      "type": "multiple",
+      "difficulty": "medium",
+      "question": "Which of these 1900s tanks were designed and built BEFORE the others?",
+      "correct_answer": "Renault FT",
+      "incorrect_answers": [
+        "M4 Sherman",
+        " Panzer IV",
+        "Cromwell "
+      ]
+    },
+    {
+      "category": "History",
+      "type": "multiple",
+      "difficulty": "easy",
+      "question": "In what year was the M1911 pistol designed?",
+      "correct_answer": "1911",
+      "incorrect_answers": [
+        "1907",
+        "1899",
+        "1917"
+      ]
+    },
+    {
+      "category": "History",
+      "type": "multiple",
+      "difficulty": "medium",
+      "question": "When did the Crisis of the Third Century begin?",
+      "correct_answer": "235 AD",
+      "incorrect_answers": [
+        "235 BC",
+        "242 AD",
+        "210 AD"
+      ]
+    },
+    {
+      "category": "History",
+      "type": "multiple",
+      "difficulty": "hard",
+      "question": "The pantheon in Rome was used to worship what god?",
+      "correct_answer": "Any god they wanted",
+      "incorrect_answers": [
+        "Athena",
+        "Zeus",
+        "Both Athena and Zeus"
+      ]
+    },
+    {
+      "category": "History",
+      "type": "multiple",
+      "difficulty": "medium",
+      "question": "Which Louis was known as &#039;The Sun King of France&#039;?",
+      "correct_answer": "Louis XIV",
+      "incorrect_answers": [
+        "Louis XIII",
+        "Louis XV",
+        "Louis XVI"
+      ]
+    },
+    {
+      "category": "History",
+      "type": "multiple",
+      "difficulty": "medium",
+      "question": "Which U.S. President was famously &#039;attacked&#039; by a swimming rabbit?",
+      "correct_answer": "Jimmy Carter",
+      "incorrect_answers": [
+        "Ronald Reagan",
+        "Lydon B. Johnson",
+        "Gerald Ford"
+      ]
+    }
+  ]
+}

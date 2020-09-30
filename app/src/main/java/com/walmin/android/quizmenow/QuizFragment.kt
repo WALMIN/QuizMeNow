@@ -454,7 +454,7 @@ class QuizFragment : Fragment() {
 
             }
 
-            if(question == (questionList.size - 1)){
+            if(question == 9){
                 finished = true
                 tapToContinueView.visibility = View.VISIBLE
 

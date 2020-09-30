@@ -16,6 +16,8 @@ import com.android.volley.RequestQueue
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
 import org.json.JSONException
+import org.json.JSONObject
+import java.util.*
 
 class HomeFragment : Fragment(), OnHomeItemClickListener {
 
@@ -71,7 +73,9 @@ class HomeFragment : Fragment(), OnHomeItemClickListener {
 
         quizList.add(HomeItemData("Animals", "0", "607D8B"))
         quizList.add(HomeItemData("General knowledge", "1", "F44336"))
-        quizList.add(HomeItemData("Sports", "2", "FFEB3B"))
+        quizList.add(HomeItemData("Geography", "2", "FFC107"))
+        quizList.add(HomeItemData("History", "3", "D81B60"))
+        quizList.add(HomeItemData("Sports", "4", "FFEB3B"))
         quizList.add(HomeItemData(getString(R.string.goOnline), "-1", "4CAF50"))
 
         quizListAdapter.notifyDataSetChanged()
@@ -91,10 +95,8 @@ class HomeFragment : Fragment(), OnHomeItemClickListener {
             online = true
             requestQueue = Volley.newRequestQueue(context)
 
-            val request = JsonObjectRequest(Request.Method.GET,
-                resources.getString(R.string.homeListURL),
-                null,
-                { response ->
+            val request = JsonObjectRequest(Request.Method.GET, resources.getString(R.string.homeListURL), null, {
+                response ->
                     try {
                         quizList.clear()
 
@@ -142,10 +144,10 @@ class HomeFragment : Fragment(), OnHomeItemClickListener {
 
         }else{
             if(online){
-                fetchQuestions(item.title, getString(R.string.quizURL, item.value))
+                fetchQuestions(item.title, item.value, getString(R.string.quizURL, item.value))
 
             }else{
-                fetchOfflineQuestions()
+                fetchOfflineQuestions(item.title, item.value)
 
             }
 
@@ -153,12 +155,53 @@ class HomeFragment : Fragment(), OnHomeItemClickListener {
 
     }
 
-    fun fetchOfflineQuestions(){
+    fun fetchOfflineQuestions(title: String, value: String){
+        try {
+            QuizFragment.currentQuestion = -1
+            QuizFragment.score = 0
+            QuizFragment.correctList = mutableListOf("null", "null", "null", "null", "null", "null", "null", "null", "null", "null")
+            QuizFragment.questionList.clear()
 
+            val response = JSONObject(requireContext().assets.open("${title.toLowerCase(Locale.ROOT).replace(" ", "_")}.json").bufferedReader().use { it.readText() })
+            val questionArray = response.getJSONArray("results")
+
+            for (i in 0 until questionArray.length()) {
+                val item = questionArray.getJSONObject(i)
+
+                val answerList = ArrayList<String>()
+                answerList.add(item.getString("correct_answer"))
+                answerList.add(item.getJSONArray("incorrect_answers")[0].toString())
+                answerList.add(item.getJSONArray("incorrect_answers")[1].toString())
+                answerList.add(item.getJSONArray("incorrect_answers")[2].toString())
+
+                answerList.shuffle()
+
+                QuizFragment.questionList.add(
+                    QuestionItemData(
+                        item.getString("question"),
+                        item.getString("correct_answer"),
+                        answerList
+                    )
+                )
+
+                GetReadyFragment.currentQuiz = title
+                GetReadyFragment.currentQuizValue = value
+
+                Log.d("HomeFragment", QuizFragment.questionList[i].toString())
+
+            }
+
+            QuizFragment.questionList.shuffle()
+            findNavController().navigate(R.id.homeToGetReady)
+
+        } catch (e: JSONException) {
+            e.printStackTrace()
+
+        }
 
     }
 
-    fun fetchQuestions(title: String, url: String){
+    fun fetchQuestions(title: String, value: String, url: String){
         val request = JsonObjectRequest(Request.Method.GET, url, null, { response ->
             try {
                 QuizFragment.currentQuestion = -1
@@ -188,6 +231,7 @@ class HomeFragment : Fragment(), OnHomeItemClickListener {
                     )
 
                     GetReadyFragment.currentQuiz = title
+                    GetReadyFragment.currentQuizValue = value
 
                     Log.d("HomeFragment", QuizFragment.questionList[i].toString())
 
