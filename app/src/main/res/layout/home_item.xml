@@ -33,6 +33,26 @@
             android:background="@drawable/home_item_gradient">
 
             <TextView
+                android:id="@+id/priceView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="4dp"
+                android:layout_marginEnd="4dp"
+                android:layout_marginBottom="4dp"
+                android:drawablePadding="2dp"
+                android:ellipsize="end"
+                android:gravity="center"
+                android:maxLines="3"
+                android:text="@string/price"
+                android:textAllCaps="true"
+                android:textColor="@color/text"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:visibility="gone"
+                app:drawableEndCompat="@drawable/coins_small" />
+
+            <TextView
                 android:id="@+id/quizTitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

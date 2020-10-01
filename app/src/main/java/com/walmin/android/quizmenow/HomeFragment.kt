@@ -6,11 +6,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+import kotlinx.android.synthetic.main.fragment_home.*
 import com.android.volley.Request
 import com.android.volley.RequestQueue
 import com.android.volley.toolbox.JsonObjectRequest
@@ -22,7 +24,7 @@ import java.util.*
 class HomeFragment : Fragment(), OnHomeItemClickListener {
 
     companion object HomeFragment {
-        var coins = 0
+        var coins = 100
 
     }
 
@@ -71,12 +73,12 @@ class HomeFragment : Fragment(), OnHomeItemClickListener {
     fun fetchOfflineList(){
         quizList.clear()
 
-        quizList.add(HomeItemData("Animals", "0", "607D8B"))
-        quizList.add(HomeItemData("General knowledge", "1", "F44336"))
-        quizList.add(HomeItemData("Geography", "2", "FFC107"))
-        quizList.add(HomeItemData("History", "3", "D81B60"))
-        quizList.add(HomeItemData("Sports", "4", "FFEB3B"))
-        quizList.add(HomeItemData(getString(R.string.goOnline), "-1", "4CAF50"))
+        quizList.add(HomeItemData("Animals", "0", "607D8B", "0", false))
+        quizList.add(HomeItemData("General knowledge", "1", "F44336", "0", false))
+        quizList.add(HomeItemData("Geography", "2", "FFC107", "0", false))
+        quizList.add(HomeItemData("History", "3", "D81B60", "0", false))
+        quizList.add(HomeItemData("Sports", "4", "FFEB3B", "0", false))
+        quizList.add(HomeItemData(getString(R.string.goOnline), "-1", "4CAF50", "0", false))
 
         quizListAdapter.notifyDataSetChanged()
 
@@ -101,20 +103,29 @@ class HomeFragment : Fragment(), OnHomeItemClickListener {
                         quizList.clear()
 
                         val listArray = response.getJSONArray("quiz")
+                        val lockArray = MainActivity.unlocked.substring(0, MainActivity.unlocked.length - 1).split("|").toTypedArray()
 
                         for (i in 0 until listArray.length()) {
+                            var locked = false
+
+                            if(lockArray[i].endsWith("l")){
+                                locked = true
+
+                            }
+
                             val item = listArray.getJSONObject(i)
                             quizList.add(
                                 HomeItemData(
                                     item.getString("title"),
                                     item.getString("value"),
-                                    item.getString("color")
+                                    item.getString("color"),
+                                    item.getString("price"),
+                                    locked
                                 )
                             )
 
                         }
 
-                        quizList.sortBy { it.title }
                         quizListAdapter.notifyDataSetChanged();
 
                     } catch (e: JSONException) {
@@ -138,18 +149,46 @@ class HomeFragment : Fragment(), OnHomeItemClickListener {
 
     }
 
-    override fun onHomeItemClick(item: HomeItemData) {
-        if(item.value == "-1"){
-            fetchList()
-
-        }else{
-            if(online){
-                fetchQuestions(item.title, item.value, getString(R.string.quizURL, item.value))
+    override fun onHomeItemClick(item: HomeItemData, position: Int) {
+        if(!item.locked){
+            if(item.value == "-1"){
+                fetchList()
 
             }else{
-                fetchOfflineQuestions(item.title, item.value)
+                if(online){
+                    fetchQuestions(item.title, item.value, getString(R.string.quizURL, item.value))
+
+                }else{
+                    fetchOfflineQuestions(item.title, item.value)
+
+                }
 
             }
+
+        }else{
+            AlertDialog.Builder(requireContext())
+                .setTitle(item.title)
+                .setMessage(getString(R.string.purchaseMsg, item.price))
+                .setPositiveButton(getString(R.string.yes)) { dialog, which ->
+                    if(coins >= item.price.toInt()){
+                        coins -= item.price.toInt()
+                        coinsView.text = coins.toString()
+
+                        MainActivity.unlocked = MainActivity.unlocked.replace(position.toString() + "l|", position.toString() + "u|")
+
+                        fetchList()
+
+                    }else{
+                        Tools.showSnackbar(layout, getString(R.string.purchaseNotEnough))
+
+                    }
+
+                }
+                .setNegativeButton(getString(R.string.no)) { dialog, which ->
+                    dialog.cancel()
+
+                }
+                .show()
 
         }
 

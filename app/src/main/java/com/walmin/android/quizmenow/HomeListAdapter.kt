@@ -33,11 +33,16 @@ class HomeListAdapter(homeList: ArrayList<HomeItemData>, var onClickListener: On
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         fun bindItems(item: HomeItemData, onClick: OnHomeItemClickListener) {
+            val priceView = itemView.findViewById<TextView>(R.id.priceView)
+            priceView.visibility = View.GONE
+
             val quizCardView = itemView.findViewById<CardView>(R.id.quizCard)
             val quizTitleView = itemView.findViewById<TextView>(R.id.quizTitle)
 
+            // Title
             quizTitleView.text = item.title
 
+            // Color
             if(item.color == ""){
                 quizCardView.setCardBackgroundColor(itemView.context.getColor(R.color.colorPrimaryDark))
 
@@ -46,9 +51,25 @@ class HomeListAdapter(homeList: ArrayList<HomeItemData>, var onClickListener: On
 
             }
 
-            if(item.value.toInt() >= 9) {
+            // Locked
+            if(item.locked){
                 Glide.with(itemView.context)
-                    .load(itemView.context.getString(R.string.thumbnailURL,
+                    .load(R.drawable.lock)
+                    .placeholder(R.drawable.loading)
+                    .error(R.drawable.error)
+                    .diskCacheStrategy(DiskCacheStrategy.ALL)
+                    .skipMemoryCache(false)
+                    .into(itemView.findViewById(R.id.quizThumbnail))
+
+                priceView.text = item.price
+                priceView.visibility = View.VISIBLE
+
+            // Icon online
+            }else if(item.value.toInt() >= 9) {
+                Glide.with(itemView.context)
+                    .load(
+                        itemView.context.getString(
+                            R.string.thumbnailURL,
                             item.title.toLowerCase(Locale.ROOT)
                                 .replace(" ", "_")
                         )
@@ -59,6 +80,7 @@ class HomeListAdapter(homeList: ArrayList<HomeItemData>, var onClickListener: On
                     .skipMemoryCache(false)
                     .into(itemView.findViewById(R.id.quizThumbnail))
 
+            // Icon offline
             }else{
                 Glide.with(itemView.context)
                     .load(Tools.getImage(itemView.context,
@@ -74,8 +96,9 @@ class HomeListAdapter(homeList: ArrayList<HomeItemData>, var onClickListener: On
 
             }
 
+            // OnClick
             itemView.setOnClickListener{
-                onClick.onHomeItemClick(item)
+                onClick.onHomeItemClick(item, adapterPosition)
 
             }
 
@@ -86,6 +109,6 @@ class HomeListAdapter(homeList: ArrayList<HomeItemData>, var onClickListener: On
 }
 
 interface OnHomeItemClickListener{
-    fun onHomeItemClick(item: HomeItemData)
+    fun onHomeItemClick(item: HomeItemData, position: Int)
 
 }

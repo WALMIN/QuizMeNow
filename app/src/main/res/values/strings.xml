@@ -11,10 +11,15 @@
     <string name="quiz_end_fragment_label">Quiz End Fragment</string>
 
     <!-- Home -->
+    <string name="price">10</string>
+
     <string name="quizTitle">Loading…</string>
     <string name="goOnline">Go online for more</string>
 
     <string name="coins">0</string>
+
+    <string name="purchaseMsg">Do you want to buy this quiz for %1$s coins?</string>
+    <string name="purchaseNotEnough">You don\'t have enough coins to buy this.</string>
 
     <!-- Get ready -->
     <string name="getReady">Get ready!</string>
@@ -37,5 +42,9 @@
     <string name="score">+%1$s</string>
 
     <string name="returnHome">Return home</string>
+
+    <!-- Buttons -->
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
 
 </resources>
