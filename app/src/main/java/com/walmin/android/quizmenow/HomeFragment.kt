@@ -1,7 +1,6 @@
 package com.walmin.android.quizmenow
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -47,6 +46,8 @@ class HomeFragment : Fragment(), OnHomeItemClickListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        requestQueue = Volley.newRequestQueue(context)
+
         // List
         quizListViewRefreshLayout = view.findViewById(R.id.quizListViewRefreshLayout)
         quizListViewRefreshLayout.setOnRefreshListener {
@@ -71,14 +72,15 @@ class HomeFragment : Fragment(), OnHomeItemClickListener {
     }
 
     fun fetchOfflineList(){
-        quizList.clear()
+        quizListViewRefreshLayout.isRefreshing = false
+        online = false
 
-        quizList.add(HomeItemData("Animals", "0", "607D8B", "0", false))
-        quizList.add(HomeItemData("General knowledge", "1", "F44336", "0", false))
-        quizList.add(HomeItemData("Geography", "2", "FFC107", "0", false))
-        quizList.add(HomeItemData("History", "3", "D81B60", "0", false))
-        quizList.add(HomeItemData("Sports", "4", "FFEB3B", "0", false))
-        quizList.add(HomeItemData(getString(R.string.goOnline), "-1", "4CAF50", "0", false))
+        quizList.add(HomeItemData("Animals", "0", "F44336", "0", false))
+        quizList.add(HomeItemData("Art", "1", "9C27B0", "0", false))
+        quizList.add(HomeItemData("Books", "2", "3F51B5", "0", false))
+        quizList.add(HomeItemData("General knowledge", "3", "03A9F4", "0", false))
+        quizList.add(HomeItemData("Geography", "4", "009688", "0", false))
+        quizList.add(HomeItemData(getString(R.string.goOnline), "-1", "8BC34A", "0", false))
 
         quizListAdapter.notifyDataSetChanged()
 
@@ -86,64 +88,59 @@ class HomeFragment : Fragment(), OnHomeItemClickListener {
 
     fun fetchList(){
         quizListViewRefreshLayout.isRefreshing = true
+        quizList.clear()
 
         if(!Tools.isNetworkConnected(requireContext())){
-            quizListViewRefreshLayout.isRefreshing = false
-
-            online = false
             fetchOfflineList()
 
         }else {
+            quizListViewRefreshLayout.isRefreshing = false
             online = true
-            requestQueue = Volley.newRequestQueue(context)
 
-            val request = JsonObjectRequest(Request.Method.GET, resources.getString(R.string.homeListURL), null, {
-                response ->
-                    try {
-                        quizList.clear()
+            val lockList = MainActivity.unlocked.split("|").toTypedArray()
+            val lockedArray = mutableListOf<Boolean>()
 
-                        val listArray = response.getJSONArray("quiz")
-                        val lockArray = MainActivity.unlocked.substring(0, MainActivity.unlocked.length - 1).split("|").toTypedArray()
+            for (i in lockList) {
+                if (i.endsWith("l")) {
+                    lockedArray.add(true)
 
-                        for (i in 0 until listArray.length()) {
-                            var locked = false
+                }else{
+                    lockedArray.add(false)
 
-                            if(lockArray[i].endsWith("l")){
-                                locked = true
+                }
+            }
 
-                            }
+            quizList.add(HomeItemData("Animals", "27", "F44336", "0", lockedArray[0]))
+            quizList.add(HomeItemData("Art", "25", "9C27B0", "0", lockedArray[1]))
+            quizList.add(HomeItemData("Books", "10", "3F51B5", "0", lockedArray[2]))
+            quizList.add(HomeItemData("General knowledge", "9", "03A9F4", "0", lockedArray[3]))
+            quizList.add(HomeItemData("Geography", "22", "009688", "0", lockedArray[4]))
+            quizList.add(HomeItemData("Film", "11", "8BC34A", "0", lockedArray[5]))
+            quizList.add(HomeItemData("History", "23", "FFEB3B", "0", lockedArray[6]))
+            quizList.add(HomeItemData("Music", "12", "FF9800", "0", lockedArray[7]))
+            quizList.add(HomeItemData("Sports", "21", "795548", "0", lockedArray[8]))
 
-                            val item = listArray.getJSONObject(i)
-                            quizList.add(
-                                HomeItemData(
-                                    item.getString("title"),
-                                    item.getString("value"),
-                                    item.getString("color"),
-                                    item.getString("price"),
-                                    locked
-                                )
-                            )
+            quizList.add(HomeItemData("Board Games", "16", "E32F2F", "10", lockedArray[9]))
+            quizList.add(HomeItemData("Cartoon & Animations", "32", "7B1FA2", "10", lockedArray[10]))
+            quizList.add(HomeItemData("Celebrities", "26", "303F9F", "10", lockedArray[11]))
 
-                        }
+            quizList.add(HomeItemData("Comics", "29", "0288D1", "15", lockedArray[12]))
+            quizList.add(HomeItemData("Computers", "18", "00796B", "15", lockedArray[13]))
+            quizList.add(HomeItemData("Gadgets", "30", "689F38", "15", lockedArray[14]))
 
-                        quizListAdapter.notifyDataSetChanged();
+            quizList.add(HomeItemData("Japanese Anime & Manga", "31", "FBC02D", "20", lockedArray[15]))
+            quizList.add(HomeItemData("Mathematics", "19", "F57C00", "20", lockedArray[16]))
+            quizList.add(HomeItemData("Musicals & Theatres", "13", "5D4037", "20", lockedArray[17]))
 
-                    } catch (e: JSONException) {
-                        e.printStackTrace()
+            quizList.add(HomeItemData("Mythology", "20", "B71C1C", "25", lockedArray[18]))
+            quizList.add(HomeItemData("Politics", "24", "4A148C", "25", lockedArray[19]))
+            quizList.add(HomeItemData("Science & Nature", "17", "1A237E", "25", lockedArray[20]))
 
-                    }
-                    quizListViewRefreshLayout.isRefreshing = false
+            quizList.add(HomeItemData("Television", "14", "01579B", "30", lockedArray[21]))
+            quizList.add(HomeItemData("Vehicles", "28", "004D40", "30", lockedArray[22]))
+            quizList.add(HomeItemData("Video Games", "15", "33691E", "30", lockedArray[23]))
 
-                },
-                {
-                    it.printStackTrace()
-
-                    quizListViewRefreshLayout.isRefreshing = false
-
-                    online = false
-                    fetchOfflineList()
-                })
-            requestQueue?.add(request)
+            quizListAdapter.notifyDataSetChanged()
 
         }
 
@@ -226,8 +223,6 @@ class HomeFragment : Fragment(), OnHomeItemClickListener {
                 GetReadyFragment.currentQuiz = title
                 GetReadyFragment.currentQuizValue = value
 
-                Log.d("HomeFragment", QuizFragment.questionList[i].toString())
-
             }
 
             QuizFragment.questionList.shuffle()
@@ -272,10 +267,7 @@ class HomeFragment : Fragment(), OnHomeItemClickListener {
                     GetReadyFragment.currentQuiz = title
                     GetReadyFragment.currentQuizValue = value
 
-                    Log.d("HomeFragment", QuizFragment.questionList[i].toString())
-
                 }
-
                 findNavController().navigate(R.id.homeToGetReady)
 
             } catch (e: JSONException) {
