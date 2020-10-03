@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
@@ -31,6 +32,8 @@ class HomeFragment : Fragment(), OnHomeItemClickListener {
     var requestQueue: RequestQueue? = null
 
     // List
+    lateinit var quizListLoadingSpinLayout: LinearLayout
+
     lateinit var quizListViewRefreshLayout: SwipeRefreshLayout
     lateinit var quizListView: RecyclerView
     lateinit var quizListAdapter: HomeListAdapter
@@ -49,9 +52,10 @@ class HomeFragment : Fragment(), OnHomeItemClickListener {
         requestQueue = Volley.newRequestQueue(context)
 
         // List
+        quizListLoadingSpinLayout = view.findViewById(R.id.quizListLoadingSpinLayout)
+
         quizListViewRefreshLayout = view.findViewById(R.id.quizListViewRefreshLayout)
         quizListViewRefreshLayout.setOnRefreshListener {
-            quizListViewRefreshLayout.isRefreshing = true
             fetchList()
 
         }
@@ -87,6 +91,8 @@ class HomeFragment : Fragment(), OnHomeItemClickListener {
     }
 
     fun fetchList(){
+        quizListLoadingSpinLayout.visibility = View.GONE
+
         quizListViewRefreshLayout.isRefreshing = true
         quizList.clear()
 
@@ -152,6 +158,8 @@ class HomeFragment : Fragment(), OnHomeItemClickListener {
                 fetchList()
 
             }else{
+                quizListLoadingSpinLayout.visibility = View.VISIBLE
+
                 if(online){
                     fetchQuestions(item.title, item.value, getString(R.string.quizURL, item.value))
 
@@ -226,7 +234,11 @@ class HomeFragment : Fragment(), OnHomeItemClickListener {
             }
 
             QuizFragment.questionList.shuffle()
-            findNavController().navigate(R.id.homeToGetReady)
+
+            if (findNavController().currentDestination?.id == R.id.HomeFragment) {
+                findNavController().navigate(R.id.homeToGetReady)
+
+            }
 
         } catch (e: JSONException) {
             e.printStackTrace()
@@ -268,7 +280,11 @@ class HomeFragment : Fragment(), OnHomeItemClickListener {
                     GetReadyFragment.currentQuizValue = value
 
                 }
-                findNavController().navigate(R.id.homeToGetReady)
+
+                if (findNavController().currentDestination?.id == R.id.HomeFragment) {
+                    findNavController().navigate(R.id.homeToGetReady)
+
+                }
 
             } catch (e: JSONException) {
                 e.printStackTrace()

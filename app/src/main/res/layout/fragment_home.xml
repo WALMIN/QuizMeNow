@@ -62,4 +62,31 @@
         </androidx.appcompat.widget.Toolbar>
 
     </com.google.android.material.appbar.AppBarLayout>
+
+    <LinearLayout
+        android:id="@+id/quizListLoadingSpinLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:visibility="gone"
+        android:clickable="true"
+        android:focusable="true"
+        android:gravity="center"
+        android:background="#80000000">
+
+        <com.github.ybq.android.spinkit.SpinKitView
+            android:layout_width="96dp"
+            android:minWidth="96dp"
+            android:maxWidth="96dp"
+            android:layout_height="96dp"
+            android:minHeight="96dp"
+            android:maxHeight="96dp"
+            app:SpinKit_Style="Wave"
+            app:SpinKit_Color="@color/colorAccent" />
+
+    </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
