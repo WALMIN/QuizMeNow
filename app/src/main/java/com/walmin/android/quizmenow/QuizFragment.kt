@@ -218,34 +218,34 @@ class QuizFragment : Fragment() {
         timer.start()
 
         if(question == 0){
-            questionDot0.setColorFilter(ContextCompat.getColor(requireContext(), R.color.text), PorterDuff.Mode.MULTIPLY)
+            questionDot0.setColorFilter(ContextCompat.getColor(requireContext(), R.color.colorAccent), PorterDuff.Mode.MULTIPLY)
 
         }else if(question == 1){
-            questionDot1.setColorFilter(ContextCompat.getColor(requireContext(), R.color.text), PorterDuff.Mode.MULTIPLY)
+            questionDot1.setColorFilter(ContextCompat.getColor(requireContext(), R.color.colorAccent), PorterDuff.Mode.MULTIPLY)
 
         }else if(question == 2){
-            questionDot2.setColorFilter(ContextCompat.getColor(requireContext(), R.color.text), PorterDuff.Mode.MULTIPLY)
+            questionDot2.setColorFilter(ContextCompat.getColor(requireContext(), R.color.colorAccent), PorterDuff.Mode.MULTIPLY)
 
         }else if(question == 3){
-            questionDot3.setColorFilter(ContextCompat.getColor(requireContext(), R.color.text), PorterDuff.Mode.MULTIPLY)
+            questionDot3.setColorFilter(ContextCompat.getColor(requireContext(), R.color.colorAccent), PorterDuff.Mode.MULTIPLY)
 
         }else if(question == 4){
-            questionDot4.setColorFilter(ContextCompat.getColor(requireContext(), R.color.text), PorterDuff.Mode.MULTIPLY)
+            questionDot4.setColorFilter(ContextCompat.getColor(requireContext(), R.color.colorAccent), PorterDuff.Mode.MULTIPLY)
 
         }else if(question == 5){
-            questionDot5.setColorFilter(ContextCompat.getColor(requireContext(), R.color.text), PorterDuff.Mode.MULTIPLY)
+            questionDot5.setColorFilter(ContextCompat.getColor(requireContext(), R.color.colorAccent), PorterDuff.Mode.MULTIPLY)
 
         }else if(question == 6){
-            questionDot6.setColorFilter(ContextCompat.getColor(requireContext(), R.color.text), PorterDuff.Mode.MULTIPLY)
+            questionDot6.setColorFilter(ContextCompat.getColor(requireContext(), R.color.colorAccent), PorterDuff.Mode.MULTIPLY)
 
         }else if(question == 7){
-            questionDot7.setColorFilter(ContextCompat.getColor(requireContext(), R.color.text), PorterDuff.Mode.MULTIPLY)
+            questionDot7.setColorFilter(ContextCompat.getColor(requireContext(), R.color.colorAccent), PorterDuff.Mode.MULTIPLY)
 
         }else if(question == 8){
-            questionDot8.setColorFilter(ContextCompat.getColor(requireContext(), R.color.text), PorterDuff.Mode.MULTIPLY)
+            questionDot8.setColorFilter(ContextCompat.getColor(requireContext(), R.color.colorAccent), PorterDuff.Mode.MULTIPLY)
 
         }else if(question == 9){
-            questionDot9.setColorFilter(ContextCompat.getColor(requireContext(), R.color.text), PorterDuff.Mode.MULTIPLY)
+            questionDot9.setColorFilter(ContextCompat.getColor(requireContext(), R.color.colorAccent), PorterDuff.Mode.MULTIPLY)
 
         }
 
