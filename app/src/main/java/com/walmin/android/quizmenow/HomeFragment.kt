@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageButton
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
@@ -23,11 +24,6 @@ import java.util.*
 
 class HomeFragment : Fragment(), OnHomeItemClickListener {
 
-    companion object HomeFragment {
-        var coins = 100
-
-    }
-
     var online = false
     var requestQueue: RequestQueue? = null
 
@@ -40,6 +36,7 @@ class HomeFragment : Fragment(), OnHomeItemClickListener {
     var quizList = ArrayList<HomeItemData>()
 
     // Views
+    lateinit var statisticsBtn: ImageButton
     lateinit var coinsView: TextView
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -68,8 +65,14 @@ class HomeFragment : Fragment(), OnHomeItemClickListener {
         quizListView.adapter = quizListAdapter
 
         // Views
+        statisticsBtn = view.findViewById(R.id.statisticsBtn)
+        statisticsBtn.setOnClickListener {
+            findNavController().navigate(R.id.homeToStats)
+
+        }
+
         coinsView = view.findViewById(R.id.coinsView)
-        coinsView.text = coins.toString()
+        coinsView.text = MainActivity.coins.toString()
 
         fetchList()
 
@@ -160,6 +163,15 @@ class HomeFragment : Fragment(), OnHomeItemClickListener {
             }else{
                 quizListLoadingSpinLayout.visibility = View.VISIBLE
 
+                QuizFragment.questionList.clear()
+                QuizFragment.currentQuestion = -1
+
+                QuizFragment.correct = 0
+                QuizFragment.incorrect = 0
+                QuizFragment.score = 0
+
+                QuizFragment.correctList = mutableListOf("null", "null", "null", "null", "null", "null", "null", "null", "null", "null")
+
                 if(online){
                     fetchQuestions(item.title, item.value, getString(R.string.quizURL, item.value))
 
@@ -175,9 +187,9 @@ class HomeFragment : Fragment(), OnHomeItemClickListener {
                 .setTitle(item.title)
                 .setMessage(getString(R.string.purchaseMsg, item.price))
                 .setPositiveButton(getString(R.string.yes)) { dialog, which ->
-                    if(coins >= item.price.toInt()){
-                        coins -= item.price.toInt()
-                        coinsView.text = coins.toString()
+                    if(MainActivity.coins >= item.price.toInt()){
+                        MainActivity.coins -= item.price.toInt()
+                        coinsView.text = MainActivity.coins.toString()
 
                         MainActivity.unlocked = MainActivity.unlocked.replace(position.toString() + "l|", position.toString() + "u|")
 
@@ -201,11 +213,6 @@ class HomeFragment : Fragment(), OnHomeItemClickListener {
 
     fun fetchOfflineQuestions(title: String, value: String){
         try {
-            QuizFragment.currentQuestion = -1
-            QuizFragment.score = 0
-            QuizFragment.correctList = mutableListOf("null", "null", "null", "null", "null", "null", "null", "null", "null", "null")
-            QuizFragment.questionList.clear()
-
             val response = JSONObject(requireContext().assets.open("${title.toLowerCase(Locale.ROOT).replace(" ", "_")}.json").bufferedReader().use { it.readText() })
             val questionArray = response.getJSONArray("results")
 
@@ -250,11 +257,6 @@ class HomeFragment : Fragment(), OnHomeItemClickListener {
     fun fetchQuestions(title: String, value: String, url: String){
         val request = JsonObjectRequest(Request.Method.GET, url, null, { response ->
             try {
-                QuizFragment.currentQuestion = -1
-                QuizFragment.score = 0
-                QuizFragment.correctList = mutableListOf("null", "null", "null", "null", "null", "null", "null", "null", "null", "null")
-                QuizFragment.questionList.clear()
-
                 val questionArray = response.getJSONArray("results")
 
                 for (i in 0 until questionArray.length()) {

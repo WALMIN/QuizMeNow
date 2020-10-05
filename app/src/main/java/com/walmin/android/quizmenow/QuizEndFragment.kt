@@ -21,6 +21,8 @@ class QuizEndFragment : Fragment() {
     lateinit var accuracyCircleView: ProgressBar
     lateinit var accuracyView: TextView
 
+    lateinit var correctView: TextView
+    lateinit var incorrectView: TextView
     lateinit var scoreView: TextView
 
     lateinit var returnHomeBtn: CardView
@@ -48,22 +50,26 @@ class QuizEndFragment : Fragment() {
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val view = inflater.inflate(R.layout.fragment_quiz_end, container, false)
-
-        return view
+        return inflater.inflate(R.layout.fragment_quiz_end, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        giveCoins()
+        giveResults()
 
         // Views
         accuracyCircleView = view.findViewById(R.id.accuracyCircleView)
             accuracyCircleView.progress = QuizFragment.score
 
         accuracyView = view.findViewById(R.id.accuracyView)
-            accuracyView.text = ((QuizFragment.score * 1000) / 100).toString() + "%"
+            accuracyView.text = (QuizFragment.score * 10).toString() + "%"
+
+        correctView = view.findViewById(R.id.correctView)
+            correctView.text = QuizFragment.correct.toString()
+
+        incorrectView = view.findViewById(R.id.incorrectView)
+            incorrectView.text = QuizFragment.incorrect.toString()
 
         scoreView = view.findViewById(R.id.scoreView)
             if(coins > 0){
@@ -83,7 +89,7 @@ class QuizEndFragment : Fragment() {
 
     }
 
-    fun giveCoins(){
+    fun giveResults(){
         if(QuizFragment.score == 10) {
             coins = (QuizFragment.score * 2)
 
@@ -94,7 +100,12 @@ class QuizEndFragment : Fragment() {
             coins = QuizFragment.score
 
         }
-        HomeFragment.coins += coins
+        MainActivity.correct += QuizFragment.correct
+        MainActivity.incorrect += QuizFragment.incorrect
+
+        MainActivity.coins += coins
+
+        MainActivity.games++
 
     }
 

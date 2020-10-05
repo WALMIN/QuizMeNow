@@ -24,7 +24,10 @@ class QuizFragment : Fragment() {
         var questionList = ArrayList<QuestionItemData>()
         var currentQuestion = -1
 
+        var correct = 0
+        var incorrect = 0
         var score = 0
+
         var correctList = mutableListOf("null", "null", "null", "null", "null", "null", "null", "null", "null", "null")
 
     }
@@ -97,6 +100,8 @@ class QuizFragment : Fragment() {
                 answer1Card.isEnabled = false
                 answer2Card.isEnabled = false
                 answer3Card.isEnabled = false
+
+                incorrect++
 
                 correctList[currentQuestion] = "false"
 
@@ -364,6 +369,7 @@ class QuizFragment : Fragment() {
 
             if(input == questionList[question].correctAnswer){
                 score++
+                correct++
 
                 view.setCardBackgroundColor(requireContext().getColor(R.color.correct))
 
@@ -402,6 +408,8 @@ class QuizFragment : Fragment() {
                 }
 
             }else{
+                incorrect++
+
                 view.setCardBackgroundColor(requireContext().getColor(R.color.incorrect))
 
                 correctList[question] = "false"

@@ -36,15 +36,31 @@
     <string name="tapToContinue">&#8594; Tap to continue &#8592;</string>
 
     <!-- Quiz End -->
-    <string name="accuracy">80%</string>
+    <string name="results">Results</string>
 
     <string name="scoreTitle">Score</string>
     <string name="score">+%1$s</string>
 
     <string name="returnHome">Return home</string>
 
+    <!-- Stats -->
+    <string name="stats">Stats</string>
+
+    <string name="accuracyTitle">Accuracy</string>
+    <string name="accuracy">0%</string>
+
+    <string name="gamesTitle">Games</string>
+    <string name="games">0</string>
+
+    <string name="correctTitle">Correct</string>
+    <string name="correct">0</string>
+
+    <string name="incorrectTitle">Incorrect</string>
+    <string name="incorrect">0</string>
+
     <!-- Buttons -->
     <string name="yes">Yes</string>
     <string name="no">No</string>
+    <string name="close">Close</string>
 
 </resources>
