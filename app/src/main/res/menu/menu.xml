@@ -1,0 +1,15 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/about"
+        android:title="@string/about" />
+
+    <item
+        android:id="@+id/licenses"
+        android:title="@string/licenses" />
+
+    <item
+        android:id="@+id/exit"
+        android:title="@string/exit" />
+
+</menu>

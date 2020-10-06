@@ -1,9 +1,15 @@
 <resources>
+
     <string name="app_name">Quiz Me Now</string>
-    <string name="homeListURL">https://walmin.com/quiz/resources/quizlist.json</string>
+    <string name="package_name">com.walmin.android.quizmenow</string>
+    <string name="devID">6020993160698769181</string>
+
+    <!-- URLs -->
+    <string name="sourceCodeURL">https://github.com/WALMIN/QuizMeNow</string>
     <string name="thumbnailURL">https://walmin.com/quiz/resources/thumbnails/%1$s.png</string>
     <string name="quizURL">https://opentdb.com/api.php?amount=10&amp;category=%1$s&amp;type=multiple</string>
 
+    <!-- Fragments -->
     <string name="home_fragment_label">Home Fragment</string>
     <string name="stats_fragment_label">Stats Fragment</string>
     <string name="get_ready_fragment_label">Get Ready Fragment</string>
@@ -57,6 +63,22 @@
 
     <string name="incorrectTitle">Incorrect</string>
     <string name="incorrect">0</string>
+
+    <!-- Menu -->
+    <string name="about">About</string>
+    <string name="aboutMsg">App developed by Victor Bergene for \"Approjekt 1\" at ITHS Stockholm.\n\nVersion: 1.0 (1)</string>
+    <string name="licenses">Licenses</string>
+    <string name="exit">Exit</string>
+
+    <!-- About -->
+    <string name="sourceCode">Source code</string>
+    <string name="moreApps">More apps</string>
+
+    <!-- License -->
+    <string name="licenseTitle">Title</string>
+    <string name="licenseBy">By</string>
+    <string name="licenseLicense">License</string>
+    <string name="licenseLink">Link</string>
 
     <!-- Buttons -->
     <string name="yes">Yes</string>

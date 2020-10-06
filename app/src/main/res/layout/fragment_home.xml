@@ -63,7 +63,7 @@
                     app:drawableTint="@color/coins" />
 
                 <ImageButton
-                    android:id="@+id/settingsBtn"
+                    android:id="@+id/menuBtn"
                     android:layout_width="32dp"
                     android:minWidth="32dp"
                     android:maxWidth="32dp"
@@ -75,7 +75,7 @@
                     android:scaleType="fitXY"
                     android:contentDescription="@null"
                     android:background="@null"
-                    android:src="@drawable/settings" />
+                    android:src="@drawable/menu" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

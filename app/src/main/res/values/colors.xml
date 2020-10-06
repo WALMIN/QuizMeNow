@@ -7,7 +7,10 @@
     <color name="background">#121212</color>
 
     <color name="text">#ffffff</color>
+    <color name="textSecondary">#eeeeee</color>
+
     <color name="textDark">#000000</color>
+    <color name="textDarkSecondary">#111111</color>
 
     <color name="correct">#66BB6A</color>
     <color name="incorrect">#EF5350</color>

@@ -1,26 +1,33 @@
 package com.walmin.android.quizmenow
 
+import android.content.ActivityNotFoundException
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
 import android.widget.LinearLayout
+import android.widget.SimpleAdapter
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.widget.PopupMenu
+import androidx.core.app.ActivityCompat.finishAffinity
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-import kotlinx.android.synthetic.main.fragment_home.*
 import com.android.volley.Request
 import com.android.volley.RequestQueue
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
+import kotlinx.android.synthetic.main.fragment_home.*
 import org.json.JSONException
 import org.json.JSONObject
 import java.util.*
+import kotlin.collections.HashMap
 
 class HomeFragment : Fragment(), OnHomeItemClickListener {
 
@@ -38,6 +45,7 @@ class HomeFragment : Fragment(), OnHomeItemClickListener {
     // Views
     lateinit var statisticsBtn: ImageButton
     lateinit var coinsView: TextView
+    lateinit var menuBtn: ImageButton
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_home, container, false)
@@ -74,7 +82,87 @@ class HomeFragment : Fragment(), OnHomeItemClickListener {
         coinsView = view.findViewById(R.id.coinsView)
         coinsView.text = MainActivity.coins.toString()
 
+        menuBtn = view.findViewById(R.id.menuBtn)
+        menuBtn.setOnClickListener {
+            menu(it)
+
+        }
+
         fetchList()
+
+    }
+
+    fun menu(view: View){
+        val popupMenu = PopupMenu(requireContext(), view)
+            popupMenu.inflate(R.menu.menu)
+            popupMenu.setOnMenuItemClickListener { item ->
+                when (item!!.itemId) {
+                    R.id.about -> {
+                        about()
+                    }
+                    R.id.licenses -> {
+                        licenses()
+                    }
+                    R.id.exit -> {
+                        finishAffinity(requireActivity())
+                    }
+
+                }
+                true
+            }
+            popupMenu.show()
+
+    }
+
+    fun about(){
+        AlertDialog.Builder(requireContext())
+            .setTitle(R.string.about)
+            .setMessage(getString(R.string.aboutMsg))
+            .setNeutralButton(getString(R.string.close)) { dialog, which -> }
+            .setNegativeButton(getString(R.string.sourceCode)) { dialog, which ->
+                startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(resources.getString(R.string.sourceCodeURL))))
+
+            }
+            .setPositiveButton(getString(R.string.moreApps)) { dialog, which ->
+                try{
+                    startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("market://dev?id=" + resources.getString(R.string.devID))))
+
+                }catch(e: ActivityNotFoundException){
+                    startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/dev?id=" + resources.getString(R.string.devID))))
+
+                }
+
+            }
+            .show()
+
+    }
+
+    fun licenses(){
+        val licenseList = ArrayList<HashMap<String, String>>()
+
+        for(i in resources.getStringArray(R.array.licenseTitle).indices){
+            val item = HashMap<String, String>()
+            item["title"] = resources.getStringArray(R.array.licenseTitle)[i]
+            item["by"] = resources.getStringArray(R.array.licenseBy)[i]
+            item["license"] = resources.getStringArray(R.array.licenseLicense)[i]
+            item["link"] = resources.getStringArray(R.array.licenseLink)[i]
+
+            licenseList.add(item)
+        }
+
+        val adapter = SimpleAdapter(context, licenseList, R.layout.license_item,
+            arrayOf("title", "by", "license", "link"),
+            intArrayOf(R.id.licenseTitle, R.id.licenseBy, R.id.licenseLicense, R.id.licenseLink)
+        )
+
+        AlertDialog.Builder(requireContext())
+            .setTitle(R.string.licenses)
+            .setNeutralButton(getString(R.string.close)) { dialog, which -> }
+            .setAdapter(adapter) { dialogInterface, i ->
+                startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(resources.getStringArray(R.array.licenseLink)[i])))
+
+            }
+            .show()
 
     }
 
@@ -191,7 +279,10 @@ class HomeFragment : Fragment(), OnHomeItemClickListener {
                         MainActivity.coins -= item.price.toInt()
                         coinsView.text = MainActivity.coins.toString()
 
-                        MainActivity.unlocked = MainActivity.unlocked.replace(position.toString() + "l|", position.toString() + "u|")
+                        MainActivity.unlocked = MainActivity.unlocked.replace(
+                            position.toString() + "l|",
+                            position.toString() + "u|"
+                        )
 
                         fetchList()
 
@@ -294,13 +385,13 @@ class HomeFragment : Fragment(), OnHomeItemClickListener {
             }
 
         },
-        {
-            it.printStackTrace()
+            {
+                it.printStackTrace()
 
-            online = false
-            fetchOfflineList()
+                online = false
+                fetchOfflineList()
 
-        })
+            })
         requestQueue?.add(request)
 
     }

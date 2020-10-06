@@ -1,0 +1,35 @@
+<resources>
+
+    <string-array name="licenseTitle">
+        <item>Android-SpinKit</item>
+        <item>Glide</item>
+        <item>Material Design Icons</item>
+        <item>Open Trivia DB</item>
+        <item>RoundedProgressBar</item>
+    </string-array>
+
+    <string-array name="licenseBy">
+        <item>ybq</item>
+        <item>Sam Judd</item>
+        <item>Google Inc.</item>
+        <item>PIXELTAIL GAMES LLC.</item>
+        <item>Mack Hartley</item>
+    </string-array>
+
+    <string-array name="licenseLicense">
+        <item>The MIT License</item>
+        <item>BSD, part MIT and Apache 2.0</item>
+        <item>Apache License, Version 2.0</item>
+        <item>Creative Commons Attribution-ShareAlike 4.0 International License</item>
+        <item>Apache License, Version 2.0</item>
+    </string-array>
+
+    <string-array name="licenseLink">
+        <item>https://github.com/ybq/Android-SpinKit</item>
+        <item>https://github.com/bumptech/glide</item>
+        <item>https://github.com/google/material-design-icons</item>
+        <item>https://opentdb.com</item>
+        <item>https://github.com/MackHartley/RoundedProgressBar</item>
+    </string-array>
+
+</resources>
