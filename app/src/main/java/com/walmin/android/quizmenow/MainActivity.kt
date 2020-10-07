@@ -3,17 +3,20 @@ package com.walmin.android.quizmenow
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.lifecycle.asLiveData
 
 class MainActivity : AppCompatActivity() {
 
     companion object MainActivity {
-        var coins = 100
+        lateinit var dataManager: DataManager
 
-        var games = 1
-        var correct = 6.0
-        var incorrect = 4.0
+        var coins = 0
 
-        var unlocked = "0u|1u|2u|3u|4u|5u|6u|7u|8u|9l|10l|11l|12l|13l|14l|15l|16l|17l|18l|19l|20l|21l|22l|23l|"
+        var games = 0
+        var correct = 0.0
+        var incorrect = 0.0
+
+        var quizList = ""
 
     }
 
@@ -22,6 +25,20 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+
+        dataManager = DataManager(this)
+        observeData()
+
+    }
+
+    private fun observeData(){
+        dataManager.coinsFlow.asLiveData().observe(this, { coins = it })
+
+        dataManager.gamesFlow.asLiveData().observe(this, { games = it })
+        dataManager.correctFlow.asLiveData().observe(this, { correct = it.toDouble() })
+        dataManager.incorrectFlow.asLiveData().observe(this, { incorrect = it.toDouble() })
+
+        dataManager.quizListFlow.asLiveData().observe(this, { quizList = it })
 
     }
 

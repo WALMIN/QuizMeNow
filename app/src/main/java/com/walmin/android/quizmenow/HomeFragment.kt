@@ -24,6 +24,8 @@ import com.android.volley.RequestQueue
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
 import kotlinx.android.synthetic.main.fragment_home.*
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import org.json.JSONException
 import org.json.JSONObject
 import java.util.*
@@ -62,7 +64,6 @@ class HomeFragment : Fragment(), OnHomeItemClickListener {
         quizListViewRefreshLayout = view.findViewById(R.id.quizListViewRefreshLayout)
         quizListViewRefreshLayout.setOnRefreshListener {
             fetchList()
-
         }
 
         quizListView = view.findViewById(R.id.quizListView)
@@ -76,7 +77,6 @@ class HomeFragment : Fragment(), OnHomeItemClickListener {
         statisticsBtn = view.findViewById(R.id.statisticsBtn)
         statisticsBtn.setOnClickListener {
             findNavController().navigate(R.id.homeToStats)
-
         }
 
         coinsView = view.findViewById(R.id.coinsView)
@@ -85,7 +85,6 @@ class HomeFragment : Fragment(), OnHomeItemClickListener {
         menuBtn = view.findViewById(R.id.menuBtn)
         menuBtn.setOnClickListener {
             menu(it)
-
         }
 
         fetchList()
@@ -194,10 +193,10 @@ class HomeFragment : Fragment(), OnHomeItemClickListener {
             quizListViewRefreshLayout.isRefreshing = false
             online = true
 
-            val lockList = MainActivity.unlocked.split("|").toTypedArray()
+            val lockedList = MainActivity.quizList.split("|").toTypedArray()
             val lockedArray = mutableListOf<Boolean>()
 
-            for (i in lockList) {
+            for (i in lockedList) {
                 if (i.endsWith("l")) {
                     lockedArray.add(true)
 
@@ -279,10 +278,12 @@ class HomeFragment : Fragment(), OnHomeItemClickListener {
                         MainActivity.coins -= item.price.toInt()
                         coinsView.text = MainActivity.coins.toString()
 
-                        MainActivity.unlocked = MainActivity.unlocked.replace(
-                            position.toString() + "l|",
-                            position.toString() + "u|"
-                        )
+                        MainActivity.quizList = MainActivity.quizList.replace(position.toString() + "l|", position.toString() + "u|")
+
+                        GlobalScope.launch {
+                            MainActivity.dataManager.saveCoins(MainActivity.coins)
+                            MainActivity.dataManager.saveQuizList(MainActivity.quizList)
+                        }
 
                         fetchList()
 

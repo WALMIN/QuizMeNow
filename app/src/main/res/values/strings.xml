@@ -10,6 +10,7 @@
     <string name="quizURL">https://opentdb.com/api.php?amount=10&amp;category=%1$s&amp;type=multiple</string>
 
     <!-- Fragments -->
+    <string name="splash_fragment_label">Splash Fragment</string>
     <string name="home_fragment_label">Home Fragment</string>
     <string name="stats_fragment_label">Stats Fragment</string>
     <string name="get_ready_fragment_label">Get Ready Fragment</string>

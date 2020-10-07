@@ -3,7 +3,6 @@ package com.walmin.android.quizmenow
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
-import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ProgressBar
@@ -11,6 +10,8 @@ import android.widget.TextView
 import androidx.activity.OnBackPressedCallback
 import androidx.cardview.widget.CardView
 import androidx.navigation.fragment.findNavController
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 class QuizEndFragment : Fragment() {
 
@@ -104,8 +105,12 @@ class QuizEndFragment : Fragment() {
         MainActivity.incorrect += QuizFragment.incorrect
 
         MainActivity.coins += coins
-
         MainActivity.games++
+
+        GlobalScope.launch {
+            MainActivity.dataManager.saveCoins(MainActivity.coins)
+            MainActivity.dataManager.saveGame(MainActivity.games, MainActivity.correct.toInt(), MainActivity.incorrect.toInt())
+        }
 
     }
 
