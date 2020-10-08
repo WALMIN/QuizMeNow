@@ -6,7 +6,7 @@
     android:layout_height="160dp"
     android:minHeight="160dp"
     android:maxHeight="160dp"
-    android:layout_margin="3dp"
+    android:layout_margin="4dp"
     app:cardBackgroundColor="@color/colorAccent"
     app:cardCornerRadius="4dp"
     app:cardElevation="2dp"
@@ -44,7 +44,7 @@
                 android:maxLines="3"
                 android:text="@string/price"
                 android:textAllCaps="true"
-                android:textColor="@color/text"
+                android:textColor="@color/textOnDark"
                 android:textSize="12sp"
                 android:textStyle="bold"
                 android:visibility="gone"
@@ -63,7 +63,7 @@
                 android:textStyle="bold"
                 android:text="@string/quizTitle"
                 android:textAllCaps="true"
-                android:textColor="@color/text"
+                android:textColor="@color/textOnDark"
                 android:textSize="14sp" />
 
         </RelativeLayout>

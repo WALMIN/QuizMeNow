@@ -1,14 +1,14 @@
 <resources>
 
-    <color name="colorPrimary">#EEEEEE</color>
-    <color name="colorPrimaryDark">#FFFFFF</color>
+    <color name="colorPrimary">#121212</color>
+    <color name="colorPrimaryDark">#000000</color>
     <color name="colorAccent">#5C6BC0</color>
 
-    <color name="background">#EEEEEE</color>
+    <color name="background">#121212</color>
 
     <!-- Text -->
-    <color name="text">#000000</color>
-    <color name="textSecondary">#111111</color>
+    <color name="text">#FFFFFF</color>
+    <color name="textSecondary">#EEEEEE</color>
 
     <color name="textOnDark">#FFFFFF</color>
     <color name="textOnDarkSecondary">#EEEEEE</color>
@@ -20,7 +20,7 @@
     <color name="coins">#FFCA28</color>
 
     <!-- Quiz -->
-    <color name="answerCardText">#000000</color>
+    <color name="answerCardText">#FFFFFF</color>
 
     <color name="correct">#66BB6A</color>
     <color name="incorrect">#EF5350</color>

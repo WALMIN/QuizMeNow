@@ -42,6 +42,7 @@
                     android:scaleType="fitXY"
                     android:contentDescription="@null"
                     android:background="@null"
+                    android:tint="@color/text"
                     android:src="@drawable/statistics" />
 
                 <TextView
@@ -75,6 +76,7 @@
                     android:scaleType="fitXY"
                     android:contentDescription="@null"
                     android:background="@null"
+                    android:tint="@color/text"
                     android:src="@drawable/menu" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
@@ -86,6 +88,7 @@
         android:id="@+id/quizListViewRefreshLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:paddingBottom="10dp"
         android:paddingStart="10dp"
         android:paddingEnd="10dp"
         app:layout_constrainedHeight="true"

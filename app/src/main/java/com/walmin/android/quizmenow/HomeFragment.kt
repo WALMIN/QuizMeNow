@@ -15,6 +15,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.PopupMenu
 import androidx.core.app.ActivityCompat.finishAffinity
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.asLiveData
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -99,9 +100,26 @@ class HomeFragment : Fragment(), OnHomeItemClickListener {
                     R.id.about -> {
                         about()
                     }
+
                     R.id.licenses -> {
                         licenses()
                     }
+
+                    R.id.theme -> {
+                        MainActivity.dataManager.themeFlow.asLiveData().observe(requireActivity(), {
+                            if(it){
+                                GlobalScope.launch { MainActivity.dataManager.saveTheme(false) }
+
+                            }else{
+                                GlobalScope.launch { MainActivity.dataManager.saveTheme(true) }
+
+                            }
+
+                        })
+                        Tools.restartApp(requireContext())
+
+                    }
+
                     R.id.exit -> {
                         finishAffinity(requireActivity())
                     }

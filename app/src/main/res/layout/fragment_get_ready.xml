@@ -24,7 +24,8 @@
             android:maxHeight="96dp"
             android:layout_marginBottom="12dp"
             android:contentDescription="@null"
-            android:src="@drawable/general_knowledge" />
+            android:src="@drawable/general_knowledge"
+            app:tint="@color/text" />
 
         <TextView
             android:id="@+id/getReadyTextView"

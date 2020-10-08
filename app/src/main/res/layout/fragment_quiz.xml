@@ -113,13 +113,13 @@
         android:layout_height="256dp"
         android:minHeight="256dp"
         android:maxHeight="256dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginEnd="12dp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toTopOf="@+id/answerLayout"
         app:cardBackgroundColor="@color/colorAccent"
         app:cardCornerRadius="4dp"
-        app:cardElevation="6dp"
+        app:cardElevation="4dp"
         app:contentPadding="0dp">
 
         <RelativeLayout
@@ -151,7 +151,7 @@
                     android:textStyle="bold"
                     android:text="@string/question"
                     android:textAllCaps="true"
-                    android:textColor="@color/text"
+                    android:textColor="@color/textOnDark"
                     android:textSize="30sp"
                     app:autoSizeMaxTextSize="30sp"
                     app:autoSizeTextType="uniform" />
@@ -164,13 +164,10 @@
         android:id="@+id/answerLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
         android:orientation="horizontal"
         android:weightSum="2"
         app:layout_constraintTop_toBottomOf="@id/questionCard"
         app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_marginBottom="24dp"
         android:baselineAligned="false">
 
         <LinearLayout
@@ -185,11 +182,10 @@
                 android:layout_height="128dp"
                 android:minHeight="128dp"
                 android:maxHeight="128dp"
-                android:layout_marginBottom="5dp"
-                android:layout_marginEnd="5dp"
+                android:layout_margin="12dp"
                 app:cardBackgroundColor="@color/colorPrimaryDark"
                 app:cardCornerRadius="4dp"
-                app:cardElevation="6dp"
+                app:cardElevation="4dp"
                 app:contentPadding="12dp">
 
                 <androidx.appcompat.widget.AppCompatTextView
@@ -201,7 +197,7 @@
                     android:textStyle="bold"
                     android:text="@string/answer0"
                     android:textAllCaps="true"
-                    android:textColor="@color/text"
+                    android:textColor="@color/answerCardText"
                     android:textSize="20sp"
                     app:autoSizeMaxTextSize="20sp"
                     app:autoSizeTextType="uniform" />
@@ -214,11 +210,10 @@
                 android:layout_height="128dp"
                 android:minHeight="128dp"
                 android:maxHeight="128dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginEnd="5dp"
+                android:layout_margin="12dp"
                 app:cardBackgroundColor="@color/colorPrimaryDark"
                 app:cardCornerRadius="4dp"
-                app:cardElevation="6dp"
+                app:cardElevation="4dp"
                 app:contentPadding="12dp">
 
                 <androidx.appcompat.widget.AppCompatTextView
@@ -230,7 +225,7 @@
                     android:textStyle="bold"
                     android:text="@string/answer2"
                     android:textAllCaps="true"
-                    android:textColor="@color/text"
+                    android:textColor="@color/answerCardText"
                     android:textSize="20sp"
                     app:autoSizeMaxTextSize="20sp"
                     app:autoSizeTextType="uniform" />
@@ -251,11 +246,10 @@
                 android:layout_height="128dp"
                 android:minHeight="128dp"
                 android:maxHeight="128dp"
-                android:layout_marginBottom="5dp"
-                android:layout_marginStart="5dp"
+                android:layout_margin="12dp"
                 app:cardBackgroundColor="@color/colorPrimaryDark"
                 app:cardCornerRadius="4dp"
-                app:cardElevation="6dp"
+                app:cardElevation="4dp"
                 app:contentPadding="12dp">
 
                 <androidx.appcompat.widget.AppCompatTextView
@@ -267,7 +261,7 @@
                     android:textStyle="bold"
                     android:text="@string/answer1"
                     android:textAllCaps="true"
-                    android:textColor="@color/text"
+                    android:textColor="@color/answerCardText"
                     android:textSize="20sp"
                     app:autoSizeMaxTextSize="20sp"
                     app:autoSizeTextType="uniform" />
@@ -280,11 +274,10 @@
                 android:layout_height="128dp"
                 android:minHeight="128dp"
                 android:maxHeight="128dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginStart="5dp"
+                android:layout_margin="12dp"
                 app:cardBackgroundColor="@color/colorPrimaryDark"
                 app:cardCornerRadius="4dp"
-                app:cardElevation="6dp"
+                app:cardElevation="4dp"
                 app:contentPadding="12dp">
 
                 <androidx.appcompat.widget.AppCompatTextView
@@ -296,7 +289,7 @@
                     android:textStyle="bold"
                     android:text="@string/answer3"
                     android:textAllCaps="true"
-                    android:textColor="@color/text"
+                    android:textColor="@color/answerCardText"
                     android:textSize="20sp"
                     app:autoSizeMaxTextSize="20sp"
                     app:autoSizeTextType="uniform" />
@@ -314,8 +307,8 @@
         android:minHeight="8dp"
         android:maxHeight="8dp"
         android:layout_marginTop="10dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginEnd="12dp"
         app:layout_constraintTop_toBottomOf="@+id/answerLayout"
         app:rpbAnimationLength="100"
         app:rpbProgressBgColor="@color/background"
@@ -326,7 +319,7 @@
         android:id="@+id/tapToContinueView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="4dp"
         android:gravity="center"
         android:textStyle="normal"
         android:text="@string/tapToContinue"

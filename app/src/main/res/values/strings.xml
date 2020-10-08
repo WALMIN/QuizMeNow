@@ -69,6 +69,7 @@
     <string name="about">About</string>
     <string name="aboutMsg">App developed by Victor Bergene for \"Approjekt 1\" at ITHS Stockholm.\n\nVersion: 1.0 (1)</string>
     <string name="licenses">Licenses</string>
+    <string name="theme">Dark theme</string>
     <string name="exit">Exit</string>
 
     <!-- About -->
