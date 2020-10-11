@@ -24,23 +24,14 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
+
         dataManager = DataManager(this)
         observeData()
 
     }
 
     private fun observeData(){
-        dataManager.themeFlow.asLiveData().observe(this, {
-            if(it){
-                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-
-            }else{
-                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-
-            }
-
-        })
-
         dataManager.coinsFlow.asLiveData().observe(this, { coins = it })
 
         dataManager.gamesFlow.asLiveData().observe(this, { games = it })

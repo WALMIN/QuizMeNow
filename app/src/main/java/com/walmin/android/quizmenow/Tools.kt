@@ -1,7 +1,6 @@
 package com.walmin.android.quizmenow
 
 import android.content.Context
-import android.content.Intent
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.view.View
@@ -39,15 +38,6 @@ object Tools {
     fun showSnackbar(view: View, message: String){
         Snackbar.make(view, message, Snackbar.LENGTH_LONG).show()
 
-    }
-
-    fun restartApp(context: Context) {
-        val packageManager = context.packageManager
-        val intent = packageManager.getLaunchIntentForPackage(context.packageName)
-        val componentName = intent!!.component
-        val mainIntent = Intent.makeRestartActivityTask(componentName)
-        context.startActivity(mainIntent)
-        Runtime.getRuntime().exit(0)
     }
 
 }

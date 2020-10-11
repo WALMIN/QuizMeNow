@@ -39,7 +39,11 @@ class SplashFragment : Fragment() {
 
         Handler().postDelayed({
             view.post {
-                findNavController().navigate(R.id.splashToHome)
+                if (findNavController().currentDestination?.id == R.id.SplashFragment) {
+                    findNavController().navigate(R.id.splashToHome)
+
+                }
+
             }
 
         }, 1500)
