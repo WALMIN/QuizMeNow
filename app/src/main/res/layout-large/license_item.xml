@@ -16,7 +16,7 @@
         android:ellipsize="end"
         android:text="@string/licenseTitle"
         android:textColor="@color/text"
-        android:textSize="14sp"
+        android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -26,7 +26,7 @@
         android:layout_height="wrap_content"
         android:text="@string/licenseBy"
         android:textColor="@color/text"
-        android:textSize="14sp"
+        android:textSize="18sp"
         android:textStyle="normal"
         app:layout_constraintTop_toBottomOf="@+id/licenseTitle" />
 
@@ -36,7 +36,7 @@
         android:layout_height="wrap_content"
         android:text="@string/licenseLicense"
         android:textColor="@color/textSecondary"
-        android:textSize="12sp"
+        android:textSize="16sp"
         android:textStyle="normal"
         app:layout_constraintTop_toBottomOf="@+id/licenseBy" />
 
@@ -46,7 +46,7 @@
         android:layout_height="wrap_content"
         android:text="@string/licenseLink"
         android:textColor="@color/colorAccent"
-        android:textSize="12sp"
+        android:textSize="16sp"
         android:textStyle="normal"
         app:layout_constraintTop_toBottomOf="@+id/licenseLicense" />
 

@@ -17,90 +17,90 @@
 
         <ImageView
             android:id="@+id/questionDot0"
-            android:layout_width="12dp"
-            android:minWidth="12dp"
-            android:maxWidth="12dp"
+            android:layout_width="24dp"
+            android:minWidth="24dp"
+            android:maxWidth="24dp"
             android:layout_height="wrap_content"
             android:contentDescription="@null"
             android:src="@drawable/question_dot" />
 
         <ImageView
             android:id="@+id/questionDot1"
-            android:layout_width="12dp"
-            android:minWidth="12dp"
-            android:maxWidth="12dp"
+            android:layout_width="24dp"
+            android:minWidth="24dp"
+            android:maxWidth="24dp"
             android:layout_height="wrap_content"
             android:contentDescription="@null"
             android:src="@drawable/question_dot" />
 
         <ImageView
             android:id="@+id/questionDot2"
-            android:layout_width="12dp"
-            android:minWidth="12dp"
-            android:maxWidth="12dp"
+            android:layout_width="24dp"
+            android:minWidth="24dp"
+            android:maxWidth="24dp"
             android:layout_height="wrap_content"
             android:contentDescription="@null"
             android:src="@drawable/question_dot" />
 
         <ImageView
             android:id="@+id/questionDot3"
-            android:layout_width="12dp"
-            android:minWidth="12dp"
-            android:maxWidth="12dp"
+            android:layout_width="24dp"
+            android:minWidth="24dp"
+            android:maxWidth="24dp"
             android:layout_height="wrap_content"
             android:contentDescription="@null"
             android:src="@drawable/question_dot" />
 
         <ImageView
             android:id="@+id/questionDot4"
-            android:layout_width="12dp"
-            android:minWidth="12dp"
-            android:maxWidth="12dp"
+            android:layout_width="24dp"
+            android:minWidth="24dp"
+            android:maxWidth="24dp"
             android:layout_height="wrap_content"
             android:contentDescription="@null"
             android:src="@drawable/question_dot" />
 
         <ImageView
             android:id="@+id/questionDot5"
-            android:layout_width="12dp"
-            android:minWidth="12dp"
-            android:maxWidth="12dp"
+            android:layout_width="24dp"
+            android:minWidth="24dp"
+            android:maxWidth="24dp"
             android:layout_height="wrap_content"
             android:contentDescription="@null"
             android:src="@drawable/question_dot" />
 
         <ImageView
             android:id="@+id/questionDot6"
-            android:layout_width="12dp"
-            android:minWidth="12dp"
-            android:maxWidth="12dp"
+            android:layout_width="24dp"
+            android:minWidth="24dp"
+            android:maxWidth="24dp"
             android:layout_height="wrap_content"
             android:contentDescription="@null"
             android:src="@drawable/question_dot" />
 
         <ImageView
             android:id="@+id/questionDot7"
-            android:layout_width="12dp"
-            android:minWidth="12dp"
-            android:maxWidth="12dp"
+            android:layout_width="24dp"
+            android:minWidth="24dp"
+            android:maxWidth="24dp"
             android:layout_height="wrap_content"
             android:contentDescription="@null"
             android:src="@drawable/question_dot" />
 
         <ImageView
             android:id="@+id/questionDot8"
-            android:layout_width="12dp"
-            android:minWidth="12dp"
-            android:maxWidth="12dp"
+            android:layout_width="24dp"
+            android:minWidth="24dp"
+            android:maxWidth="24dp"
             android:layout_height="wrap_content"
             android:contentDescription="@null"
             android:src="@drawable/question_dot" />
 
         <ImageView
             android:id="@+id/questionDot9"
-            android:layout_width="12dp"
-            android:minWidth="12dp"
-            android:maxWidth="12dp"
+            android:layout_width="24dp"
+            android:minWidth="24dp"
+            android:maxWidth="24dp"
             android:layout_height="wrap_content"
             android:contentDescription="@null"
             android:src="@drawable/question_dot" />
@@ -118,9 +118,9 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/questionCard"
         android:layout_width="match_parent"
-        android:layout_height="256dp"
-        android:minHeight="256dp"
-        android:maxHeight="256dp"
+        android:layout_height="384dp"
+        android:minHeight="384dp"
+        android:maxHeight="384dp"
         android:layout_marginBottom="6dp"
         android:layout_marginStart="12dp"
         android:layout_marginEnd="12dp"
@@ -159,8 +159,8 @@
                     android:text="@string/question"
                     android:textAllCaps="true"
                     android:textColor="@color/textOnDark"
-                    android:textSize="30sp"
-                    app:autoSizeMaxTextSize="30sp"
+                    android:textSize="70sp"
+                    app:autoSizeMaxTextSize="70sp"
                     app:autoSizeTextType="uniform" />
 
             </RelativeLayout>
@@ -187,9 +187,9 @@
             <androidx.cardview.widget.CardView
                 android:id="@+id/answer0Card"
                 android:layout_width="match_parent"
-                android:layout_height="128dp"
-                android:minHeight="128dp"
-                android:maxHeight="128dp"
+                android:layout_height="256dp"
+                android:minHeight="256dp"
+                android:maxHeight="256dp"
                 android:layout_margin="6dp"
                 app:cardBackgroundColor="@color/colorPrimaryDark"
                 app:cardCornerRadius="4dp"
@@ -206,8 +206,8 @@
                     android:text="@string/answer0"
                     android:textAllCaps="true"
                     android:textColor="@color/answerCardText"
-                    android:textSize="20sp"
-                    app:autoSizeMaxTextSize="20sp"
+                    android:textSize="40sp"
+                    app:autoSizeMaxTextSize="40sp"
                     app:autoSizeTextType="uniform" />
 
             </androidx.cardview.widget.CardView>
@@ -215,9 +215,9 @@
             <androidx.cardview.widget.CardView
                 android:id="@+id/answer2Card"
                 android:layout_width="match_parent"
-                android:layout_height="128dp"
-                android:minHeight="128dp"
-                android:maxHeight="128dp"
+                android:layout_height="256dp"
+                android:minHeight="256dp"
+                android:maxHeight="256dp"
                 android:layout_margin="6dp"
                 app:cardBackgroundColor="@color/colorPrimaryDark"
                 app:cardCornerRadius="4dp"
@@ -234,8 +234,8 @@
                     android:text="@string/answer2"
                     android:textAllCaps="true"
                     android:textColor="@color/answerCardText"
-                    android:textSize="20sp"
-                    app:autoSizeMaxTextSize="20sp"
+                    android:textSize="40sp"
+                    app:autoSizeMaxTextSize="40sp"
                     app:autoSizeTextType="uniform" />
 
             </androidx.cardview.widget.CardView>
@@ -251,9 +251,9 @@
             <androidx.cardview.widget.CardView
                 android:id="@+id/answer1Card"
                 android:layout_width="match_parent"
-                android:layout_height="128dp"
-                android:minHeight="128dp"
-                android:maxHeight="128dp"
+                android:layout_height="256dp"
+                android:minHeight="256dp"
+                android:maxHeight="256dp"
                 android:layout_margin="6dp"
                 app:cardBackgroundColor="@color/colorPrimaryDark"
                 app:cardCornerRadius="4dp"
@@ -270,8 +270,8 @@
                     android:text="@string/answer1"
                     android:textAllCaps="true"
                     android:textColor="@color/answerCardText"
-                    android:textSize="20sp"
-                    app:autoSizeMaxTextSize="20sp"
+                    android:textSize="40sp"
+                    app:autoSizeMaxTextSize="40sp"
                     app:autoSizeTextType="uniform" />
 
             </androidx.cardview.widget.CardView>
@@ -279,9 +279,9 @@
             <androidx.cardview.widget.CardView
                 android:id="@+id/answer3Card"
                 android:layout_width="match_parent"
-                android:layout_height="128dp"
-                android:minHeight="128dp"
-                android:maxHeight="128dp"
+                android:layout_height="256dp"
+                android:minHeight="256dp"
+                android:maxHeight="256dp"
                 android:layout_margin="6dp"
                 app:cardBackgroundColor="@color/colorPrimaryDark"
                 app:cardCornerRadius="4dp"
@@ -298,8 +298,8 @@
                     android:text="@string/answer3"
                     android:textAllCaps="true"
                     android:textColor="@color/answerCardText"
-                    android:textSize="20sp"
-                    app:autoSizeMaxTextSize="20sp"
+                    android:textSize="40sp"
+                    app:autoSizeMaxTextSize="40sp"
                     app:autoSizeTextType="uniform" />
 
             </androidx.cardview.widget.CardView>
@@ -312,9 +312,9 @@
     <com.mackhartley.roundedprogressbar.RoundedProgressBar
         android:id="@+id/gameTimerView"
         android:layout_width="match_parent"
-        android:layout_height="8dp"
-        android:minHeight="8dp"
-        android:maxHeight="8dp"
+        android:layout_height="16dp"
+        android:minHeight="16dp"
+        android:maxHeight="16dp"
         android:layout_marginTop="6dp"
         android:layout_marginStart="12dp"
         android:layout_marginEnd="12dp"
@@ -333,7 +333,7 @@
         android:text="@string/tapToContinue"
         android:textAllCaps="true"
         android:textColor="@color/text"
-        android:textSize="18sp"
+        android:textSize="26sp"
         app:layout_constraintTop_toBottomOf="@id/questionLayout" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
