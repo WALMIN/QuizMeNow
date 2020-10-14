@@ -1,6 +1,7 @@
 package com.walmin.android.quizmenow
 
 import android.graphics.PorterDuff
+import android.media.MediaPlayer
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.text.Html
@@ -37,6 +38,10 @@ class QuizFragment : Fragment() {
     var finished = false
 
     lateinit var timer: CountDownTimer
+
+    // Sounds
+    lateinit var correctSound: MediaPlayer
+    lateinit var incorrectSound: MediaPlayer
 
     // Views
     lateinit var layout: ConstraintLayout
@@ -94,6 +99,8 @@ class QuizFragment : Fragment() {
             }
 
             override fun onFinish() {
+                incorrectSound.start()
+
                 gameTimerView.setProgressPercentage(0.0)
 
                 answer0Card.isEnabled = false
@@ -164,6 +171,10 @@ class QuizFragment : Fragment() {
             }
 
         }
+
+        // Sounds
+        correctSound = MediaPlayer.create(context, R.raw.correct)
+        incorrectSound = MediaPlayer.create(context, R.raw.incorrect)
 
         // Views
         layout = view.findViewById(R.id.layout)
@@ -368,6 +379,8 @@ class QuizFragment : Fragment() {
             answer3Card.isEnabled = false
 
             if(input == questionList[question].correctAnswer){
+                correctSound.start()
+
                 score++
                 correct++
 
@@ -408,6 +421,8 @@ class QuizFragment : Fragment() {
                 }
 
             }else{
+                incorrectSound.start()
+
                 incorrect++
 
                 view.setCardBackgroundColor(requireContext().getColor(R.color.incorrect))

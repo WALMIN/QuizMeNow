@@ -12,8 +12,6 @@ class DataManager(context: Context) {
     private val dataStore = context.createDataStore("GamePreferences")
 
     companion object {
-        val THEME_KEY = preferencesKey<Boolean>("theme")
-
         val COINS_KEY = preferencesKey<Int>("coins")
 
         val GAMES_KEY = preferencesKey<Int>("games")
@@ -22,12 +20,6 @@ class DataManager(context: Context) {
 
         val QUIZ_LIST_KEY = preferencesKey<String>("quizList")
 
-    }
-
-    suspend fun saveTheme(theme: Boolean) {
-        dataStore.edit {
-            it[THEME_KEY] = theme
-        }
     }
 
     suspend fun saveCoins(coins: Int) {
@@ -50,8 +42,6 @@ class DataManager(context: Context) {
             it[QUIZ_LIST_KEY] = quizList
         }
     }
-
-    val themeFlow: Flow<Boolean> = dataStore.data.map { it[THEME_KEY] ?: true }
 
     val coinsFlow: Flow<Int> = dataStore.data.map { it[COINS_KEY] ?: 10 }
 

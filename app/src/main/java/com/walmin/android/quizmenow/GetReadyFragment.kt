@@ -55,7 +55,7 @@ class GetReadyFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         
         // Stuff
-        timer = object: CountDownTimer(2000, 20) {
+        timer = object: CountDownTimer(1500, 15) {
             override fun onTick(millisUntilFinished: Long) {
                 getReadyTimerView.setProgressPercentage(getReadyTimerView.getProgressPercentage() + 1)
 

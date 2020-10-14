@@ -2,6 +2,7 @@ package com.walmin.android.quizmenow
 
 import android.content.ActivityNotFoundException
 import android.content.Intent
+import android.media.MediaPlayer
 import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -33,8 +34,16 @@ import kotlin.collections.HashMap
 
 class HomeFragment : Fragment(), OnHomeItemClickListener {
 
+    companion object HomeFragment {
+        lateinit var backgroundMusic: MediaPlayer
+
+    }
+
     var online = false
     var requestQueue: RequestQueue? = null
+
+    // Sounds
+    lateinit var buySound: MediaPlayer
 
     // List
     lateinit var quizListLoadingSpinLayout: LinearLayout
@@ -57,6 +66,12 @@ class HomeFragment : Fragment(), OnHomeItemClickListener {
         super.onViewCreated(view, savedInstanceState)
 
         requestQueue = Volley.newRequestQueue(context)
+
+        // Sounds
+        backgroundMusic = MediaPlayer.create(context, R.raw.background)
+            backgroundMusic.isLooping = true
+
+        buySound = MediaPlayer.create(context, R.raw.buy)
 
         // List
         quizListLoadingSpinLayout = view.findViewById(R.id.quizListLoadingSpinLayout)
@@ -277,6 +292,8 @@ class HomeFragment : Fragment(), OnHomeItemClickListener {
                 .setMessage(getString(R.string.purchaseMsg, item.price))
                 .setPositiveButton(getString(R.string.yes)) { dialog, which ->
                     if(MainActivity.coins >= item.price.toInt()){
+                        buySound.start()
+
                         MainActivity.coins -= item.price.toInt()
                         coinsView.text = MainActivity.coins.toString()
 
@@ -339,6 +356,8 @@ class HomeFragment : Fragment(), OnHomeItemClickListener {
             if (findNavController().currentDestination?.id == R.id.HomeFragment) {
                 findNavController().navigate(R.id.homeToGetReady)
 
+                backgroundMusic.seekTo(0)
+                backgroundMusic.start()
             }
 
         } catch (e: JSONException) {
@@ -380,6 +399,8 @@ class HomeFragment : Fragment(), OnHomeItemClickListener {
                 if (findNavController().currentDestination?.id == R.id.HomeFragment) {
                     findNavController().navigate(R.id.homeToGetReady)
 
+                    backgroundMusic.seekTo(0)
+                    backgroundMusic.start()
                 }
 
             } catch (e: JSONException) {

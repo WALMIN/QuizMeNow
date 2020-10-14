@@ -45,7 +45,7 @@
             android:maxHeight="8dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:rpbAnimationLength="20"
+            app:rpbAnimationLength="15"
             app:rpbProgressBgColor="@color/background"
             app:rpbProgressColor="@color/colorAccent"
             app:rpbShowProgressText="false" />
