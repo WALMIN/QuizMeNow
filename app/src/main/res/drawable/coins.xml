@@ -3,7 +3,7 @@
 
     <item
         android:drawable="@drawable/ic_coins"
-        android:width="20dp"
-        android:height="20dp" />
+        android:width="@dimen/coins"
+        android:height="@dimen/coins" />
 
 </layer-list >

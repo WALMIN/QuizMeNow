@@ -99,7 +99,9 @@ class QuizFragment : Fragment() {
             }
 
             override fun onFinish() {
-                incorrectSound.start()
+                if(MainActivity.sound){
+                    incorrectSound.start()
+                }
 
                 gameTimerView.setProgressPercentage(0.0)
 
@@ -379,7 +381,9 @@ class QuizFragment : Fragment() {
             answer3Card.isEnabled = false
 
             if(input == questionList[question].correctAnswer){
-                correctSound.start()
+                if(MainActivity.sound){
+                    correctSound.start()
+                }
 
                 score++
                 correct++
@@ -421,7 +425,9 @@ class QuizFragment : Fragment() {
                 }
 
             }else{
-                incorrectSound.start()
+                if(MainActivity.sound) {
+                    incorrectSound.start()
+                }
 
                 incorrect++
 

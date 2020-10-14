@@ -1,0 +1,6 @@
+<resources>
+
+    <dimen name="coins">22dp</dimen>
+    <dimen name="coinsSmall">16dp</dimen>
+    
+</resources>

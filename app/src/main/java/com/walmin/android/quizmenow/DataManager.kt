@@ -12,6 +12,9 @@ class DataManager(context: Context) {
     private val dataStore = context.createDataStore("GamePreferences")
 
     companion object {
+        val MUSIC_KEY = preferencesKey<Boolean>("music")
+        val SOUND_KEY = preferencesKey<Boolean>("sound")
+
         val COINS_KEY = preferencesKey<Int>("coins")
 
         val GAMES_KEY = preferencesKey<Int>("games")
@@ -20,6 +23,18 @@ class DataManager(context: Context) {
 
         val QUIZ_LIST_KEY = preferencesKey<String>("quizList")
 
+    }
+
+    suspend fun saveMusic(music: Boolean) {
+        dataStore.edit {
+            it[MUSIC_KEY] = music
+        }
+    }
+
+    suspend fun saveSound(sound: Boolean) {
+        dataStore.edit {
+            it[SOUND_KEY] = sound
+        }
     }
 
     suspend fun saveCoins(coins: Int) {
@@ -42,6 +57,9 @@ class DataManager(context: Context) {
             it[QUIZ_LIST_KEY] = quizList
         }
     }
+
+    val musicFlow: Flow<Boolean> = dataStore.data.map { it[MUSIC_KEY] ?: true }
+    val soundFlow: Flow<Boolean> = dataStore.data.map { it[SOUND_KEY] ?: true }
 
     val coinsFlow: Flow<Int> = dataStore.data.map { it[COINS_KEY] ?: 10 }
 

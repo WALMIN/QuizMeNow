@@ -54,8 +54,12 @@ class HomeFragment : Fragment(), OnHomeItemClickListener {
     var quizList = ArrayList<HomeItemData>()
 
     // Views
-    lateinit var statisticsBtn: ImageButton
     lateinit var coinsView: TextView
+
+    lateinit var musicBtn: ImageButton
+    lateinit var soundBtn: ImageButton
+
+    lateinit var statisticsBtn: ImageButton
     lateinit var menuBtn: ImageButton
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -89,13 +93,67 @@ class HomeFragment : Fragment(), OnHomeItemClickListener {
         quizListView.adapter = quizListAdapter
 
         // Views
+        coinsView = view.findViewById(R.id.coinsView)
+        coinsView.text = MainActivity.coins.toString()
+
+        musicBtn = view.findViewById(R.id.musicBtn)
+            musicBtn.setOnClickListener {
+                if(MainActivity.music){
+                    musicBtn.setImageResource(R.drawable.music_off)
+                    MainActivity.music = false
+
+                }else{
+                    musicBtn.setImageResource(R.drawable.music_on)
+                    MainActivity.music = true
+
+                }
+
+                GlobalScope.launch {
+                    MainActivity.dataManager.saveMusic(MainActivity.music)
+
+                }
+
+            }
+
+            if(MainActivity.music){
+                musicBtn.setImageResource(R.drawable.music_on)
+
+            }else{
+                musicBtn.setImageResource(R.drawable.music_off)
+
+            }
+
+        soundBtn = view.findViewById(R.id.soundBtn)
+            soundBtn.setOnClickListener {
+                if(MainActivity.sound){
+                    soundBtn.setImageResource(R.drawable.sound_off)
+                    MainActivity.sound = false
+
+                }else{
+                    soundBtn.setImageResource(R.drawable.sound_on)
+                    MainActivity.sound = true
+
+                }
+
+                GlobalScope.launch {
+                    MainActivity.dataManager.saveSound(MainActivity.sound)
+
+                }
+
+            }
+
+            if(MainActivity.sound){
+                soundBtn.setImageResource(R.drawable.sound_on)
+
+            }else{
+                soundBtn.setImageResource(R.drawable.sound_off)
+
+            }
+
         statisticsBtn = view.findViewById(R.id.statisticsBtn)
         statisticsBtn.setOnClickListener {
             findNavController().navigate(R.id.homeToStats)
         }
-
-        coinsView = view.findViewById(R.id.coinsView)
-        coinsView.text = MainActivity.coins.toString()
 
         menuBtn = view.findViewById(R.id.menuBtn)
         menuBtn.setOnClickListener {
@@ -175,7 +233,10 @@ class HomeFragment : Fragment(), OnHomeItemClickListener {
             .setTitle(R.string.licenses)
             .setNeutralButton(getString(R.string.close)) { dialog, which -> }
             .setAdapter(adapter) { dialogInterface, i ->
-                startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(resources.getStringArray(R.array.licenseLink)[i])))
+                if(resources.getStringArray(R.array.licenseLink)[i].startsWith("https://") || resources.getStringArray(R.array.licenseLink)[i].startsWith("http://")){
+                    startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(resources.getStringArray(R.array.licenseLink)[i])))
+
+                }
 
             }
             .show()
@@ -292,7 +353,9 @@ class HomeFragment : Fragment(), OnHomeItemClickListener {
                 .setMessage(getString(R.string.purchaseMsg, item.price))
                 .setPositiveButton(getString(R.string.yes)) { dialog, which ->
                     if(MainActivity.coins >= item.price.toInt()){
-                        buySound.start()
+                        if(MainActivity.sound){
+                            buySound.start()
+                        }
 
                         MainActivity.coins -= item.price.toInt()
                         coinsView.text = MainActivity.coins.toString()
@@ -356,8 +419,11 @@ class HomeFragment : Fragment(), OnHomeItemClickListener {
             if (findNavController().currentDestination?.id == R.id.HomeFragment) {
                 findNavController().navigate(R.id.homeToGetReady)
 
-                backgroundMusic.seekTo(0)
-                backgroundMusic.start()
+                if(MainActivity.music){
+                    backgroundMusic.seekTo(0)
+                    backgroundMusic.start()
+                }
+
             }
 
         } catch (e: JSONException) {
@@ -399,8 +465,11 @@ class HomeFragment : Fragment(), OnHomeItemClickListener {
                 if (findNavController().currentDestination?.id == R.id.HomeFragment) {
                     findNavController().navigate(R.id.homeToGetReady)
 
-                    backgroundMusic.seekTo(0)
-                    backgroundMusic.start()
+                    if(MainActivity.music){
+                        backgroundMusic.seekTo(0)
+                        backgroundMusic.start()
+                    }
+
                 }
 
             } catch (e: JSONException) {
