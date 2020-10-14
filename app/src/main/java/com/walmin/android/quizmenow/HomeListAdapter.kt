@@ -64,30 +64,15 @@ class HomeListAdapter(homeList: ArrayList<HomeItemData>, var onClickListener: On
                 priceView.text = item.price
                 priceView.visibility = View.VISIBLE
 
-            // Icon online
-            }else if(item.value.toInt() >= 9) {
-                Glide.with(itemView.context)
-                    .load(
-                        itemView.context.getString(
-                            R.string.thumbnailURL,
-                            item.title.toLowerCase(Locale.ROOT)
-                                .replace(" ", "_")
-                        )
-                    )
-                    .placeholder(R.drawable.loading)
-                    .error(R.drawable.error)
-                    .diskCacheStrategy(DiskCacheStrategy.ALL)
-                    .skipMemoryCache(false)
-                    .into(itemView.findViewById(R.id.quizThumbnail))
-
-            // Icon offline
+            // Icon
             }else{
                 Glide.with(itemView.context)
                     .load(Tools.getImage(itemView.context,
                         item.title
                             .replace(itemView.context.getString(R.string.goOnline), "wifi")
                             .toLowerCase(Locale.ROOT)
-                            .replace(" ", "_")))
+                            .replace(" ", "_")
+                            .replace("&", "n")))
                     .placeholder(R.drawable.loading)
                     .error(R.drawable.error)
                     .diskCacheStrategy(DiskCacheStrategy.ALL)

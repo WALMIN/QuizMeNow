@@ -74,27 +74,16 @@ class GetReadyFragment : Fragment() {
         }
 
         // Views
-        if(currentQuizValue.toInt() >= 9) {
-            Glide.with(view.context)
-                .load(view.context.getString(R.string.thumbnailURL,
-                    currentQuiz.toLowerCase(Locale.ROOT).replace(" ", "_")))
-                .placeholder(R.drawable.loading)
-                .error(R.drawable.error)
-                .diskCacheStrategy(DiskCacheStrategy.ALL)
-                .skipMemoryCache(false)
-                .into(view.findViewById(R.id.quizIconView))
-
-        }else{
-            Glide.with(view.context)
-                .load(Tools.getImage(view.context,
-                    currentQuiz.toLowerCase(Locale.ROOT).replace(" ", "_")))
-                .placeholder(R.drawable.loading)
-                .error(R.drawable.error)
-                .diskCacheStrategy(DiskCacheStrategy.ALL)
-                .skipMemoryCache(false)
-                .into(view.findViewById(R.id.quizIconView))
-
-        }
+        Glide.with(view.context)
+            .load(Tools.getImage(view.context,
+                currentQuiz.toLowerCase(Locale.ROOT)
+                    .replace(" ", "_")
+                    .replace("&", "n")))
+            .placeholder(R.drawable.loading)
+            .error(R.drawable.error)
+            .diskCacheStrategy(DiskCacheStrategy.ALL)
+            .skipMemoryCache(false)
+            .into(view.findViewById(R.id.quizIconView))
 
         getReadyTimerView = view.findViewById(R.id.getReadyTimerView)
             getReadyTimerView.setProgressPercentage(0.0)

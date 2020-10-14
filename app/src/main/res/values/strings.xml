@@ -6,7 +6,6 @@
 
     <!-- URLs -->
     <string name="sourceCodeURL">https://github.com/WALMIN/QuizMeNow</string>
-    <string name="thumbnailURL">https://walmin.com/quiz/resources/thumbnails/%1$s.png</string>
     <string name="quizURL">https://opentdb.com/api.php?amount=10&amp;category=%1$s&amp;type=multiple</string>
 
     <!-- Fragments -->
