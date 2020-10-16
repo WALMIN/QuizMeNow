@@ -67,7 +67,10 @@ class GetReadyFragment : Fragment() {
                 getReadyTimerView.setProgressPercentage(100.0)
                 QuizFragment.currentQuestion++
 
-                findNavController().navigate(R.id.getReadyToQuiz)
+                if (findNavController().currentDestination?.id == R.id.GetReadyFragment) {
+                    findNavController().navigate(R.id.getReadyToQuiz)
+
+                }
 
             }
 

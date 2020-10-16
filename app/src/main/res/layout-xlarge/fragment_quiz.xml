@@ -193,13 +193,13 @@
                 android:layout_margin="6dp"
                 app:cardBackgroundColor="@color/colorPrimaryDark"
                 app:cardCornerRadius="4dp"
-                app:cardElevation="4dp"
-                app:contentPadding="12dp">
+                app:cardElevation="4dp">
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/answer0View"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:layout_margin="10dp"
                     android:gravity="center"
                     android:ellipsize="end"
                     android:textStyle="bold"
@@ -207,6 +207,7 @@
                     android:textAllCaps="true"
                     android:textColor="@color/answerCardText"
                     android:textSize="40sp"
+                    android:background="@color/colorPrimaryDark"
                     app:autoSizeMaxTextSize="40sp"
                     app:autoSizeTextType="uniform" />
 
@@ -221,13 +222,13 @@
                 android:layout_margin="6dp"
                 app:cardBackgroundColor="@color/colorPrimaryDark"
                 app:cardCornerRadius="4dp"
-                app:cardElevation="4dp"
-                app:contentPadding="12dp">
+                app:cardElevation="4dp">
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/answer2View"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:layout_margin="10dp"
                     android:gravity="center"
                     android:ellipsize="end"
                     android:textStyle="bold"
@@ -235,6 +236,7 @@
                     android:textAllCaps="true"
                     android:textColor="@color/answerCardText"
                     android:textSize="40sp"
+                    android:background="@color/colorPrimaryDark"
                     app:autoSizeMaxTextSize="40sp"
                     app:autoSizeTextType="uniform" />
 
@@ -257,13 +259,13 @@
                 android:layout_margin="6dp"
                 app:cardBackgroundColor="@color/colorPrimaryDark"
                 app:cardCornerRadius="4dp"
-                app:cardElevation="4dp"
-                app:contentPadding="12dp">
+                app:cardElevation="4dp">
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/answer1View"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:layout_margin="10dp"
                     android:gravity="center"
                     android:ellipsize="end"
                     android:textStyle="bold"
@@ -271,6 +273,7 @@
                     android:textAllCaps="true"
                     android:textColor="@color/answerCardText"
                     android:textSize="40sp"
+                    android:background="@color/colorPrimaryDark"
                     app:autoSizeMaxTextSize="40sp"
                     app:autoSizeTextType="uniform" />
 
@@ -285,13 +288,13 @@
                 android:layout_margin="6dp"
                 app:cardBackgroundColor="@color/colorPrimaryDark"
                 app:cardCornerRadius="4dp"
-                app:cardElevation="4dp"
-                app:contentPadding="12dp">
+                app:cardElevation="4dp">
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/answer3View"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:layout_margin="10dp"
                     android:gravity="center"
                     android:ellipsize="end"
                     android:textStyle="bold"
@@ -299,6 +302,7 @@
                     android:textAllCaps="true"
                     android:textColor="@color/answerCardText"
                     android:textSize="40sp"
+                    android:background="@color/colorPrimaryDark"
                     app:autoSizeMaxTextSize="40sp"
                     app:autoSizeTextType="uniform" />
 

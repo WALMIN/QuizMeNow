@@ -148,15 +148,19 @@ class QuizFragment : Fragment() {
 
                 if(questionList[currentQuestion].answers[0] == questionList[currentQuestion].correctAnswer){
                     answer0Card.setCardBackgroundColor(requireContext().getColor(R.color.correct))
+                    answer0View.setBackgroundColor(requireContext().getColor(R.color.colorPrimaryDark))
 
                 }else if(questionList[currentQuestion].answers[1] == questionList[currentQuestion].correctAnswer){
                     answer1Card.setCardBackgroundColor(requireContext().getColor(R.color.correct))
+                    answer1View.setBackgroundColor(requireContext().getColor(R.color.colorPrimaryDark))
 
                 }else if(questionList[currentQuestion].answers[2] == questionList[currentQuestion].correctAnswer){
                     answer2Card.setCardBackgroundColor(requireContext().getColor(R.color.correct))
+                    answer2View.setBackgroundColor(requireContext().getColor(R.color.colorPrimaryDark))
 
                 }else if(questionList[currentQuestion].answers[3] == questionList[currentQuestion].correctAnswer){
                     answer3Card.setCardBackgroundColor(requireContext().getColor(R.color.correct))
+                    answer3View.setBackgroundColor(requireContext().getColor(R.color.colorPrimaryDark))
 
                 }
 
@@ -199,26 +203,26 @@ class QuizFragment : Fragment() {
         answer0Card = view.findViewById(R.id.answer0Card)
         answer0View = view.findViewById(R.id.answer0View)
             answer0Card.setOnClickListener{
-                checkAnswer(it as CardView, currentQuestion, questionList[currentQuestion].answers[0])
+                checkAnswer(it as CardView, answer0View, currentQuestion, questionList[currentQuestion].answers[0])
 
             }
 
         answer1Card = view.findViewById(R.id.answer1Card)
         answer1View = view.findViewById(R.id.answer1View)
             answer1Card.setOnClickListener{
-                checkAnswer(it as CardView, currentQuestion, questionList[currentQuestion].answers[1])
+                checkAnswer(it as CardView, answer1View, currentQuestion, questionList[currentQuestion].answers[1])
             }
 
         answer2Card = view.findViewById(R.id.answer2Card)
         answer2View = view.findViewById(R.id.answer2View)
             answer2Card.setOnClickListener{
-                checkAnswer(it as CardView, currentQuestion, questionList[currentQuestion].answers[2])
+                checkAnswer(it as CardView, answer2View, currentQuestion, questionList[currentQuestion].answers[2])
             }
 
         answer3Card = view.findViewById(R.id.answer3Card)
         answer3View = view.findViewById(R.id.answer3View)
             answer3Card.setOnClickListener{
-                checkAnswer(it as CardView, currentQuestion,questionList[currentQuestion].answers[3])
+                checkAnswer(it as CardView, answer3View, currentQuestion,questionList[currentQuestion].answers[3])
             }
 
         tapToContinueView = view.findViewById(R.id.tapToContinueView)
@@ -370,7 +374,7 @@ class QuizFragment : Fragment() {
 
     }
 
-    fun checkAnswer(view: CardView, question: Int, input: String){
+    fun checkAnswer(view: CardView, textView: TextView, question: Int, input: String){
         if(question <= (questionList.size - 1)){
             gameTimerView.setProgressPercentage(0.0)
             timer.cancel()
@@ -389,6 +393,7 @@ class QuizFragment : Fragment() {
                 correct++
 
                 view.setCardBackgroundColor(requireContext().getColor(R.color.correct))
+                textView.setBackgroundColor(requireContext().getColor(R.color.correct))
 
                 correctList[question] = "true"
 
@@ -432,6 +437,7 @@ class QuizFragment : Fragment() {
                 incorrect++
 
                 view.setCardBackgroundColor(requireContext().getColor(R.color.incorrect))
+                textView.setBackgroundColor(requireContext().getColor(R.color.incorrect))
 
                 correctList[question] = "false"
 
@@ -469,15 +475,19 @@ class QuizFragment : Fragment() {
 
                 if(questionList[question].answers[0] == questionList[question].correctAnswer){
                     answer0Card.setCardBackgroundColor(requireContext().getColor(R.color.correct))
+                    answer0View.setBackgroundColor(requireContext().getColor(R.color.colorPrimaryDark))
 
                 }else if(questionList[question].answers[1] == questionList[question].correctAnswer){
                     answer1Card.setCardBackgroundColor(requireContext().getColor(R.color.correct))
+                    answer1View.setBackgroundColor(requireContext().getColor(R.color.colorPrimaryDark))
 
                 }else if(questionList[question].answers[2] == questionList[question].correctAnswer){
                     answer2Card.setCardBackgroundColor(requireContext().getColor(R.color.correct))
+                    answer2View.setBackgroundColor(requireContext().getColor(R.color.colorPrimaryDark))
 
                 }else if(questionList[question].answers[3] == questionList[question].correctAnswer){
                     answer3Card.setCardBackgroundColor(requireContext().getColor(R.color.correct))
+                    answer3View.setBackgroundColor(requireContext().getColor(R.color.colorPrimaryDark))
 
                 }
 
