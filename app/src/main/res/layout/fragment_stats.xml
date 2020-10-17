@@ -22,8 +22,8 @@
         android:layout_height="match_parent"
         android:gravity="center"
         android:orientation="vertical"
-        app:layout_constraintTop_toBottomOf="@+id/titleView"
-        app:layout_constraintBottom_toTopOf="@+id/closeBtn"
+        app:layout_constraintTop_toBottomOf="@id/titleView"
+        app:layout_constraintBottom_toTopOf="@id/closeBtn"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
 
@@ -135,10 +135,12 @@
 
     <androidx.cardview.widget.CardView
         android:id="@+id/closeBtn"
-        android:layout_width="256dp"
-        android:minWidth="256dp"
-        android:maxWidth="256dp"
-        android:layout_height="wrap_content"
+        android:layout_width="48dp"
+        android:minWidth="48dp"
+        android:maxWidth="48dp"
+        android:layout_height="48dp"
+        android:minHeight="48dp"
+        android:maxHeight="48dp"
         android:layout_marginBottom="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -146,19 +148,14 @@
         app:cardBackgroundColor="@color/colorAccent"
         app:cardCornerRadius="4dp"
         app:cardElevation="4dp"
-        app:contentPadding="12dp">
+        app:contentPadding="4dp">
 
-        <androidx.appcompat.widget.AppCompatTextView
+        <ImageView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:gravity="center"
-            android:maxLines="1"
-            android:ellipsize="end"
-            android:textStyle="bold"
-            android:text="@string/close"
-            android:textAllCaps="true"
-            android:textColor="@color/textOnDark"
-            android:textSize="20sp" />
+            android:contentDescription="@null"
+            android:src="@drawable/home"
+            app:tint="@color/colorPrimaryDark" />
 
     </androidx.cardview.widget.CardView>
 

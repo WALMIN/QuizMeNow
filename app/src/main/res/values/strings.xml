@@ -45,9 +45,7 @@
     <string name="results">Results</string>
 
     <string name="scoreTitle">Score</string>
-    <string name="score">+%1$s</string>
-
-    <string name="returnHome">Return home</string>
+    <string name="score">0</string>
 
     <!-- Stats -->
     <string name="stats">Stats</string>
@@ -79,6 +77,9 @@
     <string name="licenseBy">By</string>
     <string name="licenseLicense">License</string>
     <string name="licenseLink">Link</string>
+
+    <!-- Messages -->
+    <string name="noInternet">No working internet connection, try again!</string>
 
     <!-- Buttons -->
     <string name="yes">Yes</string>

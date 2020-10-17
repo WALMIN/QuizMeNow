@@ -75,6 +75,10 @@
         tools:layout="@layout/fragment_quiz_end">
 
         <action
+            android:id="@+id/quizEndToGetReady"
+            app:destination="@id/GetReadyFragment" />
+
+        <action
             android:id="@+id/quizEndToHome"
             app:destination="@id/HomeFragment" />
     </fragment>

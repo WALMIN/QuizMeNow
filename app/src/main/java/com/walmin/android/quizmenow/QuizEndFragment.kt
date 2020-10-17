@@ -10,12 +10,22 @@ import android.widget.TextView
 import androidx.activity.OnBackPressedCallback
 import androidx.cardview.widget.CardView
 import androidx.navigation.fragment.findNavController
+import com.android.volley.Request
+import com.android.volley.RequestQueue
+import com.android.volley.toolbox.JsonObjectRequest
+import com.android.volley.toolbox.Volley
+import kotlinx.android.synthetic.main.fragment_quiz_end.*
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import org.json.JSONException
+import org.json.JSONObject
+import java.util.*
 
 class QuizEndFragment : Fragment() {
 
     // Stuff
+    var requestQueue: RequestQueue? = null
+
     var coins = 0
 
     // Views
@@ -26,6 +36,7 @@ class QuizEndFragment : Fragment() {
     lateinit var incorrectView: TextView
     lateinit var scoreView: TextView
 
+    lateinit var replayBtn: CardView
     lateinit var returnHomeBtn: CardView
 
     fun shouldInterceptBackPress() = true
@@ -64,6 +75,8 @@ class QuizEndFragment : Fragment() {
 
         giveResults()
 
+        requestQueue = Volley.newRequestQueue(context)
+
         // Views
         accuracyCircleView = view.findViewById(R.id.accuracyCircleView)
             accuracyCircleView.progress = QuizFragment.score
@@ -78,18 +91,20 @@ class QuizEndFragment : Fragment() {
             incorrectView.text = QuizFragment.incorrect.toString()
 
         scoreView = view.findViewById(R.id.scoreView)
-            if(coins > 0){
-                scoreView.text = resources.getString(R.string.score, coins.toString())
+            scoreView.text = coins.toString()
 
-            }else{
-                scoreView.text = coins.toString()
+        replayBtn = view.findViewById(R.id.replayBtn)
+            replayBtn.setOnClickListener {
+                replay()
 
             }
 
-
         returnHomeBtn = view.findViewById(R.id.returnHomeBtn)
             returnHomeBtn.setOnClickListener {
-                findNavController().navigate(R.id.quizEndToHome)
+                if (findNavController().currentDestination?.id == R.id.QuizEndFragment) {
+                    findNavController().navigate(R.id.quizEndToHome)
+
+                }
 
             }
 
@@ -116,6 +131,135 @@ class QuizEndFragment : Fragment() {
             MainActivity.dataManager.saveCoins(MainActivity.coins)
             MainActivity.dataManager.saveGame(MainActivity.games, MainActivity.correct.toInt(), MainActivity.incorrect.toInt())
         }
+
+    }
+
+    fun replay(){
+        QuizFragment.questionList.clear()
+        QuizFragment.currentQuestion = -1
+
+        QuizFragment.correct = 0
+        QuizFragment.incorrect = 0
+        QuizFragment.score = 0
+
+        QuizFragment.correctList = mutableListOf("null", "null", "null", "null", "null", "null", "null", "null", "null", "null")
+
+        if(Tools.isNetworkConnected(requireContext())){
+            fetchQuestions(GetReadyFragment.currentQuiz, GetReadyFragment.currentQuizValue, getString(R.string.quizURL, GetReadyFragment.currentQuizValue))
+
+        }else {
+            if(GetReadyFragment.currentQuizValue.toInt() in 0..4) {
+                fetchOfflineQuestions(GetReadyFragment.currentQuiz, GetReadyFragment.currentQuizValue)
+
+            }else{
+                Tools.showSnackbar(layout, getString(R.string.noInternet))
+
+            }
+
+        }
+
+    }
+
+    fun fetchOfflineQuestions(title: String, value: String){
+        try {
+            val response = JSONObject(requireContext().assets.open("${title.toLowerCase(Locale.ROOT).replace(" ", "_")}.json").bufferedReader().use { it.readText() })
+            val questionArray = response.getJSONArray("results")
+
+            for (i in 0 until questionArray.length()) {
+                val item = questionArray.getJSONObject(i)
+
+                val answerList = ArrayList<String>()
+                answerList.add(item.getString("correct_answer"))
+                answerList.add(item.getJSONArray("incorrect_answers")[0].toString())
+                answerList.add(item.getJSONArray("incorrect_answers")[1].toString())
+                answerList.add(item.getJSONArray("incorrect_answers")[2].toString())
+
+                answerList.shuffle()
+
+                QuizFragment.questionList.add(
+                    QuestionItemData(
+                        item.getString("question"),
+                        item.getString("correct_answer"),
+                        answerList
+                    )
+                )
+
+                GetReadyFragment.currentQuiz = title
+                GetReadyFragment.currentQuizValue = value
+
+            }
+
+            QuizFragment.questionList.shuffle()
+
+            if (findNavController().currentDestination?.id == R.id.QuizEndFragment) {
+                findNavController().navigate(R.id.quizEndToGetReady)
+
+                if(MainActivity.music){
+                    HomeFragment.backgroundMusic.seekTo(0)
+                    HomeFragment.backgroundMusic.start()
+                }
+
+            }
+
+        } catch (e: JSONException) {
+            e.printStackTrace()
+
+        }
+
+    }
+
+    fun fetchQuestions(title: String, value: String, url: String){
+        val request = JsonObjectRequest(
+            Request.Method.GET, url, null, { response ->
+            try {
+                val questionArray = response.getJSONArray("results")
+
+                for (i in 0 until questionArray.length()) {
+                    val item = questionArray.getJSONObject(i)
+
+                    val answerList = ArrayList<String>()
+                    answerList.add(item.getString("correct_answer"))
+                    answerList.add(item.getJSONArray("incorrect_answers")[0].toString())
+                    answerList.add(item.getJSONArray("incorrect_answers")[1].toString())
+                    answerList.add(item.getJSONArray("incorrect_answers")[2].toString())
+
+                    answerList.shuffle()
+
+                    QuizFragment.questionList.add(
+                        QuestionItemData(
+                            item.getString("question"),
+                            item.getString("correct_answer"),
+                            answerList
+                        )
+                    )
+
+                    GetReadyFragment.currentQuiz = title
+                    GetReadyFragment.currentQuizValue = value
+
+                }
+
+                if (findNavController().currentDestination?.id == R.id.QuizEndFragment) {
+                    findNavController().navigate(R.id.quizEndToGetReady)
+
+                    if(MainActivity.music){
+                        HomeFragment.backgroundMusic.seekTo(0)
+                        HomeFragment.backgroundMusic.start()
+                    }
+
+                }
+
+            } catch (e: JSONException) {
+                e.printStackTrace()
+
+            }
+
+        },
+            {
+                it.printStackTrace()
+                Tools.showSnackbar(layout, getString(R.string.noInternet))
+
+            })
+        requestQueue?.add(request)
 
     }
 
