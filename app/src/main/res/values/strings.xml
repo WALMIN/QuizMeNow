@@ -28,7 +28,8 @@
     <string name="purchaseNotEnough">You don\'t have enough coins to buy this.</string>
 
     <!-- Get ready -->
-    <string name="getReady">Get ready!</string>
+    <string name="getReadyTitle">Get ready!</string>
+    <string name="getReady">3</string>
 
     <!-- Quiz -->
     <string name="currentQuestion">.........</string>

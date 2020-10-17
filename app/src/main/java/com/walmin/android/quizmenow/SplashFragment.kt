@@ -46,7 +46,7 @@ class SplashFragment : Fragment() {
 
             }
 
-        }, 1500)
+        }, 1250)
 
     }
 

@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.activity.OnBackPressedCallback
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
@@ -22,11 +23,13 @@ class GetReadyFragment : Fragment() {
     }
 
     // Stuff
+    var countDown = 3
+
     lateinit var timer: CountDownTimer
     var timerFinished = false
 
     // Views
-    lateinit var getReadyTimerView: RoundedProgressBar
+    lateinit var getReadyTextView: TextView
 
     fun shouldInterceptBackPress() = true
 
@@ -55,16 +58,16 @@ class GetReadyFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         
         // Stuff
-        timer = object: CountDownTimer(1500, 15) {
+        timer = object: CountDownTimer(1600, 500) {
             override fun onTick(millisUntilFinished: Long) {
-                getReadyTimerView.setProgressPercentage(getReadyTimerView.getProgressPercentage() + 1)
+                getReadyTextView.text = countDown--.toString()
 
             }
 
             override fun onFinish() {
                 timerFinished = true
 
-                getReadyTimerView.setProgressPercentage(100.0)
+                getReadyTextView.text = "0"
                 QuizFragment.currentQuestion++
 
                 if (findNavController().currentDestination?.id == R.id.GetReadyFragment) {
@@ -88,8 +91,8 @@ class GetReadyFragment : Fragment() {
             .skipMemoryCache(false)
             .into(view.findViewById(R.id.quizIconView))
 
-        getReadyTimerView = view.findViewById(R.id.getReadyTimerView)
-            getReadyTimerView.setProgressPercentage(0.0)
+        getReadyTextView = view.findViewById(R.id.getReadyTextView)
+            getReadyTextView.text = countDown.toString()
 
         timer.start()
 

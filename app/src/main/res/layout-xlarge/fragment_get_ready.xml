@@ -16,16 +16,25 @@
 
         <ImageView
             android:id="@+id/quizIconView"
-            android:layout_width="288dp"
-            android:minWidth="288dp"
-            android:maxWidth="288dp"
-            android:layout_height="288dp"
-            android:minHeight="288dp"
-            android:maxHeight="288dp"
+            android:layout_width="320dp"
+            android:minWidth="320dp"
+            android:maxWidth="320dp"
+            android:layout_height="320dp"
+            android:minHeight="320dp"
+            android:maxHeight="320dp"
             android:layout_marginBottom="12dp"
             android:contentDescription="@null"
             android:src="@drawable/general_knowledge"
             app:tint="@color/text" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/getReadyTitle"
+            android:textStyle="normal"
+            android:textAllCaps="true"
+            android:textColor="@color/colorAccent"
+            android:textSize="60sp"/>
 
         <TextView
             android:id="@+id/getReadyTextView"
@@ -35,20 +44,7 @@
             android:textStyle="bold"
             android:textAllCaps="true"
             android:textColor="@color/colorAccent"
-            android:textSize="60sp"/>
-
-        <com.mackhartley.roundedprogressbar.RoundedProgressBar
-            android:id="@+id/getReadyTimerView"
-            android:layout_width="match_parent"
-            android:layout_height="8dp"
-            android:minHeight="8dp"
-            android:maxHeight="8dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:rpbAnimationLength="15"
-            app:rpbProgressBgColor="@color/background"
-            app:rpbProgressColor="@color/colorAccent"
-            app:rpbShowProgressText="false" />
+            android:textSize="120sp"/>
 
     </LinearLayout>
 
