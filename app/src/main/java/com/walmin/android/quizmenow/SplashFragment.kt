@@ -11,20 +11,12 @@ import androidx.navigation.fragment.findNavController
 
 class SplashFragment : Fragment() {
 
-    fun shouldInterceptBackPress() = true
-
+    // Block back press
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         activity?.onBackPressedDispatcher?.addCallback(requireActivity(), object : OnBackPressedCallback(true) {
-            override fun handleOnBackPressed() {
-                if(!shouldInterceptBackPress()){
-                    isEnabled = false
-                    activity?.onBackPressed()
-
-                }
-
-            }
+            override fun handleOnBackPressed() {}
 
         })
 
@@ -37,6 +29,7 @@ class SplashFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        // Go to home fragment after delay
         Handler().postDelayed({
             view.post {
                 if (findNavController().currentDestination?.id == R.id.SplashFragment) {

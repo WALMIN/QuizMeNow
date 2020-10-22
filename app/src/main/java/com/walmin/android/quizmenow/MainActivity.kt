@@ -2,7 +2,6 @@ package com.walmin.android.quizmenow
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.app.AppCompatDelegate
 import androidx.lifecycle.asLiveData
 
 class MainActivity : AppCompatActivity() {
@@ -27,13 +26,12 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
-
         dataManager = DataManager(this)
         observeData()
 
     }
 
+    // Get saved data
     private fun observeData(){
         dataManager.musicFlow.asLiveData().observe(this, { music = it })
         dataManager.soundFlow.asLiveData().observe(this, { sound = it })

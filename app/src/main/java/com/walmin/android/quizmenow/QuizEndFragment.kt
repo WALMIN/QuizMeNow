@@ -39,21 +39,13 @@ class QuizEndFragment : Fragment() {
     lateinit var replayBtn: CardView
     lateinit var returnHomeBtn: CardView
 
-    fun shouldInterceptBackPress() = true
-
+    // Go to home on back press
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         activity?.onBackPressedDispatcher?.addCallback(requireActivity(), object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
-                if(shouldInterceptBackPress()) {
-                    findNavController().navigate(R.id.quizEndToHome)
-
-                }else{
-                    isEnabled = false
-                    activity?.onBackPressed()
-
-                }
+                findNavController().navigate(R.id.quizEndToHome)
 
             }
 
@@ -68,13 +60,15 @@ class QuizEndFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        giveResults()
+
+        // Stop music if playing
         if(HomeFragment.backgroundMusic.isPlaying){
             HomeFragment.backgroundMusic.stop()
 
         }
 
-        giveResults()
-
+        // Stuff
         requestQueue = Volley.newRequestQueue(context)
 
         // Views
@@ -110,6 +104,7 @@ class QuizEndFragment : Fragment() {
 
     }
 
+    // Give points & stats to player
     fun giveResults(){
         if(QuizFragment.score == 10) {
             coins = (QuizFragment.score * 2)
@@ -134,6 +129,7 @@ class QuizEndFragment : Fragment() {
 
     }
 
+    // Replay quiz
     fun replay(){
         QuizFragment.questionList.clear()
         QuizFragment.currentQuestion = -1
@@ -160,6 +156,7 @@ class QuizEndFragment : Fragment() {
 
     }
 
+    // Get offline questions
     fun fetchOfflineQuestions(title: String, value: String){
         try {
             val response = JSONObject(requireContext().assets.open("${title.toLowerCase(Locale.ROOT).replace(" ", "_")}.json").bufferedReader().use { it.readText() })
@@ -208,6 +205,7 @@ class QuizEndFragment : Fragment() {
 
     }
 
+    // Get questions from url
     fun fetchQuestions(title: String, value: String, url: String){
         val request = JsonObjectRequest(
             Request.Method.GET, url, null, { response ->

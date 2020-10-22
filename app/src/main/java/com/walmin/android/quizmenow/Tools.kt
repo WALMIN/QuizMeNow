@@ -6,7 +6,6 @@ import android.net.NetworkCapabilities
 import android.view.View
 import com.google.android.material.snackbar.Snackbar
 
-
 object Tools {
 
     fun isNetworkConnected(context: Context): Boolean {

@@ -64,20 +64,12 @@ class QuizFragment : Fragment() {
 
     lateinit var gameTimerView: RoundedProgressBar
 
-    fun shouldInterceptBackPress() = true
-
+    // Block back press
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         activity?.onBackPressedDispatcher?.addCallback(requireActivity(), object : OnBackPressedCallback(true) {
-            override fun handleOnBackPressed() {
-                if(!shouldInterceptBackPress()){
-                    isEnabled = false
-                    activity?.onBackPressed()
-
-                }
-
-            }
+            override fun handleOnBackPressed() {}
 
         })
 
@@ -114,54 +106,39 @@ class QuizFragment : Fragment() {
 
                 correctList[currentQuestion] = "false"
 
-                if(currentQuestion == 0){
-                    questionDot0.setColorFilter(ContextCompat.getColor(requireContext(), R.color.incorrect), PorterDuff.Mode.MULTIPLY)
-
-                }else if(currentQuestion == 1){
-                    questionDot1.setColorFilter(ContextCompat.getColor(requireContext(), R.color.incorrect), PorterDuff.Mode.MULTIPLY)
-
-                }else if(currentQuestion == 2){
-                    questionDot2.setColorFilter(ContextCompat.getColor(requireContext(), R.color.incorrect), PorterDuff.Mode.MULTIPLY)
-
-                }else if(currentQuestion == 3){
-                    questionDot3.setColorFilter(ContextCompat.getColor(requireContext(), R.color.incorrect), PorterDuff.Mode.MULTIPLY)
-
-                }else if(currentQuestion == 4){
-                    questionDot4.setColorFilter(ContextCompat.getColor(requireContext(), R.color.incorrect), PorterDuff.Mode.MULTIPLY)
-
-                }else if(currentQuestion == 5){
-                    questionDot5.setColorFilter(ContextCompat.getColor(requireContext(), R.color.incorrect), PorterDuff.Mode.MULTIPLY)
-
-                }else if(currentQuestion == 6){
-                    questionDot6.setColorFilter(ContextCompat.getColor(requireContext(), R.color.incorrect), PorterDuff.Mode.MULTIPLY)
-
-                }else if(currentQuestion == 7){
-                    questionDot7.setColorFilter(ContextCompat.getColor(requireContext(), R.color.incorrect), PorterDuff.Mode.MULTIPLY)
-
-                }else if(currentQuestion == 8){
-                    questionDot8.setColorFilter(ContextCompat.getColor(requireContext(), R.color.incorrect), PorterDuff.Mode.MULTIPLY)
-
-                }else if(currentQuestion == 9){
-                    questionDot9.setColorFilter(ContextCompat.getColor(requireContext(), R.color.incorrect), PorterDuff.Mode.MULTIPLY)
-
+                when (currentQuestion) {
+                    0 -> { questionDot0.setColorFilter(ContextCompat.getColor(requireContext(), R.color.incorrect), PorterDuff.Mode.MULTIPLY) }
+                    1 -> { questionDot1.setColorFilter(ContextCompat.getColor(requireContext(), R.color.incorrect), PorterDuff.Mode.MULTIPLY) }
+                    2 -> { questionDot2.setColorFilter(ContextCompat.getColor(requireContext(), R.color.incorrect), PorterDuff.Mode.MULTIPLY) }
+                    3 -> { questionDot3.setColorFilter(ContextCompat.getColor(requireContext(), R.color.incorrect), PorterDuff.Mode.MULTIPLY) }
+                    4 -> { questionDot4.setColorFilter(ContextCompat.getColor(requireContext(), R.color.incorrect), PorterDuff.Mode.MULTIPLY) }
+                    5 -> { questionDot5.setColorFilter(ContextCompat.getColor(requireContext(), R.color.incorrect), PorterDuff.Mode.MULTIPLY) }
+                    6 -> { questionDot6.setColorFilter(ContextCompat.getColor(requireContext(), R.color.incorrect), PorterDuff.Mode.MULTIPLY) }
+                    7 -> { questionDot7.setColorFilter(ContextCompat.getColor(requireContext(), R.color.incorrect), PorterDuff.Mode.MULTIPLY) }
+                    8 -> { questionDot8.setColorFilter(ContextCompat.getColor(requireContext(), R.color.incorrect), PorterDuff.Mode.MULTIPLY) }
+                    9 -> { questionDot9.setColorFilter(ContextCompat.getColor(requireContext(), R.color.incorrect), PorterDuff.Mode.MULTIPLY) }
                 }
 
-                if(questionList[currentQuestion].answers[0] == questionList[currentQuestion].correctAnswer){
-                    answer0Card.setCardBackgroundColor(requireContext().getColor(R.color.correct))
-                    answer0View.setBackgroundColor(requireContext().getColor(R.color.colorPrimaryDark))
+                when (questionList[currentQuestion].correctAnswer) {
+                    questionList[currentQuestion].answers[0] -> {
+                        answer0Card.setCardBackgroundColor(requireContext().getColor(R.color.correct))
+                        answer0View.setBackgroundColor(requireContext().getColor(R.color.colorPrimaryDark))
+                    }
 
-                }else if(questionList[currentQuestion].answers[1] == questionList[currentQuestion].correctAnswer){
-                    answer1Card.setCardBackgroundColor(requireContext().getColor(R.color.correct))
-                    answer1View.setBackgroundColor(requireContext().getColor(R.color.colorPrimaryDark))
+                    questionList[currentQuestion].answers[1] -> {
+                        answer1Card.setCardBackgroundColor(requireContext().getColor(R.color.correct))
+                        answer1View.setBackgroundColor(requireContext().getColor(R.color.colorPrimaryDark))
+                    }
 
-                }else if(questionList[currentQuestion].answers[2] == questionList[currentQuestion].correctAnswer){
-                    answer2Card.setCardBackgroundColor(requireContext().getColor(R.color.correct))
-                    answer2View.setBackgroundColor(requireContext().getColor(R.color.colorPrimaryDark))
+                    questionList[currentQuestion].answers[2] -> {
+                        answer2Card.setCardBackgroundColor(requireContext().getColor(R.color.correct))
+                        answer2View.setBackgroundColor(requireContext().getColor(R.color.colorPrimaryDark))
+                    }
 
-                }else if(questionList[currentQuestion].answers[3] == questionList[currentQuestion].correctAnswer){
-                    answer3Card.setCardBackgroundColor(requireContext().getColor(R.color.correct))
-                    answer3View.setBackgroundColor(requireContext().getColor(R.color.colorPrimaryDark))
-
+                    questionList[currentQuestion].answers[3] -> {
+                        answer3Card.setCardBackgroundColor(requireContext().getColor(R.color.correct))
+                        answer3View.setBackgroundColor(requireContext().getColor(R.color.colorPrimaryDark))
+                    }
                 }
 
                 if(currentQuestion == (questionList.size - 1)){
@@ -235,40 +212,22 @@ class QuizFragment : Fragment() {
 
     }
 
+    // Set current question
     fun setQuestion(question: Int){
         gameTimerView.setProgressPercentage(100.0)
         timer.start()
 
-        if(question == 0){
-            questionDot0.setColorFilter(ContextCompat.getColor(requireContext(), R.color.colorAccent), PorterDuff.Mode.MULTIPLY)
-
-        }else if(question == 1){
-            questionDot1.setColorFilter(ContextCompat.getColor(requireContext(), R.color.colorAccent), PorterDuff.Mode.MULTIPLY)
-
-        }else if(question == 2){
-            questionDot2.setColorFilter(ContextCompat.getColor(requireContext(), R.color.colorAccent), PorterDuff.Mode.MULTIPLY)
-
-        }else if(question == 3){
-            questionDot3.setColorFilter(ContextCompat.getColor(requireContext(), R.color.colorAccent), PorterDuff.Mode.MULTIPLY)
-
-        }else if(question == 4){
-            questionDot4.setColorFilter(ContextCompat.getColor(requireContext(), R.color.colorAccent), PorterDuff.Mode.MULTIPLY)
-
-        }else if(question == 5){
-            questionDot5.setColorFilter(ContextCompat.getColor(requireContext(), R.color.colorAccent), PorterDuff.Mode.MULTIPLY)
-
-        }else if(question == 6){
-            questionDot6.setColorFilter(ContextCompat.getColor(requireContext(), R.color.colorAccent), PorterDuff.Mode.MULTIPLY)
-
-        }else if(question == 7){
-            questionDot7.setColorFilter(ContextCompat.getColor(requireContext(), R.color.colorAccent), PorterDuff.Mode.MULTIPLY)
-
-        }else if(question == 8){
-            questionDot8.setColorFilter(ContextCompat.getColor(requireContext(), R.color.colorAccent), PorterDuff.Mode.MULTIPLY)
-
-        }else if(question == 9){
-            questionDot9.setColorFilter(ContextCompat.getColor(requireContext(), R.color.colorAccent), PorterDuff.Mode.MULTIPLY)
-
+        when (question) {
+            0 -> { questionDot0.setColorFilter(ContextCompat.getColor(requireContext(), R.color.colorAccent), PorterDuff.Mode.MULTIPLY) }
+            1 -> { questionDot1.setColorFilter(ContextCompat.getColor(requireContext(), R.color.colorAccent), PorterDuff.Mode.MULTIPLY) }
+            2 -> { questionDot2.setColorFilter(ContextCompat.getColor(requireContext(), R.color.colorAccent), PorterDuff.Mode.MULTIPLY) }
+            3 -> { questionDot3.setColorFilter(ContextCompat.getColor(requireContext(), R.color.colorAccent), PorterDuff.Mode.MULTIPLY) }
+            4 -> { questionDot4.setColorFilter(ContextCompat.getColor(requireContext(), R.color.colorAccent), PorterDuff.Mode.MULTIPLY) }
+            5 -> { questionDot5.setColorFilter(ContextCompat.getColor(requireContext(), R.color.colorAccent), PorterDuff.Mode.MULTIPLY) }
+            6 -> { questionDot6.setColorFilter(ContextCompat.getColor(requireContext(), R.color.colorAccent), PorterDuff.Mode.MULTIPLY) }
+            7 -> { questionDot7.setColorFilter(ContextCompat.getColor(requireContext(), R.color.colorAccent), PorterDuff.Mode.MULTIPLY) }
+            8 -> { questionDot8.setColorFilter(ContextCompat.getColor(requireContext(), R.color.colorAccent), PorterDuff.Mode.MULTIPLY) }
+            9 -> { questionDot9.setColorFilter(ContextCompat.getColor(requireContext(), R.color.colorAccent), PorterDuff.Mode.MULTIPLY) }
         }
 
         for(i in 0 until correctList.size){
@@ -374,6 +333,7 @@ class QuizFragment : Fragment() {
 
     }
 
+    // Check the answer
     fun checkAnswer(view: CardView, textView: TextView, question: Int, input: String){
         if(question <= (questionList.size - 1)){
             gameTimerView.setProgressPercentage(0.0)
@@ -397,36 +357,17 @@ class QuizFragment : Fragment() {
 
                 correctList[question] = "true"
 
-                if(question == 0){
-                    questionDot0.setColorFilter(ContextCompat.getColor(requireContext(), R.color.correct), PorterDuff.Mode.MULTIPLY)
-
-                }else if(question == 1){
-                    questionDot1.setColorFilter(ContextCompat.getColor(requireContext(), R.color.correct), PorterDuff.Mode.MULTIPLY)
-
-                }else if(question == 2){
-                    questionDot2.setColorFilter(ContextCompat.getColor(requireContext(), R.color.correct), PorterDuff.Mode.MULTIPLY)
-
-                }else if(question == 3){
-                    questionDot3.setColorFilter(ContextCompat.getColor(requireContext(), R.color.correct), PorterDuff.Mode.MULTIPLY)
-
-                }else if(question == 4){
-                    questionDot4.setColorFilter(ContextCompat.getColor(requireContext(), R.color.correct), PorterDuff.Mode.MULTIPLY)
-
-                }else if(question == 5){
-                    questionDot5.setColorFilter(ContextCompat.getColor(requireContext(), R.color.correct), PorterDuff.Mode.MULTIPLY)
-
-                }else if(question == 6){
-                    questionDot6.setColorFilter(ContextCompat.getColor(requireContext(), R.color.correct), PorterDuff.Mode.MULTIPLY)
-
-                }else if(question == 7){
-                    questionDot7.setColorFilter(ContextCompat.getColor(requireContext(), R.color.correct), PorterDuff.Mode.MULTIPLY)
-
-                }else if(question == 8){
-                    questionDot8.setColorFilter(ContextCompat.getColor(requireContext(), R.color.correct), PorterDuff.Mode.MULTIPLY)
-
-                }else if(question == 9){
-                    questionDot9.setColorFilter(ContextCompat.getColor(requireContext(), R.color.correct), PorterDuff.Mode.MULTIPLY)
-
+                when (question) {
+                    0 -> { questionDot0.setColorFilter(ContextCompat.getColor(requireContext(), R.color.correct), PorterDuff.Mode.MULTIPLY) }
+                    1 -> { questionDot1.setColorFilter(ContextCompat.getColor(requireContext(), R.color.correct), PorterDuff.Mode.MULTIPLY) }
+                    2 -> { questionDot2.setColorFilter(ContextCompat.getColor(requireContext(), R.color.correct), PorterDuff.Mode.MULTIPLY) }
+                    3 -> { questionDot3.setColorFilter(ContextCompat.getColor(requireContext(), R.color.correct), PorterDuff.Mode.MULTIPLY) }
+                    4 -> { questionDot4.setColorFilter(ContextCompat.getColor(requireContext(), R.color.correct), PorterDuff.Mode.MULTIPLY) }
+                    5 -> { questionDot5.setColorFilter(ContextCompat.getColor(requireContext(), R.color.correct), PorterDuff.Mode.MULTIPLY) }
+                    6 -> { questionDot6.setColorFilter(ContextCompat.getColor(requireContext(), R.color.correct), PorterDuff.Mode.MULTIPLY) }
+                    7 -> { questionDot7.setColorFilter(ContextCompat.getColor(requireContext(), R.color.correct), PorterDuff.Mode.MULTIPLY) }
+                    8 -> { questionDot8.setColorFilter(ContextCompat.getColor(requireContext(), R.color.correct), PorterDuff.Mode.MULTIPLY) }
+                    9 -> { questionDot9.setColorFilter(ContextCompat.getColor(requireContext(), R.color.correct), PorterDuff.Mode.MULTIPLY) }
                 }
 
             }else{
@@ -441,54 +382,39 @@ class QuizFragment : Fragment() {
 
                 correctList[question] = "false"
 
-                if(question == 0){
-                    questionDot0.setColorFilter(ContextCompat.getColor(requireContext(), R.color.incorrect), PorterDuff.Mode.MULTIPLY)
-
-                }else if(question == 1){
-                    questionDot1.setColorFilter(ContextCompat.getColor(requireContext(), R.color.incorrect), PorterDuff.Mode.MULTIPLY)
-
-                }else if(question == 2){
-                    questionDot2.setColorFilter(ContextCompat.getColor(requireContext(), R.color.incorrect), PorterDuff.Mode.MULTIPLY)
-
-                }else if(question == 3){
-                    questionDot3.setColorFilter(ContextCompat.getColor(requireContext(), R.color.incorrect), PorterDuff.Mode.MULTIPLY)
-
-                }else if(question == 4){
-                    questionDot4.setColorFilter(ContextCompat.getColor(requireContext(), R.color.incorrect), PorterDuff.Mode.MULTIPLY)
-
-                }else if(question == 5){
-                    questionDot5.setColorFilter(ContextCompat.getColor(requireContext(), R.color.incorrect), PorterDuff.Mode.MULTIPLY)
-
-                }else if(question == 6){
-                    questionDot6.setColorFilter(ContextCompat.getColor(requireContext(), R.color.incorrect), PorterDuff.Mode.MULTIPLY)
-
-                }else if(question == 7){
-                    questionDot7.setColorFilter(ContextCompat.getColor(requireContext(), R.color.incorrect), PorterDuff.Mode.MULTIPLY)
-
-                }else if(question == 8){
-                    questionDot8.setColorFilter(ContextCompat.getColor(requireContext(), R.color.incorrect), PorterDuff.Mode.MULTIPLY)
-
-                }else if(question == 9){
-                    questionDot9.setColorFilter(ContextCompat.getColor(requireContext(), R.color.incorrect), PorterDuff.Mode.MULTIPLY)
-
+                when (question) {
+                    0 -> { questionDot0.setColorFilter(ContextCompat.getColor(requireContext(), R.color.incorrect), PorterDuff.Mode.MULTIPLY) }
+                    1 -> { questionDot1.setColorFilter(ContextCompat.getColor(requireContext(), R.color.incorrect), PorterDuff.Mode.MULTIPLY) }
+                    2 -> { questionDot2.setColorFilter(ContextCompat.getColor(requireContext(), R.color.incorrect), PorterDuff.Mode.MULTIPLY) }
+                    3 -> { questionDot3.setColorFilter(ContextCompat.getColor(requireContext(), R.color.incorrect), PorterDuff.Mode.MULTIPLY) }
+                    4 -> { questionDot4.setColorFilter(ContextCompat.getColor(requireContext(), R.color.incorrect), PorterDuff.Mode.MULTIPLY) }
+                    5 -> { questionDot5.setColorFilter(ContextCompat.getColor(requireContext(), R.color.incorrect), PorterDuff.Mode.MULTIPLY) }
+                    6 -> { questionDot6.setColorFilter(ContextCompat.getColor(requireContext(), R.color.incorrect), PorterDuff.Mode.MULTIPLY) }
+                    7 -> { questionDot7.setColorFilter(ContextCompat.getColor(requireContext(), R.color.incorrect), PorterDuff.Mode.MULTIPLY) }
+                    8 -> { questionDot8.setColorFilter(ContextCompat.getColor(requireContext(), R.color.incorrect), PorterDuff.Mode.MULTIPLY) }
+                    9 -> { questionDot9.setColorFilter(ContextCompat.getColor(requireContext(), R.color.incorrect), PorterDuff.Mode.MULTIPLY) }
                 }
 
-                if(questionList[question].answers[0] == questionList[question].correctAnswer){
-                    answer0Card.setCardBackgroundColor(requireContext().getColor(R.color.correct))
-                    answer0View.setBackgroundColor(requireContext().getColor(R.color.colorPrimaryDark))
+                when (questionList[question].correctAnswer) {
+                    questionList[question].answers[0] -> {
+                        answer0Card.setCardBackgroundColor(requireContext().getColor(R.color.correct))
+                        answer0View.setBackgroundColor(requireContext().getColor(R.color.colorPrimaryDark))
+                    }
 
-                }else if(questionList[question].answers[1] == questionList[question].correctAnswer){
-                    answer1Card.setCardBackgroundColor(requireContext().getColor(R.color.correct))
-                    answer1View.setBackgroundColor(requireContext().getColor(R.color.colorPrimaryDark))
+                    questionList[question].answers[1] -> {
+                        answer1Card.setCardBackgroundColor(requireContext().getColor(R.color.correct))
+                        answer1View.setBackgroundColor(requireContext().getColor(R.color.colorPrimaryDark))
+                    }
 
-                }else if(questionList[question].answers[2] == questionList[question].correctAnswer){
-                    answer2Card.setCardBackgroundColor(requireContext().getColor(R.color.correct))
-                    answer2View.setBackgroundColor(requireContext().getColor(R.color.colorPrimaryDark))
+                    questionList[question].answers[2] -> {
+                        answer2Card.setCardBackgroundColor(requireContext().getColor(R.color.correct))
+                        answer2View.setBackgroundColor(requireContext().getColor(R.color.colorPrimaryDark))
+                    }
 
-                }else if(questionList[question].answers[3] == questionList[question].correctAnswer){
-                    answer3Card.setCardBackgroundColor(requireContext().getColor(R.color.correct))
-                    answer3View.setBackgroundColor(requireContext().getColor(R.color.colorPrimaryDark))
-
+                    questionList[question].answers[3] -> {
+                        answer3Card.setCardBackgroundColor(requireContext().getColor(R.color.correct))
+                        answer3View.setBackgroundColor(requireContext().getColor(R.color.colorPrimaryDark))
+                    }
                 }
 
             }

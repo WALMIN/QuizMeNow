@@ -11,7 +11,6 @@ import androidx.activity.OnBackPressedCallback
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
-import com.mackhartley.roundedprogressbar.RoundedProgressBar
 import java.util.*
 
 class GetReadyFragment : Fragment() {
@@ -31,20 +30,12 @@ class GetReadyFragment : Fragment() {
     // Views
     lateinit var getReadyTextView: TextView
 
-    fun shouldInterceptBackPress() = true
-
+    // Block back press
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         activity?.onBackPressedDispatcher?.addCallback(requireActivity(), object : OnBackPressedCallback(true) {
-            override fun handleOnBackPressed() {
-                if(!shouldInterceptBackPress()){
-                    isEnabled = false
-                    activity?.onBackPressed()
-
-                }
-
-            }
+            override fun handleOnBackPressed() {}
 
         })
 
@@ -101,6 +92,7 @@ class GetReadyFragment : Fragment() {
     override fun onResume() {
         super.onResume()
 
+        // Go to question if timer got done in background
         if(timerFinished){
             findNavController().navigate(R.id.getReadyToQuiz)
 

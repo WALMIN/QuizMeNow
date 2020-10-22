@@ -12,6 +12,7 @@ import android.widget.ImageButton
 import android.widget.LinearLayout
 import android.widget.SimpleAdapter
 import android.widget.TextView
+import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.PopupMenu
 import androidx.core.app.ActivityCompat.finishAffinity
@@ -39,6 +40,7 @@ class HomeFragment : Fragment(), OnHomeItemClickListener {
 
     }
 
+    // Stuff
     var online = false
     var requestQueue: RequestQueue? = null
 
@@ -62,6 +64,20 @@ class HomeFragment : Fragment(), OnHomeItemClickListener {
     lateinit var statisticsBtn: ImageButton
     lateinit var menuBtn: ImageButton
 
+    // Close app on back press
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        activity?.onBackPressedDispatcher?.addCallback(requireActivity(), object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                finishAffinity(requireActivity())
+
+            }
+
+        })
+
+    }
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_home, container, false)
     }
@@ -69,6 +85,7 @@ class HomeFragment : Fragment(), OnHomeItemClickListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        // Stuff
         requestQueue = Volley.newRequestQueue(context)
 
         // Sounds
@@ -164,6 +181,7 @@ class HomeFragment : Fragment(), OnHomeItemClickListener {
 
     }
 
+    // Show menu
     fun menu(view: View){
         val popupMenu = PopupMenu(requireContext(), view)
             popupMenu.inflate(R.menu.menu)
@@ -188,6 +206,7 @@ class HomeFragment : Fragment(), OnHomeItemClickListener {
 
     }
 
+    // Show about dialog
     fun about(){
         AlertDialog.Builder(requireContext())
             .setTitle(R.string.about)
@@ -211,6 +230,7 @@ class HomeFragment : Fragment(), OnHomeItemClickListener {
 
     }
 
+    // Show license dialog
     fun licenses(){
         val licenseList = ArrayList<HashMap<String, String>>()
 
@@ -243,6 +263,7 @@ class HomeFragment : Fragment(), OnHomeItemClickListener {
 
     }
 
+    // Get & show offline list of quizzes
     fun fetchOfflineList(){
         quizListViewRefreshLayout.isRefreshing = false
         online = false
@@ -258,6 +279,7 @@ class HomeFragment : Fragment(), OnHomeItemClickListener {
 
     }
 
+    // Get & show list of quizzes
     fun fetchList(){
         quizListLoadingSpinLayout.visibility = View.GONE
 
@@ -320,11 +342,14 @@ class HomeFragment : Fragment(), OnHomeItemClickListener {
 
     }
 
+    // Click on quiz item
     override fun onHomeItemClick(item: HomeItemData, position: Int) {
         if(!item.locked){
+            // Go online btn
             if(item.value == "-1"){
                 fetchList()
 
+            // Reset & get questions for the game
             }else{
                 quizListLoadingSpinLayout.visibility = View.VISIBLE
 
@@ -347,6 +372,7 @@ class HomeFragment : Fragment(), OnHomeItemClickListener {
 
             }
 
+        // Buy new quiz
         }else{
             AlertDialog.Builder(requireContext())
                 .setTitle(item.title)
@@ -385,6 +411,7 @@ class HomeFragment : Fragment(), OnHomeItemClickListener {
 
     }
 
+    // Get offline questions
     fun fetchOfflineQuestions(title: String, value: String){
         try {
             val response = JSONObject(requireContext().assets.open("${title.toLowerCase(Locale.ROOT).replace(" ", "_")}.json").bufferedReader().use { it.readText() })
@@ -433,6 +460,7 @@ class HomeFragment : Fragment(), OnHomeItemClickListener {
 
     }
 
+    // Get questions from url
     fun fetchQuestions(title: String, value: String, url: String){
         val request = JsonObjectRequest(Request.Method.GET, url, null, { response ->
             try {
