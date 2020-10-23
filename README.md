@@ -5,7 +5,7 @@
 <p align="center">
 <a href="https://github.com/WALMIN/QuizMeNow/releases" title="Download apk">
 <img src="https://walmin.com/unleashiconpack/images/github_download.png" height="20">
-</a>&nbsp;You can download the APK from <a href="https://www.walmin.com"><b>releases</b></a>.
+</a>&nbsp;You can download the APK from <a href="https://github.com/WALMIN/QuizMeNow/releases"><b>releases</b></a>.
 </p>
 
 ---
