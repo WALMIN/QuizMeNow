@@ -64,7 +64,7 @@ class QuizEndFragment : Fragment() {
 
         // Stop music if playing
         if(HomeFragment.backgroundMusic.isPlaying){
-            HomeFragment.backgroundMusic.stop()
+            HomeFragment.backgroundMusic.pause()
 
         }
 
