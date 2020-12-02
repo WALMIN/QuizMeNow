@@ -60,12 +60,6 @@ class DataManager(context: Context) {
 
     }
 
-    suspend fun saveQuizList(quizList: String) {
-        dataStore.edit {
-            it[QUIZ_LIST_KEY] = quizList
-        }
-    }
-
     val firstRunFlow: Flow<Boolean> = dataStore.data.map { it[FIRST_RUN_KEY] ?: true }
 
     val musicFlow: Flow<Boolean> = dataStore.data.map { it[MUSIC_KEY] ?: true }
@@ -76,7 +70,5 @@ class DataManager(context: Context) {
     val gamesFlow: Flow<Int> = dataStore.data.map { it[GAMES_KEY] ?: 0 }
     val correctFlow: Flow<Int> = dataStore.data.map { it[CORRECT_KEY] ?: 0 }
     val incorrectFlow: Flow<Int> = dataStore.data.map { it[INCORRECT_KEY] ?: 0 }
-
-    val quizListFlow: Flow<String> = dataStore.data.map { it[QUIZ_LIST_KEY] ?: "0u|1u|2u|3u|4u|5u|6u|7u|8u|9l|10l|11l|12l|13l|14l|15l|16l|17l|18l|19l|20l|21l|22l|23l|" }
 
 }

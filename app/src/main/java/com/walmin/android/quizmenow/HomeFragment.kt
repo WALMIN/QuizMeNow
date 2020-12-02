@@ -112,7 +112,7 @@ class HomeFragment : Fragment(), CoroutineScope, OnHomeItemClickListener {
         }
 
         quizListView = view.findViewById(R.id.quizListView)
-        quizListView.setHasFixedSize(true);
+        quizListView.setHasFixedSize(true)
         quizListView.layoutManager = GridLayoutManager(context, 3)
 
         quizListAdapter = HomeListAdapter(MainActivity.homeList, this)
