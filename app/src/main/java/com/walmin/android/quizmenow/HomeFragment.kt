@@ -26,19 +26,25 @@ import com.android.volley.RequestQueue
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
 import kotlinx.android.synthetic.main.fragment_home.*
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
 import org.json.JSONException
 import org.json.JSONObject
 import java.util.*
 import kotlin.collections.HashMap
+import kotlin.coroutines.CoroutineContext
 
-class HomeFragment : Fragment(), OnHomeItemClickListener {
+class HomeFragment : Fragment(), CoroutineScope, OnHomeItemClickListener {
 
     companion object HomeFragment {
         lateinit var backgroundMusic: MediaPlayer
 
     }
+
+    // Database
+    lateinit var job: Job
+    override val coroutineContext: CoroutineContext
+        get() = Dispatchers.Main + job
+    lateinit var db: AppDatabase
 
     // Stuff
     var online = false
@@ -53,7 +59,6 @@ class HomeFragment : Fragment(), OnHomeItemClickListener {
     lateinit var quizListViewRefreshLayout: SwipeRefreshLayout
     lateinit var quizListView: RecyclerView
     lateinit var quizListAdapter: HomeListAdapter
-    var quizList = ArrayList<HomeItemData>()
 
     // Views
     lateinit var coinsView: TextView
@@ -85,6 +90,10 @@ class HomeFragment : Fragment(), OnHomeItemClickListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        // Database
+        job = Job()
+        db = AppDatabase.getInstance(view.context)
+
         // Stuff
         requestQueue = Volley.newRequestQueue(context)
 
@@ -106,7 +115,7 @@ class HomeFragment : Fragment(), OnHomeItemClickListener {
         quizListView.setHasFixedSize(true);
         quizListView.layoutManager = GridLayoutManager(context, 3)
 
-        quizListAdapter = HomeListAdapter(quizList, this)
+        quizListAdapter = HomeListAdapter(MainActivity.homeList, this)
         quizListView.adapter = quizListAdapter
 
         // Views
@@ -265,85 +274,61 @@ class HomeFragment : Fragment(), OnHomeItemClickListener {
 
     // Get & show offline list of quizzes
     fun fetchOfflineList(){
-        quizListViewRefreshLayout.isRefreshing = false
+        quizListViewRefreshLayout.isRefreshing = true
         online = false
 
-        quizList.add(HomeItemData("Animals", "0", "F44336", "0", false))
-        quizList.add(HomeItemData("Art", "1", "9C27B0", "0", false))
-        quizList.add(HomeItemData("Books", "2", "3F51B5", "0", false))
-        quizList.add(HomeItemData("General knowledge", "3", "03A9F4", "0", false))
-        quizList.add(HomeItemData("Geography", "4", "009688", "0", false))
-        quizList.add(HomeItemData(getString(R.string.goOnline), "-1", "8BC34A", "0", false))
-
-        quizListAdapter.notifyDataSetChanged()
-
-    }
-
-    // Get & show list of quizzes
-    fun fetchList(){
-        quizListLoadingSpinLayout.visibility = View.GONE
-
-        quizListViewRefreshLayout.isRefreshing = true
-        quizList.clear()
-
-        if(!Tools.isNetworkConnected(requireContext())){
-            fetchOfflineList()
-
-        }else {
-            quizListViewRefreshLayout.isRefreshing = false
-            online = true
-
-            val lockedList = MainActivity.quizList.split("|").toTypedArray()
-            val lockedArray = mutableListOf<Boolean>()
-
-            for (i in lockedList) {
-                if (i.endsWith("l")) {
-                    lockedArray.add(true)
-
-                }else{
-                    lockedArray.add(false)
+        // Load offline categories into home list
+        val list = loadAllCategories()
+        async(Dispatchers.IO) {
+            val itemsList = list.await()
+            for(item in itemsList){
+                if(item.id in 0..5){
+                    MainActivity.homeList.add(item)
 
                 }
+
             }
-
-            quizList.add(HomeItemData("Animals", "27", "F44336", "0", lockedArray[0]))
-            quizList.add(HomeItemData("Art", "25", "9C27B0", "0", lockedArray[1]))
-            quizList.add(HomeItemData("Books", "10", "3F51B5", "0", lockedArray[2]))
-            quizList.add(HomeItemData("General knowledge", "9", "03A9F4", "0", lockedArray[3]))
-            quizList.add(HomeItemData("Geography", "22", "009688", "0", lockedArray[4]))
-            quizList.add(HomeItemData("Film", "11", "8BC34A", "0", lockedArray[5]))
-            quizList.add(HomeItemData("History", "23", "FFEB3B", "0", lockedArray[6]))
-            quizList.add(HomeItemData("Music", "12", "FF9800", "0", lockedArray[7]))
-            quizList.add(HomeItemData("Sports", "21", "795548", "0", lockedArray[8]))
-
-            quizList.add(HomeItemData("Board Games", "16", "E32F2F", "10", lockedArray[9]))
-            quizList.add(HomeItemData("Cartoon & Animations", "32", "7B1FA2", "10", lockedArray[10]))
-            quizList.add(HomeItemData("Celebrities", "26", "303F9F", "10", lockedArray[11]))
-
-            quizList.add(HomeItemData("Comics", "29", "0288D1", "15", lockedArray[12]))
-            quizList.add(HomeItemData("Computers", "18", "00796B", "15", lockedArray[13]))
-            quizList.add(HomeItemData("Gadgets", "30", "689F38", "15", lockedArray[14]))
-
-            quizList.add(HomeItemData("Japanese Anime & Manga", "31", "FBC02D", "20", lockedArray[15]))
-            quizList.add(HomeItemData("Mathematics", "19", "F57C00", "20", lockedArray[16]))
-            quizList.add(HomeItemData("Musicals & Theatres", "13", "5D4037", "20", lockedArray[17]))
-
-            quizList.add(HomeItemData("Mythology", "20", "B71C1C", "25", lockedArray[18]))
-            quizList.add(HomeItemData("Politics", "24", "4A148C", "25", lockedArray[19]))
-            quizList.add(HomeItemData("Science & Nature", "17", "1A237E", "25", lockedArray[20]))
-
-            quizList.add(HomeItemData("Television", "14", "01579B", "30", lockedArray[21]))
-            quizList.add(HomeItemData("Vehicles", "28", "004D40", "30", lockedArray[22]))
-            quizList.add(HomeItemData("Video Games", "15", "33691E", "30", lockedArray[23]))
-
+            quizListViewRefreshLayout.isRefreshing = false
             quizListAdapter.notifyDataSetChanged()
 
         }
 
     }
 
+    // Get & show list of quizzes
+    fun fetchList(){
+        quizListLoadingSpinLayout.visibility = View.GONE
+        MainActivity.homeList.clear()
+
+        if(!Tools.isNetworkConnected(requireContext())){
+            fetchOfflineList()
+
+        }else {
+            quizListViewRefreshLayout.isRefreshing = true
+            online = true
+
+            // Load categories into home list
+            val list = loadAllCategories()
+            launch {
+                val itemsList = list.await()
+                for(item in itemsList){
+                    if(item.id > 5){
+                        MainActivity.homeList.add(item)
+
+                    }
+
+                }
+                quizListViewRefreshLayout.isRefreshing = false
+                quizListAdapter.notifyDataSetChanged()
+
+            }
+
+        }
+
+    }
+
     // Click on quiz item
-    override fun onHomeItemClick(item: HomeItemData, position: Int) {
+    override fun onHomeItemClick(item: Category, position: Int) {
         if(!item.locked){
             // Go online btn
             if(item.value == "-1"){
@@ -386,11 +371,10 @@ class HomeFragment : Fragment(), OnHomeItemClickListener {
                         MainActivity.coins -= item.price.toInt()
                         coinsView.text = MainActivity.coins.toString()
 
-                        MainActivity.quizList = MainActivity.quizList.replace(position.toString() + "l|", position.toString() + "u|")
+                        saveCategory(Category(item.id, item.title, item.value, item.color, item.price, false))
 
                         GlobalScope.launch {
                             MainActivity.dataManager.saveCoins(MainActivity.coins)
-                            MainActivity.dataManager.saveQuizList(MainActivity.quizList)
                         }
 
                         fetchList()
@@ -516,5 +500,19 @@ class HomeFragment : Fragment(), OnHomeItemClickListener {
         requestQueue?.add(request)
 
     }
+
+    // Save category item in room db
+    fun saveCategory(category: Category){
+        launch(Dispatchers.IO) {
+            db.categoryDao().insert(category)
+            quizListAdapter.notifyDataSetChanged()
+
+        }
+
+    }
+
+    // Load all categories from room db
+    fun loadAllCategories(): Deferred<List<Category>> =
+        async(Dispatchers.IO) { db.categoryDao().getAll() }
 
 }

@@ -1,9 +1,9 @@
 package com.walmin.android.quizmenow
 
 import android.content.Context
+import androidx.datastore.preferences.core.edit
+import androidx.datastore.preferences.core.preferencesKey
 import androidx.datastore.preferences.createDataStore
-import androidx.datastore.preferences.edit
-import androidx.datastore.preferences.preferencesKey
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 
@@ -12,6 +12,8 @@ class DataManager(context: Context) {
     private val dataStore = context.createDataStore("GamePreferences")
 
     companion object {
+        val FIRST_RUN_KEY = preferencesKey<Boolean>("firstRun")
+
         val MUSIC_KEY = preferencesKey<Boolean>("music")
         val SOUND_KEY = preferencesKey<Boolean>("sound")
 
@@ -23,6 +25,12 @@ class DataManager(context: Context) {
 
         val QUIZ_LIST_KEY = preferencesKey<String>("quizList")
 
+    }
+
+    suspend fun saveFirstRun(firstRun: Boolean) {
+        dataStore.edit {
+            it[FIRST_RUN_KEY] = firstRun
+        }
     }
 
     suspend fun saveMusic(music: Boolean) {
@@ -57,6 +65,8 @@ class DataManager(context: Context) {
             it[QUIZ_LIST_KEY] = quizList
         }
     }
+
+    val firstRunFlow: Flow<Boolean> = dataStore.data.map { it[FIRST_RUN_KEY] ?: true }
 
     val musicFlow: Flow<Boolean> = dataStore.data.map { it[MUSIC_KEY] ?: true }
     val soundFlow: Flow<Boolean> = dataStore.data.map { it[SOUND_KEY] ?: true }
